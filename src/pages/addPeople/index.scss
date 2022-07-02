@@ -1,0 +1,135 @@
+$background-color:#FAFDF8;
+
+.backGround-b{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: $background-color;
+    font-family: 'PingFang SC';
+    font-style: normal;
+}
+.thingList-text{
+    position: relative;
+    top: 50px;
+    margin-bottom: 76px;
+}
+.thingList-font{
+    margin-left: 48px;
+    font-size: 36px;
+}
+.Selected-one::after{
+    position: absolute;
+    border-style: none;
+}
+.Selected-one{
+    position: absolute;
+    width: 75PX;
+    border-bottom: #54C496 3px solid;
+    border-radius: 3px ;
+    margin-left: 30px;
+}
+.unSelected-one::after{
+    position: absolute;
+    border-style: none;
+}
+.unSelected-one{
+    position: absolute;
+    width: 75PX;
+    margin-left: 30px;
+    color: #BED3BE;
+}
+.Selected-two::after{
+    position: absolute;
+    border-style: none;
+}
+.Selected-two{
+    position: absolute;
+    width: 75PX;
+    border-bottom: #54C496 3px solid;
+    border-radius: 3px ;
+    margin-left: 160px;
+}
+.unSelected-two::after{
+    position: absolute;
+    border-style: none;
+}
+.unSelected-two{
+    position: absolute;
+    width: 75PX;
+    margin-left: 160px;
+    color: #BED3BE;
+}
+.switch{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    
+}button{
+    font-size: 23px;
+}
+.add-button{
+    position: absolute;
+    margin-left: 48px;
+    margin-top: 88px;
+}
+.add-button-zero{
+    width: 280px;
+    height: 80px;
+    font-size: 30px;
+    border-radius: 12px;
+    background: linear-gradient(180deg, rgba(61, 221, 154, 0.7) 0%, rgba(97, 243, 121, 0.56) 112.7%, rgba(99, 101, 99, 0.672) 112.7%);
+}
+.number-list{
+    position: absolute;
+    margin-top: 190px;
+}
+.list-title{
+    display: flex;
+    flex-direction: row;
+}
+.title-detail{
+    margin-left: 48px;
+    margin-right: 90px;
+    color: rgba(51, 51, 51, 0.85);
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+.list{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.list-detail1{
+    margin-left: 48px;
+    width: 150px;
+}
+.list-detail2{
+    margin-left: 48px;
+    margin-right: 88px;
+    width: 200px;
+}
+.list-detail3{
+    margin-left: 48px;
+    width: 200px;
+}
+.unShowNumber{
+    display: none;
+}
+.dp-title{
+    position: relative;
+    margin-left: 48px;
+    margin-top: 190px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    color: rgba(51, 51, 51, 0.85);
+}
+.dp-detail{
+    margin-left: 48px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.unShow{
+    display: none;
+}

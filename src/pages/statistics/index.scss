@@ -1,0 +1,189 @@
+$background-color:#FAFDF8;
+
+.backGround-b{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: $background-color;
+    font-family: 'PingFang SC';
+    font-style: normal;
+}
+.progress{
+    position: relative;
+    margin-left: 48px;
+    margin-top: 35px;
+}
+.progress-text{
+    line-height: 68px;
+    color: #333333;
+    font-size: 35px;
+}
+.Selected-one::after{
+    position: absolute;
+    border-style: none;
+}
+.Selected-one{
+    position: absolute;
+    width: 75PX;
+    border-bottom: #54C496 3px solid;
+    border-radius: 3px ;
+    margin-left: 30px;
+}
+.unSelected-one::after{
+    position: absolute;
+    border-style: none;
+}
+.unSelected-one{
+    position: absolute;
+    width: 75PX;
+    margin-left: 30px;
+    color: #BED3BE;
+}
+.Selected-two::after{
+    position: absolute;
+    border-style: none;
+}
+.Selected-two{
+    position: absolute;
+    width: 75PX;
+    border-bottom: #54C496 3px solid;
+    border-radius: 3px ;
+    margin-left: 160px;
+}
+.unSelected-two::after{
+    position: absolute;
+    border-style: none;
+}
+.unSelected-two{
+    position: absolute;
+    width: 75PX;
+    margin-left: 160px;
+    color: #BED3BE;
+}
+.switch{
+    display: flex;
+    flex-direction: row;
+    
+}button{
+    font-size: 23px;
+}
+.listShow{
+    margin-top: 80px;
+}
+.listUnShow{
+    margin-top: 80px;
+    display: none;
+}
+.things{
+    margin-top: 10px;
+    margin-left: 48px;
+    width: 88%;
+}
+.things-item{
+    position: relative;
+    margin-top: 35px;
+    background-color: #ffffff;
+    height: 130px;
+}
+.things-icon{
+    position: absolute;
+    width: 115px;
+    height: 115px;
+    margin-left: 15px;
+}
+.things-texts{
+    display: flex;
+    flex-direction: column;
+    margin-left: 143px;
+}
+.things-title{
+    margin-top: 15px;
+    color: #333333;
+    font-size: 30px;
+}
+.things-count{
+    margin-top:15px;
+    margin-left: 70%;
+    display: flex;
+    flex-direction: row;
+    color:  #BED3BE;
+    text-align: center;
+    font-size: 30px;
+}
+.counts{
+    width: 80px !important;
+    background-color: #F0F5F0;
+    border-radius: 5px;
+    color: black;
+    font-size: 40px;
+}
+.count-input{
+    line-height: 10px;
+    vertical-align:middle
+}
+.operation{
+    position:relative;
+    margin-left: 6%;
+    height: 150px;
+    background-color: white;
+    border-radius: 6px;
+    width: 88%;
+    margin-bottom: 3%;
+}
+.icon{
+    margin-top: 49px;
+    margin-left: 36px;
+    width: 45px;
+    height: 45px;
+}
+.icon-font{
+    position: absolute;
+    margin-left: 20px;
+    margin-top: 46px;
+    color: #333333;
+}
+.arrow{
+    position: absolute;
+    width: 20px;
+    height: 32px;
+    margin-left: 75%;
+    margin-top: 56px;
+}
+.pathTo{
+    position: absolute;
+    width: 100%;
+    min-height: 100%;
+}
+.detail-unshow{
+    display: none;
+}
+.detail-show{
+    margin-top: 85px;
+}
+.select-date{
+    display: flex;
+    flex-direction: row;
+    margin-left: 48px;
+    
+}
+.little-text{
+ margin: 20px;
+}
+.startTime{
+    border-radius: 8px;
+    border: 1px solid #BED3BE;
+}
+.endTime{
+    border-radius: 8px;
+    border: 1px solid #BED3BE;
+}
+.little-image{
+    height: 7PX;
+    width: 20PX;
+}
+.select-department{
+    width: 82.5%;
+    margin-left: 48px;
+    margin-top: 30px;
+    border: 1px solid #BED3BE;
+}

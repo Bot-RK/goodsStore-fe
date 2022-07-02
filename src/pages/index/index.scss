@@ -1,0 +1,65 @@
+$background-color:#F8F9FD;
+
+.backGround-f{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: $background-color;
+    font-family: 'PingFang SC';
+    font-style: normal;
+}
+.announcement{
+    height: 30%;
+    background: linear-gradient(rgba(11, 118, 251, 1) , rgba(0, 135, 255, 0.57));
+    z-index: -1;
+}    
+.operation{
+    position:relative;
+    margin-top: -9.5%;
+    margin-left: 6%;
+    height: 150px;
+    background-color: white;
+    border-radius: 6px;
+    width: 88%;
+    margin-bottom: 15%;
+}
+.icon{
+    margin-top: 49px;
+    margin-left: 36px;
+    width: 45px;
+    height: 45px;
+}
+.icon-font{
+    position: absolute;
+    margin-left: 20px;
+    margin-top: 46px;
+    color: #333333;
+}
+.arrow{
+    position: absolute;
+    width: 20px;
+    height: 32px;
+    margin-left: 75%;
+    margin-top: 56px;
+}
+.pathTo{
+    position: absolute;
+    width: 100%;
+    min-height: 100%;
+}
+.icon-family{
+    position: fixed;
+    top: 95%;
+    left: 32%;
+}
+.family-image{
+   width: 220px;
+   height: 40px;
+}
+.announcement-text{
+    position: absolute;
+    margin-top: 48px;
+    margin-left: 48px;
+    margin-right: 48px;
+    color: #ffffff;
+}

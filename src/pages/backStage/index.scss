@@ -1,0 +1,76 @@
+$background-color:#FAFDF8;
+
+.backGround-b{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: $background-color;
+    font-family: 'PingFang SC';
+    font-style: normal;
+}
+.announcement{
+    height: 30%;
+    background: linear-gradient(281.77deg, #39BB85 0%, rgba(57, 187, 133, 0.73) 99.58%);
+    z-index: -1;
+}    
+.operation{
+    position:relative;
+    margin-top: -9.5%;
+    margin-left: 6%;
+    height: 150px;
+    background-color: white;
+    border-radius: 6px;
+    width: 88%;
+    margin-bottom: 15%;
+}
+.icon{
+    margin-top: 49px;
+    margin-left: 36px;
+    width: 45px;
+    height: 45px;
+}
+.icon-font{
+    position: absolute;
+    margin-left: 20px;
+    margin-top: 46px;
+    color: #333333;
+}
+.arrow{
+    position: absolute;
+    width: 20px;
+    height: 32px;
+    margin-left: 75%;
+    margin-top: 56px;
+}
+.pathTo{
+    position: absolute;
+    width: 100%;
+    min-height: 100%;
+}
+.backStage-image{
+    position: absolute;
+    margin-left: 70%;
+    margin-top: 65px;
+}
+.backStage-image1{
+    width: 180px;
+    height: 150px;
+}
+.title{
+    position: absolute;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    margin-left: 60px;
+    font-size: 42px;
+    margin-top: 65px;
+}
+.icon-family{
+    position: fixed;
+    top: 95%;
+    left: 32%;
+}
+.family-image{
+   width: 220px;
+   height: 40px;
+}

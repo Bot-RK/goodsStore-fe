@@ -1,0 +1,55 @@
+$background-color:#F8F9FD;
+
+.backGround-f{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: $background-color;
+    font-family: 'PingFang SC';
+    font-style: normal;
+}
+.progress{
+    position: relative;
+    margin-left: 48px;
+    margin-top: 35px;
+}
+.progress-font{
+    color: #8C8C8C;
+    font-size: 25px;
+}
+.progress-bar{
+    width: 120px;
+}
+.progress-text{
+    line-height: 68px;
+    color: #333333;
+    font-size: 35px;
+}
+.next{
+    position: fixed;
+    top: 83%;
+    width: 80%;
+    margin-left: 10%;
+    border-radius: 36px;
+}
+.next-button{
+    width: 100% !important;
+    border-radius: 48px;
+    background: linear-gradient(91.71deg, #0B76FB -3.29%, rgba(11, 118, 251, 0.4) 104.77%);
+    color: #ffffff;
+}
+.add-input{
+    margin-left: 48px;
+    font-size: 28px;
+    margin-top: 20px;
+}
+.input1{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 30%;
+    height: 80px;
+    border-radius: 12px;
+    padding-left: 30px;
+    background-color: white;
+    border: #F0F1F5 1px solid;
+}
