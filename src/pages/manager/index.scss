@@ -18,42 +18,21 @@ $background-color:#FAFDF8;
     color: #333333;
     font-size: 35px;
 }
-.search{
-    position: relative;
-    margin-left: 48px;
-    margin-top: 25px;
-}
-.search-input{
-    background-color: #F0F1F5;
-    width: 83%;
-    border-radius: 10px;
-    height: 65px;
-}
-.search-icon{
-    position: absolute;
-    margin-top: 18px;
-    margin-left: 30px;
-    width: 30px;
-    height: 30px;
-}
-.search-input-placeholder{
-    margin-left: 68px;
-    color: #BED3BE;
-}
 .manager-button{
     display: flex;
     flex-direction: row;
+    margin-top: 20px;
 }
 .button-one{
     width: 310px;
-    height: 120px;
+    height: 100px;
     margin-left: 50px;
     background: linear-gradient(179.76deg, #7AD7F9 -31.09%, rgba(145, 244, 143, 0.5) 177.83%, #6CE8D0 177.83%);
     border-radius: 16px;
 }
 .button-two{
     width: 310px;
-    height: 120px;
+    height: 100px;
     margin-right: 50px;
     background: linear-gradient(180deg, rgba(61, 221, 154, 0.7) 0%, rgba(97, 243, 121, 0.56) 112.7%, rgba(99, 101, 99, 0.672) 112.7%);
     border-radius: 16px;
@@ -104,4 +83,20 @@ $background-color:#FAFDF8;
 .count-input{
     line-height: 10px;
     vertical-align:middle
+}
+.search-bar{
+    margin-top: 30px;
+    width: 88%;
+    margin-left: 48px;
+    background-color:$background-color ;
+}
+.button-scan{
+    position: absolute;
+    margin-left: 88%;
+    margin-top: -45px;
+    padding-left: 5px;
+    width: 50px;
+    height: 50px;
+    background-image: url("../../asset/images/扫描二维码.png");
+    border: #F8F9FD;
 }

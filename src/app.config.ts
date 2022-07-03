@@ -17,6 +17,9 @@ export default defineAppConfig({
     'pages/addPeople/addNumber',
     'pages/addPeople/addDp',
     'pages/announce/index',
+    'pages/manager/first',
+    'pages/manager/second',
+    'pages/manager/third',
   ],
   window: {
     backgroundTextStyle: 'light',
