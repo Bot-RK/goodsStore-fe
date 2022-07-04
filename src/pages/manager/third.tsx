@@ -6,13 +6,11 @@ import "./third.scss";
 
 export default function Index() {
   const [count, setCount] = useState(0);
-  const [file, setFile] = useState("");
-  const imageUrl =[{
-    url :"https://joeschmoe.io/api/v1/random"
-  }]
+  const [file, setFile] = useState([]);
+
   function final() {
-    Taro.navigateTo({
-      url: "index",
+    Taro.navigateBack({
+      delta:1,
       success: (res) => {
         Taro.showToast({
           title: "成功",
@@ -26,6 +24,7 @@ export default function Index() {
     setCount(e);
   };
   const onChange = (files) => {
+    console.log(file)
     console.log(files)
     setFile(files)
   };
@@ -67,12 +66,12 @@ export default function Index() {
       </View>
       <View className="add-input">
         <Text>物品数量:</Text>
-        <View>
-          <AtImagePicker files={imageUrl} onChange={onChange} />
+        <View >
+          <AtImagePicker className="imagePciker" files={file} onChange={onChange} multiple={false} showAddBtn={file.length < 1}  />
         </View>
       </View>
       <View className="next">
-        <Button className="next-button" onClick={final}>
+        <Button className="next-button" onClick={final} >
           完成
         </Button>
       </View>

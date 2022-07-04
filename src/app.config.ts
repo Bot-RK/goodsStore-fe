@@ -20,6 +20,7 @@ export default defineAppConfig({
     'pages/manager/first',
     'pages/manager/second',
     'pages/manager/third',
+    'pages/apply/multiple',
   ],
   window: {
     backgroundTextStyle: 'light',

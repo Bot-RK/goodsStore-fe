@@ -1,11 +1,16 @@
 import { View,Text,Input,Image } from "@tarojs/components";
 import './record.scss'
+import deleteIcon from '../../asset/images/Vector13.png'
 
 export default function detail(){
     return(
         <View className="backGround-b">
              <View className="thingList-text">
         <Text className="thingList-font">2022/5/9的申领</Text>
+        </View>
+        <View className="delete">
+          <Image className="delete-icon" src={deleteIcon}></Image>
+          <Text className="delete-text">删除</Text>
         </View>
         <View className="record-detail">
             <Text className="record-title">申领时间:</Text>

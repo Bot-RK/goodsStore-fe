@@ -8,25 +8,52 @@ import {
   Picker,
 } from "@tarojs/components";
 import { useState } from "react";
-import { AtList, AtListItem } from "taro-ui";
+import { AtCheckbox, AtFloatLayout, AtList, AtListItem } from "taro-ui";
 import "./index.scss";
 import icon4 from "../../asset/images/Vector4.png";
 import icon6 from "../../asset/images/Vector11.png";
 import icon5 from "../../asset/images/Vector12.png";
 
 export default function Index() {
+  const [layoutShow, setLayoutShow] = useState(false);
   const [selected, setSelected] = useState(true);
   const [startDate, setStartDate] = useState("2022-07-02");
   const [endDate, setEndDate] = useState("2022-07-12");
-  const [dp, setDp] = useState("");
-  const department: string[] = ["A", "B", "C", "d"];
+  const [selectList, setSelectList] = useState([]);
+  // const [dp, setDp] = useState("");
+  const openLayout = (e) => {
+    setLayoutShow(!layoutShow);
+    console.log(layoutShow);
+  };
+  const select = (e) => {
+    setSelectList(e);
+  };
+  const closeLayout = (e) => {
+    setLayoutShow(!layoutShow);
+    console.log(layoutShow);
+  };
+  // const department: string[] = ["A", "B", "C", "d"];
+  const departments: any = [
+    {
+      value: "学工处",
+      label: "学工处",
+    },
+    {
+      value: "保卫处",
+      label: "保卫处",
+    },
+    {
+      value: "后勤处",
+      label: "后勤处",
+    },
+  ];
   function change() {
     setSelected(!selected);
   }
-  const onChangeDepartment = (e) => {
-    console.log(e);
-    setDp(department[e.detail.value]);
-  };
+  // const onChangeDepartment = (e) => {
+  //   console.log(e);
+  //   setDp(department[e.detail.value]);
+  // };
 
   const onStartTimeChange = (e) => {
     setStartDate(e.detail.value);
@@ -84,7 +111,7 @@ export default function Index() {
             </Picker>
           </View>
         </View>
-        <View className="select-department">
+        {/* <View className="select-department">
           <Picker
             mode="selector"
             range={department}
@@ -94,6 +121,11 @@ export default function Index() {
               <AtListItem title="部门选择" extraText={dp} />
             </AtList>
           </Picker>
+        </View> */}
+        <View className="department-box">
+          <Button className="department-button" onClick={openLayout}>
+            点击选择部门
+          </Button>
         </View>
         <View className="things">
           <View className="things-item">
@@ -115,18 +147,31 @@ export default function Index() {
       </View>
       <View className={selected ? "detail-unshow" : "detail-show"}>
         <View className="operation">
-          <Navigator className="pathTo" url="/pages/statistics/record"></Navigator>
+          <Navigator
+            className="pathTo"
+            url="/pages/statistics/record"
+          ></Navigator>
           <Image className="icon" src={icon6}></Image>
           <Text className="icon-font">物资清单</Text>
           <Image className="arrow" src={icon4}></Image>
         </View>
         <View className="operation">
-          <Navigator className="pathTo" url="/pages/statistics/record"></Navigator>
+          <Navigator
+            className="pathTo"
+            url="/pages/statistics/record"
+          ></Navigator>
           <Image className="icon" src={icon6}></Image>
           <Text className="icon-font">物资清单</Text>
           <Image className="arrow" src={icon4}></Image>
         </View>
       </View>
+      <AtFloatLayout isOpened={layoutShow} onClose={closeLayout} title="已选清单">
+        <AtCheckbox
+          options={departments}
+          selectedList={selectList}
+          onChange={select}
+        />
+      </AtFloatLayout>
     </View>
   );
 }

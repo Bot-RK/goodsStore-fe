@@ -20,11 +20,6 @@ export default function Second() {
       }
     })
   }
-  const shopping=(e)=>{
-    Taro.navigateTo({
-      url:"/pages/apply/index"
-    })
-  }
   const close=()=>{
     setOpen(!open)
   }
@@ -72,9 +67,6 @@ export default function Second() {
             <Text className="things-count-text">本</Text>
           </View>
         </View>      
-      </View>
-      <View>
-        <Button className="shop-car" onClick={shopping}></Button>
       </View>
       <AtCurtain
         isOpened={open}

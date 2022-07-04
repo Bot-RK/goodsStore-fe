@@ -5,10 +5,16 @@ import './last.scss'
 
 export default function last(){
     function to(){
-        Taro.navigateBack({
-            delta:4
-        })
-    }
+        Taro.navigateTo({
+          url :'/pages/index/index',
+          success:(res)=>{
+            Taro.showToast({
+              title: '成功',
+              icon: 'success',
+              duration: 2000
+            })
+          }
+        })}
     return(
         <View className="backGround-f">
             <Image className="final-image" src={final}></Image>

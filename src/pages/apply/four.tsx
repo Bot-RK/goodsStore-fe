@@ -71,7 +71,7 @@ export default function detail(){
         </View>
         </View>
         <View className="next">
-        <Button className="next-button" onClick={to}>完成</Button>
+        <Button className="next-button" onClick={to}>申领</Button>
       </View>
          </View>
     )
