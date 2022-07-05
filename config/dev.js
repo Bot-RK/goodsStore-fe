@@ -8,5 +8,14 @@ module.exports = {
   mini: {
     hot:true
   },
-  h5: {}
+  h5: {},
+  config :{
+    plugins: [
+      '@tarojs/plugin-react-devtools'
+    ],
+    enable: true
+    // ...
+  }
 }
+
+
