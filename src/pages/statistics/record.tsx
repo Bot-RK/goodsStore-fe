@@ -1,5 +1,4 @@
 import { View,Text,Input,Image } from "@tarojs/components";
-import { Barcode, QRCode } from 'taro3-code'
 import './record.scss'
 import deleteIcon from '../../asset/images/Vector13.png'
 
@@ -62,15 +61,6 @@ export default function detail(){
             <Text className="things-count-text">本</Text>
          </View>
         </View>
-        </View>
-        <View>
-        <QRCode
-          text="www.baidu.com"
-          size={300}
-          scale={4}
-          errorCorrectLevel="M"
-          typeNumber={2}
-        />
         </View>
          </View>
     )

@@ -1,0 +1,103 @@
+
+.detail-background{
+    margin-left: 5%;
+    height: 500px;
+    width: 90%;
+}
+.detail-box{
+    position: absolute;
+    margin-top: -480px;
+    margin-left: 5%;
+}
+.detail-icon{
+    width: 230px;
+    height: 230px;
+}
+.detail-name{
+    position: absolute;
+    margin-top: -180px;
+    margin-left: 300px;
+    font-size: 36px;
+    width: 200px;
+    font-size: 40px;
+}
+.detail-count{
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    margin-top: -100px;
+    margin-left: 300px;
+}
+.detail-count-text{
+    color: #BEC2D3;
+    width: 70px;
+}
+.detail-count-input{
+    background: #F0F1F5;
+    border-radius: 8px;
+    width: 50px;
+    padding-left: 18px;
+    margin-right: 5px;    
+}
+.count-new{ 
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+}
+.counter-name-new{
+    font-size: 38px;
+    margin-left: 88px;
+    margin-right: 80px;
+}
+.little-box{
+    margin-bottom: 20px;
+}
+.next{
+    position: absolute;
+    margin-top: 50px;
+    border-radius: 36px;
+    width: 70%;
+    height: 60px;
+    margin-left: 20%;
+}
+.next-button{
+    width: 100% !important;
+    background: linear-gradient(91.71deg, #0B76FB -3.29%, rgba(11, 118, 251, 0.4) 104.77%);
+    height: 100%;
+    border-radius: 30px;
+    line-height: 60px;
+    color: #ffffff;
+}
+.unnext{
+    display: none;
+}
+.detail-icon-new{
+    width: 280px;
+    height: 280px;
+    margin-left: 130px;
+    margin-top: -30px;
+}
+.detail-name-new{
+    margin-left: 200px;
+    margin-top: 30px;
+    font-size: 36px;
+}
+.detail-count-new{
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    margin-left: 180px;
+    margin-top: 50px;
+}
+.uncounter-new{
+    display: none;
+}
+.show-QRcode{
+    display: none;
+}
+.un-show-QR-code{
+    display: none;
+}
+.QR-code-style{
+    width: 100%;
+}
