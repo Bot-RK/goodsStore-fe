@@ -4,11 +4,14 @@ import { useState } from "react";
 import { AtImagePicker, AtInputNumber, AtList, AtListItem } from "taro-ui";
 import "./third.scss";
 
+
 export default function Index() {
   const [count, setCount] = useState(0);
   const [file, setFile] = useState([]);
+  let img;
 
   function final() {
+
     Taro.navigateBack({
       delta:1,
       success: (res) => {

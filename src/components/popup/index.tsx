@@ -13,12 +13,11 @@ type popupProps={
     remainCount?:string;
     isShowCounter:boolean
     needCount?:number|string;
-    isAdd?:boolean;
     onclose:CommonEventFunction<any>;
     getCount?:(value: number, e: CommonEvent<any>) => void;
 }
 
-const Popup:FC<popupProps>=({isOpen,isShowQRcode,icon,name,remainCount,needCount,isAdd,onclose,getCount})=>{
+const Popup:FC<popupProps>=({isOpen,isShowQRcode,icon,name,remainCount,isShowCounter,needCount,onclose,getCount})=>{
 
     return(
       <>
@@ -28,12 +27,12 @@ const Popup:FC<popupProps>=({isOpen,isShowQRcode,icon,name,remainCount,needCount
           </Image>
           <View className="detail-box">
             <View className="little-box">
-            <Image  src={icon!} className={isAdd?"detail-icon":"detail-icon-new"}>
+            <Image  src={icon!} className={isShowCounter?"detail-icon":"detail-icon-new"}>
             </Image>
-          <View className={isAdd?"detail-name":"detail-name-new"}>
+          <View className={isShowCounter?"detail-name":"detail-name-new"}>
             <Text>{name}</Text>
           </View>
-          <View className={isAdd?"detail-count":"detail-count-new"}>
+          <View className={isShowCounter?"detail-count":"detail-count-new"}>
             <Text className="detail-count-text">
             剩余
             </Text>
@@ -41,12 +40,12 @@ const Popup:FC<popupProps>=({isOpen,isShowQRcode,icon,name,remainCount,needCount
             <Text className="detail-count-text">本</Text>
           </View>
           </View>
-          <View className={isAdd?"counter-new":"uncounter-new"}>
+          <View className={isShowCounter?"counter-new":"uncounter-new"}>
             <Text className="counter-name-new">需要</Text>
             <AtInputNumber className="counter-counter-new"  min={0} max={10} step={1} value={needCount!} width={120} onChange={getCount!} type="number"  />
           </View>
-          <View className={isAdd?"next":"unnext"}>
-        <Button className="next-button" >加入申领清单</Button>
+          <View className={isShowCounter?"next-1":"unnext"}>
+        <Button className="next-button-1" >加入申领清单</Button>
       </View>
         </View>
       </AtCurtain>

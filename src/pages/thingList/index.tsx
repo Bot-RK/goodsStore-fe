@@ -68,7 +68,7 @@ export default function Second() {
           </View>
         </View>      
       </View>
-    <Popup isOpen={open} isShowQRcode={false} isShowCounter={false} onclose={close} icon="https://joeschmoe.io/api/v1/random" name="物品名字" remainCount="20" isAdd={false}></Popup>
+    <Popup isOpen={open} isShowQRcode={false} isShowCounter={false} onclose={close} icon="https://joeschmoe.io/api/v1/random" name="物品名字" remainCount="20" ></Popup>
     {/* <Popup isOpen={open} isShowQRcode isShowCounter={false} onclose={close}></Popup> */}
     </View>
     

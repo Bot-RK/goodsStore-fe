@@ -39,28 +39,32 @@
     padding-left: 18px;
     margin-right: 5px;    
 }
-.count-new{ 
+.counter-new{ 
     position: absolute;
     display: flex;
     flex-direction: row;
 }
 .counter-name-new{
     font-size: 38px;
-    margin-left: 88px;
+    margin-left: -58px;
     margin-right: 80px;
+    width: 80px;
+}
+.counter-counter-new{
+    height: 50px;
 }
 .little-box{
-    margin-bottom: 20px;
+    margin-bottom: 80px;
 }
-.next{
+.next-1{
     position: absolute;
     margin-top: 50px;
     border-radius: 36px;
-    width: 70%;
+    width: 400px;
     height: 60px;
-    margin-left: 20%;
+    margin-left: 30%;
 }
-.next-button{
+.next-button-1{
     width: 100% !important;
     background: linear-gradient(91.71deg, #0B76FB -3.29%, rgba(11, 118, 251, 0.4) 104.77%);
     height: 100%;
