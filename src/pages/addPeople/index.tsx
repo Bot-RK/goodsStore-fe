@@ -61,7 +61,20 @@ export default function Add() {
         </Button>
       </View>
       <View className={selected ? "showNumber" : "unShowNumber"}>
-        <View className="number-list"></View>
+        <View className="number-list">
+          <View className="list-title">
+            <View>
+              <Text className="title-detail">姓名</Text>
+            </View>
+            <View>
+              <Text className="title-detail">微信绑定电话</Text>
+            </View>
+            <View>
+              <Text className="title-detail">权限</Text>
+            </View>
+          </View>
+          <NumberList />
+        </View>
       </View>
       <View className={selected ? "unShow" : "show"}>
         <View className="dp-title">
@@ -77,7 +90,6 @@ export default function Add() {
           <Text>教育科</Text>
         </View>
       </View>
-      <NumberList />
     </View>
   );
 }

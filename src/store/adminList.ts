@@ -40,10 +40,14 @@ const useAdminList = create<adminlist>((set) => ({
       data: state.data,
     });
   },
-  changeAu: (i) =>
+  changeAu: (i, e) =>
     set(
       produce((state) => {
-        state.data[i].is_admin = !state.data[i].is_admin;
+        if (e.detail.value == 0 && !state.data[i].is_admin) {
+          state.data[i].is_admin = !state.data[i].is_admin;
+        } else if (e.detail.value == 1 && state.data[i].is_admin) {
+          state.data[i].is_admin = !state.data[i].is_admin;
+        }
       })
     ),
 }));

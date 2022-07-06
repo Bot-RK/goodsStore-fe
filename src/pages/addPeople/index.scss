@@ -86,6 +86,7 @@ $background-color:#FAFDF8;
 .list-title{
     display: flex;
     flex-direction: row;
+    margin-bottom: 30px;
 }
 .title-detail{
     margin-left: 48px;
@@ -132,4 +133,17 @@ $background-color:#FAFDF8;
 }
 .unShow{
     display: none;
+}
+.au-selector{
+    width: 70%;
+    height: 60px;
+    margin-right: 30px;
+}
+.au-selector-text{
+    position: absolute;
+    margin-top: -35px;
+    margin-left: -36px;
+    padding-bottom: 10px !important;
+    text-align: center;
+    vertical-align: middle;
 }
