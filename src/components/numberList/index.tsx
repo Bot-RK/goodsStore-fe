@@ -6,7 +6,7 @@ import useAdminList from "../../store/adminList";
 export default function NumberList() {
   const Authoritys = useAdminList((state) => state.data);
   const onChange = useAdminList((state) => state.changeAu);
-
+  let a = [];
   const authority = ["成员", "管理员"];
   return (
     <>

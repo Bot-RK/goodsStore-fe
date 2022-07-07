@@ -5,20 +5,25 @@ import { useState } from "react";
 import Popup from "../../components/popup";
 import "./index.scss";
 import searchIcon from "../../asset/images/search.png";
+import usePopupDetail from "../../store/popup";
+import SelectThingList from "../../components/selectThingList";
+import FloatLayout from "../../components/floatLayout";
 
 export default function Apply() {
   const [text, setText] = useState("");
   const [layoutShow, setLayoutShow] = useState(false);
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
+  const open = usePopupDetail((state) => state.isOpen);
+  const popupClose = usePopupDetail((state) => state.onclose);
+  const popupOpen = usePopupDetail((state) => state.onOpen);
+
   const openLayout = (e) => {
     setLayoutShow(!layoutShow);
   };
   const onChange = (e) => {
     setText(e);
   };
-  const close = (e) => {
-    setOpen(!open);
-  };
+
   function to() {
     Taro.navigateTo({
       url: "third",
@@ -42,7 +47,7 @@ export default function Apply() {
   const scan = (e) => {
     Taro.scanCode({
       success: (res) => {
-        setOpen(!open)
+        popupOpen();
         console.log(res);
       },
     });
@@ -72,206 +77,7 @@ export default function Apply() {
       </View>
 
       <View className="things">
-        <View className="things-item">
-          <Image
-            src="https://joeschmoe.io/api/v1/random"
-            className="things-icon"
-          ></Image>
-          <View className="things-texts">
-            <Text className="things-title">物品名字</Text>
-            <Text className="things-count">剩余XXX</Text>
-          </View>
-        </View>
-        <View className="counter">
-          <AtInputNumber
-            type="number"
-            min={0}
-            max={100}
-            step={1}
-            value={1}
-            onChange={() => 2}
-          />
-        </View>
-        <View className="things-item">
-          <Image
-            src="https://joeschmoe.io/api/v1/random"
-            className="things-icon"
-          ></Image>
-          <View className="things-texts">
-            <Text className="things-title">物品名字</Text>
-            <Text className="things-count">剩余XXX</Text>
-          </View>
-        </View>
-        <View className="counter">
-          <AtInputNumber
-            type="number"
-            min={0}
-            max={100}
-            step={1}
-            value={1}
-            onChange={() => 2}
-          />
-        </View>
-        <View className="things-item">
-          <Image
-            src="https://joeschmoe.io/api/v1/random"
-            className="things-icon"
-          ></Image>
-          <View className="things-texts">
-            <Text className="things-title">物品名字</Text>
-            <Text className="things-count">剩余XXX</Text>
-          </View>
-        </View>
-        <View className="counter">
-          <AtInputNumber
-            type="digit"
-            min={0}
-            max={100}
-            step={1}
-            value={1}
-            onChange={() => 2}
-          />
-        </View>
-        <View className="things-item">
-          <Image
-            src="https://joeschmoe.io/api/v1/random"
-            className="things-icon"
-          ></Image>
-          <View className="things-texts">
-            <Text className="things-title">物品名字</Text>
-            <Text className="things-count">剩余XXX</Text>
-          </View>
-        </View>
-        <View className="counter">
-          <AtInputNumber
-            type="digit"
-            min={0}
-            max={100}
-            step={1}
-            value={1}
-            onChange={() => 2}
-          />
-        </View>
-        <View className="things-item">
-          <Image
-            src="https://joeschmoe.io/api/v1/random"
-            className="things-icon"
-          ></Image>
-          <View className="things-texts">
-            <Text className="things-title">物品名字</Text>
-            <Text className="things-count">剩余XXX</Text>
-          </View>
-        </View>
-        <View className="counter">
-          <AtInputNumber
-            type="digit"
-            min={0}
-            max={100}
-            step={1}
-            value={1}
-            onChange={() => 2}
-          />
-        </View>
-        <View className="things-item">
-          <Image
-            src="https://joeschmoe.io/api/v1/random"
-            className="things-icon"
-          ></Image>
-          <View className="things-texts">
-            <Text className="things-title">物品名字</Text>
-            <Text className="things-count">剩余XXX</Text>
-          </View>
-        </View>
-        <View className="counter">
-          <AtInputNumber
-            type="digit"
-            min={0}
-            max={100}
-            step={1}
-            value={1}
-            onChange={() => 2}
-          />
-        </View>
-        <View className="things-item">
-          <Image
-            src="https://joeschmoe.io/api/v1/random"
-            className="things-icon"
-          ></Image>
-          <View className="things-texts">
-            <Text className="things-title">物品名字</Text>
-            <Text className="things-count">剩余XXX</Text>
-          </View>
-        </View>
-        <View className="counter">
-          <AtInputNumber
-            type="digit"
-            min={0}
-            max={100}
-            step={1}
-            value={1}
-            onChange={() => 2}
-          />
-        </View>
-        <View className="things-item">
-          <Image
-            src="https://joeschmoe.io/api/v1/random"
-            className="things-icon"
-          ></Image>
-          <View className="things-texts">
-            <Text className="things-title">物品名字</Text>
-            <Text className="things-count">剩余XXX</Text>
-          </View>
-        </View>
-        <View className="counter">
-          <AtInputNumber
-            type="digit"
-            min={0}
-            max={100}
-            step={1}
-            value={1}
-            onChange={() => 2}
-          />
-        </View>
-        <View className="things-item">
-          <Image
-            src="https://joeschmoe.io/api/v1/random"
-            className="things-icon"
-          ></Image>
-          <View className="things-texts">
-            <Text className="things-title">物品名字</Text>
-            <Text className="things-count">剩余XXX</Text>
-          </View>
-        </View>
-        <View className="counter">
-          <AtInputNumber
-            type="digit"
-            min={0}
-            max={100}
-            step={1}
-            value={1}
-            onChange={() => 2}
-          />
-        </View>
-        <View className="things-item">
-          <Image
-            src="https://joeschmoe.io/api/v1/random"
-            className="things-icon"
-          ></Image>
-          <View className="things-texts">
-            <Text className="things-title">物品名字</Text>
-            <Text className="things-count">剩余XXX</Text>
-          </View>
-        </View>
-        <View className="counter">
-          <AtInputNumber
-            type="digit"
-            min={0}
-            max={100}
-            step={1}
-            value={1}
-            onChange={() => 2}
-          />
-        </View>
+        <SelectThingList />
       </View>
       <View className="next">
         <Button className="show-list" onClick={openLayout}>
@@ -286,35 +92,16 @@ export default function Apply() {
         title="已选清单"
         onClose={closeLayout}
       >
-        <View className="things-item">
-          <Image
-            src="https://joeschmoe.io/api/v1/random"
-            className="things-icon"
-          ></Image>
-          <View className="things-texts">
-            <Text className="things-title">物品名字</Text>
-            <Text className="things-count">剩余XXX</Text>
-          </View>
-        </View>
-        <View className="counter-new">
-          <AtInputNumber
-            type="digit"
-            min={0}
-            max={100}
-            step={1}
-            value={1}
-            onChange={() => 2}
-          />
-        </View>
+        <FloatLayout />
       </AtFloatLayout>
       <Popup
         isOpen={open}
         isShowQRcode={false}
         isShowCounter
-        onclose={close}
+        onclose={popupClose}
         icon="https://joeschmoe.io/api/v1/random"
         name="物品名字"
-        remainCount="20"
+        remainCount={20}
       ></Popup>
     </View>
   );
