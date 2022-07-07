@@ -13,21 +13,24 @@ export default function SelectThingList() {
   if (!thingList[0].count) {
     addCount();
   }
-  //   const a = [
-  //     { id: 1 },
-  //     {
-  //       id: 2,
-  //     },
-  //   ];
-  //   console.log(!a.find(({ id }) => id === 1));
-  const onChangePush = (index1, e, Id, name, icon, remain_count, count) => {
+  const onChangePush = async (
+    index1,
+    e,
+    Id,
+    name,
+    icon,
+    remain_count,
+    count
+  ) => {
+    console.log(e);
     onChange(index1, e);
     if (!layoutList.find(({ id }) => id === Id)) {
       onPush(Id, name, icon, remain_count, count);
     } else {
       const index = layoutList.findIndex(({ id }) => id === Id);
       console.log(index);
-      setCount(index, count + 1);
+      console.log(count);
+      setCount(index, e);
     }
   };
   return (

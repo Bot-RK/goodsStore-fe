@@ -35,7 +35,7 @@ const useLayoutList = create<layoutListType>((set) => ({
           name: name1,
           icon: icon1,
           remain_count: remain1_count1,
-          count: count1,
+          count: 1,
         });
       })
     ),

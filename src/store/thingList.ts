@@ -16,6 +16,7 @@ interface thinglist {
   }>;
   onChange: (i: any, e: any) => void;
   addCount: () => void;
+  setCount: (i: number, e: number) => void;
 }
 const useThingListStore = create<thinglist>((set) => ({
   data: [
@@ -68,6 +69,12 @@ const useThingListStore = create<thinglist>((set) => ({
       })
     );
   },
+  setCount: (i, e) =>
+    set(
+      produce((state) => {
+        state.data[i].count = e;
+      })
+    ),
 }));
 
 export default useThingListStore;

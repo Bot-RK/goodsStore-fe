@@ -2,14 +2,20 @@ import create from "zustand";
 import { produce } from "immer";
 
 interface applyListType {
+  person_name: string;
+  department_id: number;
   data: Array<{
     good_id: number;
     amount: number;
   }>;
   add: (id: number, Amount: number) => void;
+  setPerson_name: (name: string) => void;
+  setDepartment_id: (id: number) => void;
 }
 
-const applyList = create<applyListType>((set) => ({
+const useApplyList = create<applyListType>((set) => ({
+  person_name: "test",
+  department_id: -1,
   data: [],
   add: (id, Amount) =>
     set(
@@ -20,4 +26,14 @@ const applyList = create<applyListType>((set) => ({
         });
       })
     ),
+  setDepartment_id: (id) =>
+    set((state) => ({
+      department_id: id,
+    })),
+  setPerson_name: (name) =>
+    set((state) => ({
+      person_name: name,
+    })),
 }));
+
+export default useApplyList;

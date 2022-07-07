@@ -1,10 +1,17 @@
 import { View, Image, Text } from "@tarojs/components";
 import { AtInputNumber } from "taro-ui";
 import useLayoutList from "../../store/layoutList";
+import useThingListStore from "../../store/thingList";
 
 export default function FloatLayout() {
   const layoutList = useLayoutList((state) => state.data);
   const onChange = useLayoutList((state) => state.onChange);
+  const setCount = useThingListStore((state) => state.setCount);
+  const onSetChange = (index, e, Id) => {
+    onChange(index, e);
+    const newIndex = layoutList.findIndex(({ id }) => id === Id);
+    setCount(newIndex, e);
+  };
   console.log(layoutList);
   return (
     <>
@@ -27,7 +34,7 @@ export default function FloatLayout() {
               max={100}
               step={1}
               value={`${item.count}`}
-              onChange={(e) => onChange(index, e)}
+              onChange={(e) => onSetChange(index, e, item.id)}
             />
           </View>
         </>

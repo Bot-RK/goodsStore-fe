@@ -8,6 +8,8 @@ import searchIcon from "../../asset/images/search.png";
 import usePopupDetail from "../../store/popup";
 import SelectThingList from "../../components/selectThingList";
 import FloatLayout from "../../components/floatLayout";
+import useApplyList from "../../store/applyList";
+import useLayoutList from "../../store/layoutList";
 
 export default function Apply() {
   const [text, setText] = useState("");
@@ -16,7 +18,8 @@ export default function Apply() {
   const open = usePopupDetail((state) => state.isOpen);
   const popupClose = usePopupDetail((state) => state.onclose);
   const popupOpen = usePopupDetail((state) => state.onOpen);
-
+  const pushApplyList = useApplyList((state) => state.add);
+  const layoutList = useLayoutList((state) => state.data);
   const openLayout = (e) => {
     setLayoutShow(!layoutShow);
   };
@@ -24,7 +27,10 @@ export default function Apply() {
     setText(e);
   };
 
-  function to() {
+  async function to() {
+    layoutList.map((item) => {
+      pushApplyList(item.id, item.count);
+    });
     Taro.navigateTo({
       url: "third",
       success: (res) => {
@@ -42,6 +48,7 @@ export default function Apply() {
     });
   }
   const closeLayout = (e) => {
+    setLayoutShow(!layoutShow);
     console.log(e);
   };
   const scan = (e) => {
