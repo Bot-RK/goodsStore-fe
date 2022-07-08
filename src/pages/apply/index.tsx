@@ -1,6 +1,6 @@
 import { View, Text, Progress, Input, Image, Button } from "@tarojs/components";
 import { AtFloatLayout, AtInputNumber, AtSearchBar } from "taro-ui";
-import Taro from "@tarojs/taro";
+import Taro, { useReady } from "@tarojs/taro";
 import { useState } from "react";
 import Popup from "../../components/popup";
 import "./index.scss";
@@ -29,6 +29,9 @@ export default function Apply() {
   const openLayout = (e) => {
     setLayoutShow(!layoutShow);
   };
+  useReady(() => {
+    api.get("/user/broadcast");
+  });
   const onChange = (e) => {
     setText(e);
   };
@@ -48,19 +51,6 @@ export default function Apply() {
           title: "成功",
           icon: "success",
           duration: 2000,
-        });
-      },
-    });
-    Taro.login({
-      success: (res) => {
-        Taro.request({
-          method: "POST",
-          url: "https://gss.ncuos.com/login",
-          header: {
-            code: res.code,
-          },
-          success: (res1) => console.log(res1),
-          fail: (err) => console.log(err),
         });
       },
     });

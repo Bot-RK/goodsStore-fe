@@ -1,11 +1,11 @@
-import Taro from "@tarojs/taro";
+import Taro, { getStorageSync } from "@tarojs/taro";
 
 export default {
   baseOptions(params, method = "get") {
     let { url, data } = params;
     let contentType = "application/json";
     contentType = params.contentType || contentType;
-
+    const token = getStorageSync("token");
     type OptionType = {
       url: string;
       data?: object | string;
@@ -23,6 +23,7 @@ export default {
       method: method,
       header: {
         "content-type": contentType,
+        Authorization: token,
       },
       success(res) {
         console.log("res=>", res);
@@ -41,6 +42,7 @@ export default {
   },
   get(url, data?: object) {
     let option = { url, data };
+    console.log("token=>", getStorageSync("token"));
     return this.baseOptions(option);
   },
   post(url, data?: object) {
