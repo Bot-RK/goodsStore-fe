@@ -10,6 +10,7 @@ export default function SelectThingList() {
   const onPush = useLayoutList((state) => state.onPush);
   const layoutList = useLayoutList((state) => state.data);
   const setCount = useLayoutList((state) => state.setCount);
+  const onDelete = useLayoutList((state) => state.onDelete);
   if (!thingList[0].count) {
     addCount();
   }
@@ -28,9 +29,13 @@ export default function SelectThingList() {
       onPush(Id, name, icon, remain_count, count);
     } else {
       const index = layoutList.findIndex(({ id }) => id === Id);
-      console.log(index);
-      console.log(count);
-      setCount(index, e);
+      if (e === 0) {
+        onDelete(index);
+      } else {
+        console.log(index);
+        console.log(count);
+        setCount(index, e);
+      }
     }
   };
   return (

@@ -18,6 +18,7 @@ interface layoutListType {
     count: any
   ) => void;
   setCount: (i: number, e: number) => void;
+  onDelete: (index: number) => void;
 }
 const useLayoutList = create<layoutListType>((set) => ({
   data: [],
@@ -37,6 +38,12 @@ const useLayoutList = create<layoutListType>((set) => ({
           remain_count: remain1_count1,
           count: 1,
         });
+      })
+    ),
+  onDelete: (index) =>
+    set(
+      produce((state) => {
+        state.data.splice(index, 1);
       })
     ),
   setCount: (i, e) =>

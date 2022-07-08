@@ -2,6 +2,7 @@ import { View, Text, Progress, Button, Input } from "@tarojs/components";
 import Taro from "@tarojs/taro";
 import { useState } from "react";
 import { AtCheckbox, AtFloatLayout } from "taro-ui";
+import useJudge from "../../store/judgeIsMultiple";
 import useApplyList from "../../store/applyList";
 import "./third.scss";
 
@@ -12,6 +13,8 @@ export default function Third() {
   const setSingleDepartment = useApplyList((state) => state.setDepartment_id);
   const setName = useApplyList((state) => state.setPerson_name);
   const applyList = useApplyList((state) => state);
+  const setIsTrue = useJudge((state) => state.setIsTrue);
+  const setIsFalse = useJudge((state) => state.setIsFlase);
   const dp = [
     {
       ID: 1,
@@ -70,6 +73,7 @@ export default function Third() {
     }
   };
   function to() {
+    setIsFalse();
     Taro.navigateTo({
       url: "four",
       success: (res) => {
@@ -82,6 +86,7 @@ export default function Third() {
     });
   }
   const to2 = (e) => {
+    setIsTrue();
     Taro.navigateTo({
       url: "multiple",
       success: (res) => {

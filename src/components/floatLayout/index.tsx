@@ -7,10 +7,16 @@ export default function FloatLayout() {
   const layoutList = useLayoutList((state) => state.data);
   const onChange = useLayoutList((state) => state.onChange);
   const setCount = useThingListStore((state) => state.setCount);
+  const onDelete = useLayoutList((state) => state.onDelete);
   const onSetChange = (index, e, Id) => {
     onChange(index, e);
     const newIndex = layoutList.findIndex(({ id }) => id === Id);
-    setCount(newIndex, e);
+    if (e === 0) {
+      onDelete(newIndex);
+    } else {
+      console.log("delete", layoutList);
+      setCount(newIndex, e);
+    }
   };
   console.log(layoutList);
   return (
