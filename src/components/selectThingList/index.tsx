@@ -21,19 +21,18 @@ export default function SelectThingList() {
     name,
     icon,
     remain_count,
-    count
+    count_name
   ) => {
     console.log(e);
     onChange(index1, e);
     if (!layoutList.find(({ id }) => id === Id)) {
-      onPush(Id, name, icon, remain_count, count);
+      onPush(Id, name, icon, remain_count, count_name);
     } else {
       const index = layoutList.findIndex(({ id }) => id === Id);
       if (e === 0) {
         onDelete(index);
       } else {
         console.log(index);
-        console.log(count);
         setCount(index, e);
       }
     }
@@ -67,7 +66,7 @@ export default function SelectThingList() {
                   item.name,
                   item.picture_url,
                   item.amount,
-                  item.count
+                  item.measure_word
                 )
               }
             />

@@ -18,17 +18,24 @@ export default function Third() {
   const dp = [
     {
       ID: 1,
-      CreatedAt: "2022-07-06T11:59:09.479+08:00",
-      UpdatedAt: "2022-07-06T11:59:09.479+08:00",
-      DeletedAt: null,
-      name: "家园工作室",
+      CreatedAt: "ss",
+      UpdatedAt: "ss",
+      DeletedAt: "aa",
+      name: "咳咳咳",
     },
     {
       ID: 2,
-      CreatedAt: "2022-07-06T11:59:47.565+08:00",
-      UpdatedAt: "2022-07-06T11:59:47.565+08:00",
-      DeletedAt: null,
-      name: "学工处",
+      CreatedAt: "ss",
+      UpdatedAt: "ss",
+      DeletedAt: "aa",
+      name: "咳咳咳1",
+    },
+    {
+      ID: 3,
+      CreatedAt: "ss",
+      UpdatedAt: "ss",
+      DeletedAt: "aa",
+      name: "咳咳咳2",
     },
   ];
   const departments: any = dp.map(function (item) {
