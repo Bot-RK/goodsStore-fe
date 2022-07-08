@@ -24,6 +24,8 @@ export default function Apply() {
   const layoutList = useLayoutList((state) => state.data);
   const searchByName = useThingListStore((state) => state.searchByName);
   const thingList = useThingListStore((state) => state.data);
+  const id = useThingListStore((state) => state.selectId);
+  const setID = useThingListStore((state) => state.setSelectedId);
   const openLayout = (e) => {
     setLayoutShow(!layoutShow);
   };
@@ -71,6 +73,7 @@ export default function Apply() {
   const scan = (e) => {
     Taro.scanCode({
       success: (res) => {
+        setID(Number(res.result));
         popupOpen();
         console.log(res);
       },
@@ -128,8 +131,7 @@ export default function Apply() {
         isShowQRcode={false}
         isShowCounter
         onclose={popupClose}
-        icon="https://joeschmoe.io/api/v1/random"
-        name="物品名字"
+        thingId={Number(id)}
         remainCount={20}
       ></Popup>
     </View>

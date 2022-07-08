@@ -7,15 +7,18 @@ import {
   CommonEvent,
   CommonEventFunction,
 } from "@tarojs/components";
+import { useTabItemTap } from "@tarojs/taro";
 import { FC, memo } from "react";
 import { AtCurtain, AtInputNumber } from "taro-ui";
 import { Barcode, QRCode } from "taro3-code";
+import useThingListStore from "../../store/thingList";
 import white1 from "../../asset/images/纯白.png";
 import "./index.scss";
 
 type popupProps = {
   isOpen: boolean;
   isShowQRcode: boolean;
+  thingId: number;
   icon?: string;
   name?: string;
   remainCount?: number;
@@ -28,6 +31,7 @@ type popupProps = {
 const Popup: FC<popupProps> = ({
   isOpen,
   isShowQRcode,
+  thingId,
   icon,
   name,
   remainCount,
@@ -36,6 +40,9 @@ const Popup: FC<popupProps> = ({
   onclose,
   getCount,
 }) => {
+  const thingList = useThingListStore((state) => state.data);
+  const index = thingList.findIndex(({ ID }) => ID === thingId);
+
   return (
     <>
       <View className={isShowQRcode ? "show-QRcode" : "show-detail"}>
@@ -44,13 +51,19 @@ const Popup: FC<popupProps> = ({
           <View className="detail-box">
             <View className="little-box">
               <Image
-                src={icon!}
+                src={
+                  !thingList[index]
+                    ? "https://joeschmoe.io/api/v1/random"
+                    : thingList[index].picture_url
+                }
                 className={isShowCounter ? "detail-icon" : "detail-icon-new"}
               ></Image>
               <View
                 className={isShowCounter ? "detail-name" : "detail-name-new"}
               >
-                <Text>{name}</Text>
+                <Text>
+                  {!thingList[index] ? "名字名字" : thingList[index].name}
+                </Text>
               </View>
               <View
                 className={isShowCounter ? "detail-count" : "detail-count-new"}
@@ -59,9 +72,11 @@ const Popup: FC<popupProps> = ({
                 <Input
                   disabled
                   className="detail-count-input"
-                  value={`${remainCount}`}
+                  value={!thingList[index] ? "0" : `${thingList[index].amount}`}
                 ></Input>
-                <Text className="detail-count-text">本</Text>
+                <Text className="detail-count-text">
+                  {!thingList[index] ? "个" : thingList[index].measure_word}
+                </Text>
               </View>
             </View>
             <View className={isShowCounter ? "counter-new" : "uncounter-new"}>
@@ -87,7 +102,7 @@ const Popup: FC<popupProps> = ({
         <AtCurtain onClose={onclose} isOpened={isOpen}>
           <View className="QR-code-style">
             <QRCode
-              text="www.baidu.com"
+              text="16"
               size={300}
               scale={4}
               errorCorrectLevel="M"

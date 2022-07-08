@@ -18,6 +18,8 @@ interface thinglist {
   addCount: () => void;
   setCount: (i: number, e: number) => void;
   searchByName: (index: number) => void;
+  selectId: number;
+  setSelectedId: (ID: number) => void;
 }
 const useThingListStore = create<thinglist>((set) => ({
   data: [
@@ -81,31 +83,31 @@ const useThingListStore = create<thinglist>((set) => ({
       CreatedAt: "2022-07-06T15:35:17.772+08:00",
       UpdatedAt: "2022-07-06T16:40:04.924+08:00",
       DeletedAt: null,
-      amount: 39,
+      amount: 81,
       name: "物资16",
-      picture_url: "test.com",
+      picture_url: "https://joeschmoe.io/api/v1/random",
       measure_word: "个",
       under_warning_value: false,
     },
     {
-      ID: 17,
+      ID: 1,
       CreatedAt: "2022-07-06T15:35:17.772+08:00",
       UpdatedAt: "2022-07-06T16:40:04.924+08:00",
       DeletedAt: null,
       amount: 39,
       name: "物资17",
-      picture_url: "test.com",
+      picture_url: "https://joeschmoe.io/api/v1/random",
       measure_word: "个",
       under_warning_value: false,
     },
     {
-      ID: 18,
+      ID: 10,
       CreatedAt: "2022-07-06T15:35:17.772+08:00",
       UpdatedAt: "2022-07-06T16:40:04.924+08:00",
       DeletedAt: null,
       amount: 39,
       name: "物资18",
-      picture_url: "test.com",
+      picture_url: "https://joeschmoe.io/api/v1/random",
       measure_word: "个",
       under_warning_value: false,
     },
@@ -138,6 +140,11 @@ const useThingListStore = create<thinglist>((set) => ({
         state.data.splice(index + 1, 1);
       })
     ),
+  selectId: -1,
+  setSelectedId: (ID) =>
+    set((state) => ({
+      selectId: ID,
+    })),
 }));
 
 export default useThingListStore;

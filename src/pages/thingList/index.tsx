@@ -6,23 +6,34 @@ import ThingList from "../../components/thingList";
 import Popup from "../../components/popup";
 import "./index.scss";
 import usePopupDetail from "../../store/popup";
+import useThingListStore from "../../store/thingList";
 
 export default function Second() {
   const [text, setText] = useState("");
   // const [open, setOpen] = useState(false);
   const [count, setCount] = useState(0);
-
+  const searchByName = useThingListStore((state) => state.searchByName);
+  const thingList = useThingListStore((state) => state.data);
   const open = usePopupDetail((state) => state.isOpen);
+  const popupOpen = usePopupDetail((state) => state.onOpen);
   const popupClose = usePopupDetail((state) => state.onclose);
+  const id = useThingListStore((state) => state.selectId);
+  const setID = useThingListStore((state) => state.setSelectedId);
   const onChange = (e) => {
     setText(e);
   };
   const scan = (e) => {
     Taro.scanCode({
       success: (res) => {
+        setID(Number(res.result));
+        popupOpen();
         console.log(res);
       },
     });
+  };
+  const search = () => {
+    let index = thingList.findIndex(({ name }) => name === text);
+    searchByName(index);
   };
 
   const getCount = (e) => {
@@ -46,7 +57,12 @@ export default function Second() {
         <View>
           <Button className="button-scan" onClick={scan}></Button>
         </View>
-        <AtSearchBar value={text} onChange={onChange} className="search-bar" />
+        <AtSearchBar
+          value={text}
+          onChange={onChange}
+          className="search-bar"
+          onActionClick={search}
+        />
       </View>
       <View className="things">
         <ThingList />
@@ -56,8 +72,7 @@ export default function Second() {
         isShowQRcode={false}
         isShowCounter={false}
         onclose={popupClose}
-        icon="https://joeschmoe.io/api/v1/random"
-        name="物品名字"
+        thingId={id}
         remainCount={20}
       ></Popup>
       {/* <Popup isOpen={open} isShowQRcode isShowCounter={false} onclose={close}></Popup> */}
