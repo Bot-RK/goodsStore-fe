@@ -34,8 +34,8 @@ $background-color:#F8F9FD;
 }
 .icon-font{
     position: absolute;
-    margin-left: 20px;
-    margin-top: 46px;
+    margin-left: 30px;
+    margin-top: 15px;
     color: #333333;
 }
 .arrow{
@@ -49,4 +49,19 @@ $background-color:#F8F9FD;
     position: absolute;
     width: 100%;
     min-height: 100%;
+}
+.little-box{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    margin-top: -30px;
+}
+.little-font{
+    margin-left: 111px;
+    font-size: 25px;
+    color: #BEC2D3;
+    margin-top: 5px;
+}
+.department-name{
+    margin-left: 30px;
 }

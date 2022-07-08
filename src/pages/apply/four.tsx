@@ -33,8 +33,6 @@ export default function Detail() {
     longName += item.name + "(" + item.count + ")" + " ";
   });
 
-  console.log(longName);
-
   return (
     <View className="backGround-f">
       <View className="thingList-text">
@@ -61,21 +59,6 @@ export default function Detail() {
       </View>
       <View className="things">
         <DetailList />
-        {/* <View className="things-item">
-          <Image
-            src="https://joeschmoe.io/api/v1/random"
-            className="things-icon"
-          ></Image>
-          <View className="things-texts">
-            <Text className="things-title">物品名字</Text>
-          </View>
-          <View className="things-count">
-            <View className="counts">
-              <Input className="count-input" disabled value="20"></Input>
-            </View>
-            <Text className="things-count-text">本</Text>
-          </View>
-        </View> */}
       </View>
       <View className="next">
         <Button className="next-button" onClick={to}>

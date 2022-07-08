@@ -53,7 +53,6 @@ export default function Apply() {
     });
     Taro.login({
       success: (res) => {
-        console.log(res);
         Taro.request({
           method: "POST",
           url: "https://gss.ncuos.com/login",
@@ -68,14 +67,12 @@ export default function Apply() {
   }
   const closeLayout = (e) => {
     setLayoutShow(!layoutShow);
-    console.log(e);
   };
   const scan = (e) => {
     Taro.scanCode({
       success: (res) => {
         setID(Number(res.result));
         popupOpen();
-        console.log(res);
       },
     });
   };

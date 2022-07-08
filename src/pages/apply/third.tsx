@@ -60,19 +60,15 @@ export default function Third() {
   // ];
   const openLayout = (e) => {
     setLayoutShow(!layoutShow);
-    console.log(layoutShow);
-    console.log(e);
   };
   const closeLayout = (e) => {
     setLayoutShow(!layoutShow);
-    console.log(layoutShow);
-    console.log(e);
+
     if (selectList.length > 1) {
       setIsMultiple(!isMultiple);
     }
   };
   const select = (e) => {
-    console.log(e);
     setSelected(e);
     if (e.length == 1) {
       setSingleDepartment(e[0]);
@@ -107,7 +103,6 @@ export default function Third() {
   };
   const onBlur = (name) => {
     setName(name);
-    console.log(name);
   };
 
   return (
