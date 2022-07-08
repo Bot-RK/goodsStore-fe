@@ -10,6 +10,8 @@ import SelectThingList from "../../components/selectThingList";
 import FloatLayout from "../../components/floatLayout";
 import useApplyList from "../../store/applyList";
 import useLayoutList from "../../store/layoutList";
+import api from "../../service/api";
+import useThingListStore from "../../store/thingList";
 
 export default function Apply() {
   const [text, setText] = useState("");
@@ -20,11 +22,17 @@ export default function Apply() {
   const popupOpen = usePopupDetail((state) => state.onOpen);
   const pushApplyList = useApplyList((state) => state.add);
   const layoutList = useLayoutList((state) => state.data);
+  const searchByName = useThingListStore((state) => state.searchByName);
+  const thingList = useThingListStore((state) => state.data);
   const openLayout = (e) => {
     setLayoutShow(!layoutShow);
   };
   const onChange = (e) => {
     setText(e);
+  };
+  const search = () => {
+    let index = thingList.findIndex(({ name }) => name === text);
+    searchByName(index);
   };
 
   async function to() {
@@ -44,6 +52,15 @@ export default function Apply() {
     Taro.login({
       success: (res) => {
         console.log(res);
+        Taro.request({
+          method: "POST",
+          url: "https://gss.ncuos.com/login",
+          header: {
+            code: res.code,
+          },
+          success: (res1) => console.log(res1),
+          fail: (err) => console.log(err),
+        });
       },
     });
   }
@@ -80,7 +97,12 @@ export default function Apply() {
         <View>
           <Button className="button-scan" onClick={scan}></Button>
         </View>
-        <AtSearchBar value={text} onChange={onChange} className="search-bar" />
+        <AtSearchBar
+          value={text}
+          onChange={onChange}
+          className="search-bar"
+          onActionClick={search}
+        />
       </View>
 
       <View className="things">

@@ -14,9 +14,9 @@ export default function Index() {
         <View className="announcement-text">
           <Text>你好,欢迎使用学工仓储系统</Text>
           <View>
-          <Text>
-            我是公告我是公告我是公告我是公告我是公告我是公告我是公告我是公告我是公告我是公告
-          </Text>
+            <Text>
+              我是公告我是公告我是公告我是公告我是公告我是公告我是公告我是公告我是公告我是公告
+            </Text>
           </View>
         </View>
       </View>

@@ -13,6 +13,7 @@ export default function FloatLayout() {
     const newIndex = layoutList.findIndex(({ id }) => id === Id);
     if (e === 0) {
       onDelete(newIndex);
+      setCount(newIndex, e);
     } else {
       console.log("delete", layoutList);
       setCount(newIndex, e);

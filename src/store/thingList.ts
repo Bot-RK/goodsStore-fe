@@ -17,6 +17,7 @@ interface thinglist {
   onChange: (i: any, e: any) => void;
   addCount: () => void;
   setCount: (i: number, e: number) => void;
+  searchByName: (index: number) => void;
 }
 const useThingListStore = create<thinglist>((set) => ({
   data: [
@@ -53,6 +54,61 @@ const useThingListStore = create<thinglist>((set) => ({
       measure_word: "个",
       under_warning_value: false,
     },
+    {
+      ID: 14,
+      CreatedAt: "2022-07-06T15:35:17.772+08:00",
+      UpdatedAt: "2022-07-06T16:40:04.924+08:00",
+      DeletedAt: null,
+      amount: 39,
+      name: "物资9",
+      picture_url: "test.com",
+      measure_word: "个",
+      under_warning_value: false,
+    },
+    {
+      ID: 15,
+      CreatedAt: "2022-07-06T15:35:17.772+08:00",
+      UpdatedAt: "2022-07-06T16:40:04.924+08:00",
+      DeletedAt: null,
+      amount: 39,
+      name: "物资10",
+      picture_url: "test.com",
+      measure_word: "个",
+      under_warning_value: false,
+    },
+    {
+      ID: 16,
+      CreatedAt: "2022-07-06T15:35:17.772+08:00",
+      UpdatedAt: "2022-07-06T16:40:04.924+08:00",
+      DeletedAt: null,
+      amount: 39,
+      name: "物资16",
+      picture_url: "test.com",
+      measure_word: "个",
+      under_warning_value: false,
+    },
+    {
+      ID: 17,
+      CreatedAt: "2022-07-06T15:35:17.772+08:00",
+      UpdatedAt: "2022-07-06T16:40:04.924+08:00",
+      DeletedAt: null,
+      amount: 39,
+      name: "物资17",
+      picture_url: "test.com",
+      measure_word: "个",
+      under_warning_value: false,
+    },
+    {
+      ID: 18,
+      CreatedAt: "2022-07-06T15:35:17.772+08:00",
+      UpdatedAt: "2022-07-06T16:40:04.924+08:00",
+      DeletedAt: null,
+      amount: 39,
+      name: "物资18",
+      picture_url: "test.com",
+      measure_word: "个",
+      under_warning_value: false,
+    },
   ],
   onChange: (i, e) =>
     set(
@@ -73,6 +129,13 @@ const useThingListStore = create<thinglist>((set) => ({
     set(
       produce((state) => {
         state.data[i].count = e;
+      })
+    ),
+  searchByName: (index) =>
+    set(
+      produce((state) => {
+        state.data.unshift(state.data[index]);
+        state.data.splice(index + 1, 1);
       })
     ),
 }));
