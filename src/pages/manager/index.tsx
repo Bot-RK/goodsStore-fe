@@ -4,10 +4,13 @@ import Taro from "@tarojs/taro";
 import { useState } from "react";
 import "./index.scss";
 import searchIcon from "../../asset/images/search.png";
-
+import ThingList from "../../components/thingList";
+import useThingListStore from "../../store/thingList";
 
 export default function Apply() {
+  const searchByName = useThingListStore((state) => state.searchByName);
   const [text, setText] = useState("");
+  const thingList = useThingListStore((state) => state.data);
 
   const onChange = (e) => {
     setText(e);
@@ -25,6 +28,10 @@ export default function Apply() {
       },
     });
   }
+  const search = () => {
+    let index = thingList.findIndex(({ name }) => name === text);
+    searchByName(index);
+  };
   function to2() {
     Taro.navigateTo({
       url: "third",
@@ -37,28 +44,38 @@ export default function Apply() {
       },
     });
   }
-  const scan=(e)=>{
+  const scan = (e) => {
     Taro.scanCode({
-      success:(res)=>{
-        console.log(res)
-      }
-    })
-  }
+      success: (res) => {
+        console.log(res);
+      },
+    });
+  };
   return (
     <View className="backGround-b">
       <View className="progress">
         <Text className="progress-text">物资管理</Text>
       </View>
-      <View >
-          <Button className="button-scan" onClick={scan}></Button>
-        </View>
-      <View className="manager-button">
-        <Button className="button-one" onClick={to}>补充物品</Button>
-        <Button className="button-two" onClick={to2}>新建物品</Button>
+      <View>
+        <Button className="button-scan" onClick={scan}></Button>
       </View>
-      <AtSearchBar value={text} onChange={onChange} className="search-bar" />
+      <View className="manager-button">
+        <Button className="button-one" onClick={to}>
+          补充物品
+        </Button>
+        <Button className="button-two" onClick={to2}>
+          新建物品
+        </Button>
+      </View>
+      <AtSearchBar
+        value={text}
+        onChange={onChange}
+        className="search-bar"
+        onActionClick={search}
+      />
       <View className="things">
-        <View className="things-item">
+        <ThingList />
+        {/* <View className="things-item">
           <Image
             src="https://joeschmoe.io/api/v1/random"
             className="things-icon"
@@ -73,7 +90,7 @@ export default function Apply() {
             </View>
             <Text className="things-count-text">本</Text>
           </View>
-        </View>
+        </View> */}
       </View>
     </View>
   );

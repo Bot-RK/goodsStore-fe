@@ -1,34 +1,40 @@
-import { View, Text, Progress, Input, Image, Button } from "@tarojs/components";
-import { AtInputNumber, AtSearchBar } from 'taro-ui'
+import { View, Text, Progress, Button } from "@tarojs/components";
+import { AtSearchBar } from "taro-ui";
 import Taro from "@tarojs/taro";
 import { useState } from "react";
 import "./first.scss";
-import searchIcon from "../../asset/images/search.png";
-
-
+import SelectThingList from "../../components/selectThingList";
+import useThingListStore from "../../store/thingList";
 
 export default function Apply() {
-    const [text, setText] = useState("");
+  const [text, setText] = useState("");
+  const searchByName = useThingListStore((state) => state.searchByName);
+  const thingList = useThingListStore((state) => state.data);
 
-    const onChange = (e) => {
-      setText(e);
-    };
-  function to(){Taro.navigateTo({
-    url :'second',
-    success:(res)=>{
-      Taro.showToast({
-        title: '成功',
-        icon: 'success',
-        duration: 2000
-      })
-    }
-  });
-  Taro.login({
-    success:(res)=>{
-      console.log(res.code)
-    }
-  })
-}
+  const onChange = (e) => {
+    setText(e);
+  };
+  function to() {
+    Taro.navigateTo({
+      url: "second",
+      success: (res) => {
+        Taro.showToast({
+          title: "成功",
+          icon: "success",
+          duration: 2000,
+        });
+      },
+    });
+    Taro.login({
+      success: (res) => {
+        console.log(res.code);
+      },
+    });
+  }
+  const search = () => {
+    let index = thingList.findIndex(({ name }) => name === text);
+    searchByName(index);
+  };
 
   return (
     <View className="backGround-b">
@@ -42,212 +48,20 @@ export default function Apply() {
         ></Progress>
         <Text className="progress-text">选择物品</Text>
       </View>
-      <AtSearchBar value={text} onChange={onChange} className="search-bar" />
-     
+      <AtSearchBar
+        value={text}
+        onChange={onChange}
+        className="search-bar"
+        onActionClick={search}
+      />
+
       <View className="things">
-        <View className="things-item">
-          <Image
-            src="https://joeschmoe.io/api/v1/random"
-            className="things-icon"
-          ></Image>
-          <View className="things-texts">
-            <Text className="things-title">物品名字</Text>
-            <Text className="things-count">剩余XXX</Text>
-          </View>
-        </View>
-        <View className="counter">
-        <AtInputNumber
-          type="number"
-          min={0}
-          max={100}
-          step={1}
-          value={1}
-          onChange={()=>2}
-        />
-        </View>
-        <View className="things-item">
-          <Image
-            src="https://joeschmoe.io/api/v1/random"
-            className="things-icon"
-          ></Image>
-          <View className="things-texts">
-            <Text className="things-title">物品名字</Text>
-            <Text className="things-count">剩余XXX</Text>
-          </View>
-        </View>
-        <View className="counter">
-        <AtInputNumber
-          type="number"
-          min={0}
-          max={100}
-          step={1}
-          value={1}
-          onChange={()=>2}
-        />
-        </View>
-        <View className="things-item">
-          <Image
-            src="https://joeschmoe.io/api/v1/random"
-            className="things-icon"
-          ></Image>
-          <View className="things-texts">
-            <Text className="things-title">物品名字</Text>
-            <Text className="things-count">剩余XXX</Text>
-          </View>
-        </View>
-        <View className="counter">
-        <AtInputNumber
-          type="digit"
-          min={0}
-          max={100}
-          step={1}
-          value={1}
-          onChange={()=>2}
-        />
-        </View>
-        <View className="things-item">
-          <Image
-            src="https://joeschmoe.io/api/v1/random"
-            className="things-icon"
-          ></Image>
-          <View className="things-texts">
-            <Text className="things-title">物品名字</Text>
-            <Text className="things-count">剩余XXX</Text>
-          </View>
-        </View>
-        <View className="counter">
-        <AtInputNumber
-          type="digit"
-          min={0}
-          max={100}
-          step={1}
-          value={1}
-          onChange={()=>2}
-        />
-        </View>
-        <View className="things-item">
-          <Image
-            src="https://joeschmoe.io/api/v1/random"
-            className="things-icon"
-          ></Image>
-          <View className="things-texts">
-            <Text className="things-title">物品名字</Text>
-            <Text className="things-count">剩余XXX</Text>
-          </View>
-        </View>
-        <View className="counter">
-        <AtInputNumber
-          type="digit"
-          min={0}
-          max={100}
-          step={1}
-          value={1}
-          onChange={()=>2}
-        />
-        </View>
-        <View className="things-item">
-          <Image
-            src="https://joeschmoe.io/api/v1/random"
-            className="things-icon"
-          ></Image>
-          <View className="things-texts">
-            <Text className="things-title">物品名字</Text>
-            <Text className="things-count">剩余XXX</Text>
-          </View>
-        </View>
-        <View className="counter">
-        <AtInputNumber
-          type="digit"
-          min={0}
-          max={100}
-          step={1}
-          value={1}
-          onChange={()=>2}
-        />
-        </View>
-        <View className="things-item">
-          <Image
-            src="https://joeschmoe.io/api/v1/random"
-            className="things-icon"
-          ></Image>
-          <View className="things-texts">
-            <Text className="things-title">物品名字</Text>
-            <Text className="things-count">剩余XXX</Text>
-          </View>
-        </View>
-        <View className="counter">
-        <AtInputNumber
-          type="digit"
-          min={0}
-          max={100}
-          step={1}
-          value={1}
-          onChange={()=>2}
-        />
-        </View>
-        <View className="things-item">
-          <Image
-            src="https://joeschmoe.io/api/v1/random"
-            className="things-icon"
-          ></Image>
-          <View className="things-texts">
-            <Text className="things-title">物品名字</Text>
-            <Text className="things-count">剩余XXX</Text>
-          </View>
-        </View>
-        <View className="counter">
-        <AtInputNumber
-          type="digit"
-          min={0}
-          max={100}
-          step={1}
-          value={1}
-          onChange={()=>2}
-        />
-        </View>
-        <View className="things-item">
-          <Image
-            src="https://joeschmoe.io/api/v1/random"
-            className="things-icon"
-          ></Image>
-          <View className="things-texts">
-            <Text className="things-title">物品名字</Text>
-            <Text className="things-count">剩余XXX</Text>
-          </View>
-        </View>
-        <View className="counter">
-        <AtInputNumber
-          type="digit"
-          min={0}
-          max={100}
-          step={1}
-          value={1}
-          onChange={()=>2}
-        />
-        </View>
-        <View className="things-item">
-          <Image
-            src="https://joeschmoe.io/api/v1/random"
-            className="things-icon"
-          ></Image>
-          <View className="things-texts">
-            <Text className="things-title">物品名字</Text>
-            <Text className="things-count">剩余XXX</Text>
-          </View>
-        </View>
-        <View className="counter">
-        <AtInputNumber
-          type="digit"
-          min={0}
-          max={100}
-          step={1}
-          value={1}
-          onChange={()=>2}
-        />
-        </View>
+        <SelectThingList />
       </View>
       <View className="next">
-        <Button className="next-button" onClick={to}>下一步</Button>
+        <Button className="next-button" onClick={to}>
+          下一步
+        </Button>
       </View>
     </View>
   );

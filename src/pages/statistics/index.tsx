@@ -13,6 +13,7 @@ import "./index.scss";
 import icon4 from "../../asset/images/Vector4.png";
 import icon6 from "../../asset/images/Vector11.png";
 import icon5 from "../../asset/images/Vector12.png";
+import AdRecords from "../../components/adminRecords";
 
 export default function Index() {
   const [layoutShow, setLayoutShow] = useState(false);
@@ -127,22 +128,8 @@ export default function Index() {
             点击选择部门
           </Button>
         </View>
-        <View className="things">
-          <View className="things-item">
-            <Image
-              src="https://joeschmoe.io/api/v1/random"
-              className="things-icon"
-            ></Image>
-            <View className="things-texts">
-              <Text className="things-title">物品名字</Text>
-            </View>
-            <View className="things-count">
-              <View className="counts">
-                <Input className="count-input" disabled value="20"></Input>
-              </View>
-              <Text className="things-count-text">本</Text>
-            </View>
-          </View>
+        <View className="list">
+          <AdRecords />
         </View>
       </View>
       <View className={selected ? "detail-unshow" : "detail-show"}>
@@ -165,7 +152,11 @@ export default function Index() {
           <Image className="arrow" src={icon4}></Image>
         </View>
       </View>
-      <AtFloatLayout isOpened={layoutShow} onClose={closeLayout} title="已选清单">
+      <AtFloatLayout
+        isOpened={layoutShow}
+        onClose={closeLayout}
+        title="已选清单"
+      >
         <AtCheckbox
           options={departments}
           selectedList={selectList}

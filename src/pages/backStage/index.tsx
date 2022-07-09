@@ -1,4 +1,5 @@
 import { View, Text, Image, Navigator } from "@tarojs/components";
+import { useReady } from "@tarojs/taro";
 import "./index.scss";
 import icon1 from "../../asset/images/Vector7.png";
 import icon2 from "../../asset/images/Vector8.png";
@@ -7,19 +8,23 @@ import icon4 from "../../asset/images/Vector4.png";
 import icon5 from "../../asset/images/Vector10.png";
 import icon6 from "../../asset/images/backStage1.png";
 import icon7 from "../../asset/images/Group.png";
+import useLayoutList from "../../store/layoutList";
 
 export default function Index() {
+  const clean = useLayoutList((state) => state.clean);
+  useReady(() => {
+    clean();
+  });
   return (
     <View className='"backGround-b"'>
-        <View className="title">
-            <Text className="title-name">管理后台</Text>
-            <Text className="title-who">你好,xxx</Text>
-        </View>
+      <View className="title">
+        <Text className="title-name">管理后台</Text>
+        <Text className="title-who">你好,xxx</Text>
+      </View>
       <View className="backStage-image">
         <Image className="backStage-image1" src={icon6}></Image>
       </View>
-      <View className="announcement">
-      </View>
+      <View className="announcement"></View>
 
       <View className="operation">
         <Navigator className="pathTo" url="/pages/manager/index"></Navigator>

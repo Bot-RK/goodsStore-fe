@@ -7,9 +7,13 @@ import "./addNumber.scss";
 export default function AddNumber() {
   const [au, setAu] = useState("");
   const Authors: string[] = ["成员", "管理员"];
+  const [name, setName] = useState("");
+  const [number, setNumber] = useState("");
+  const [is_admin, setIsAdmin] = useState(false);
   const onChangeAU = (e) => {
     console.log(e);
     setAu(Authors[e.detail.value]);
+    setIsAdmin(e.detail.value == "成员" ? false : true);
   };
   function final() {
     Taro.navigateTo({
@@ -23,6 +27,12 @@ export default function AddNumber() {
       },
     });
   }
+  const onAddName = (e) => {
+    setName(e.detail.value);
+  };
+  const onAddNumber = (e) => {
+    setNumber(e.detail.value);
+  };
   return (
     <View className="backGround-b">
       <View className="thingList-text">
@@ -34,6 +44,7 @@ export default function AddNumber() {
           className="input1"
           placeholder="输入名称"
           placeholderClass="input-place"
+          onBlur={(e) => onAddName(e)}
         ></Input>
       </View>
       <View className="add-input">
@@ -42,6 +53,7 @@ export default function AddNumber() {
           className="input2"
           placeholder="点击输入"
           placeholderClass="input-place"
+          onBlur={(e) => onAddNumber(e)}
         ></Input>
       </View>
       <View className="select-authority">

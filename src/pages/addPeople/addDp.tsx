@@ -1,8 +1,10 @@
 import { View, Text, Input, Button } from "@tarojs/components";
 import Taro from "@tarojs/taro";
+import { useState } from "react";
 import "./addDp.scss";
 
 export default function AddDp() {
+  const [dp, setDp] = useState("");
   function final() {
     Taro.navigateTo({
       url: "index",
@@ -15,6 +17,9 @@ export default function AddDp() {
       },
     });
   }
+  const onAddDp = (e) => {
+    setDp(e.detail.value);
+  };
   return (
     <View className="backGround-b">
       <View className="thingList-text">
@@ -26,6 +31,7 @@ export default function AddDp() {
           className="input1"
           placeholder="输入名称"
           placeholderClass="input-place"
+          onBlur={(e) => onAddDp(e)}
         ></Input>
       </View>
       <View className="next">
