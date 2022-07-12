@@ -1,7 +1,7 @@
 import { View, Text, Image, Input } from "@tarojs/components";
 import useRecordTypeStore from "../../store/records";
 
-const RecordDetailList = (props) => {
+const RecordDetailList = (props: any) => {
   const { Id } = props;
 
   const recordsList = useRecordTypeStore((state) => state.data);

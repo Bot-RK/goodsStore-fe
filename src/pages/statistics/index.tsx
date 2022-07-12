@@ -10,10 +10,10 @@ import {
 import { useState } from "react";
 import { AtCheckbox, AtFloatLayout, AtList, AtListItem } from "taro-ui";
 import "./index.scss";
-import icon4 from "../../asset/images/Vector4.png";
-import icon6 from "../../asset/images/Vector11.png";
+
 import icon5 from "../../asset/images/Vector12.png";
 import AdRecords from "../../components/adminRecords";
+import BackRecords from "../../components/backRecords";
 
 export default function Index() {
   const [layoutShow, setLayoutShow] = useState(false);
@@ -133,24 +133,7 @@ export default function Index() {
         </View>
       </View>
       <View className={selected ? "detail-unshow" : "detail-show"}>
-        <View className="operation">
-          <Navigator
-            className="pathTo"
-            url="/pages/statistics/record"
-          ></Navigator>
-          <Image className="icon" src={icon6}></Image>
-          <Text className="icon-font">物资清单</Text>
-          <Image className="arrow" src={icon4}></Image>
-        </View>
-        <View className="operation">
-          <Navigator
-            className="pathTo"
-            url="/pages/statistics/record"
-          ></Navigator>
-          <Image className="icon" src={icon6}></Image>
-          <Text className="icon-font">物资清单</Text>
-          <Image className="arrow" src={icon4}></Image>
-        </View>
+        <BackRecords />
       </View>
       <AtFloatLayout
         isOpened={layoutShow}
