@@ -11,7 +11,7 @@ export default function SelectThingList() {
   const layoutList = useLayoutList((state) => state.data);
   const setCount = useLayoutList((state) => state.setCount);
   const onDelete = useLayoutList((state) => state.onDelete);
-  if (!thingList[0].count) {
+  if (thingList[0].count === undefined) {
     addCount();
   }
   const onChangePush = async (
@@ -23,17 +23,18 @@ export default function SelectThingList() {
     remain_count,
     count_name
   ) => {
-    console.log(e);
+    console.log("value:" + e);
+    console.log("index1:" + index1);
     onChange(index1, e);
     if (!layoutList.find(({ id }) => id === Id)) {
       onPush(Id, name, icon, remain_count, count_name);
     } else {
-      const index = layoutList.findIndex(({ id }) => id === Id);
+      const index0 = layoutList.findIndex(({ id }) => id === Id);
       if (e === 0) {
-        onDelete(index);
+        onDelete(index0);
       } else {
-        console.log(index);
-        setCount(index, e);
+        console.log("index0: " + index0);
+        setCount(index0, e);
       }
     }
   };

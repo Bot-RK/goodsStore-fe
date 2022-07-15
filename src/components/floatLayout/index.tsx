@@ -19,7 +19,6 @@ export default function FloatLayout() {
       setCount(newIndex, e);
     }
   };
-  console.log(layoutList);
   return (
     <>
       {layoutList.map((item, index) => (

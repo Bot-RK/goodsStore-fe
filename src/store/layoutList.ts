@@ -53,6 +53,7 @@ const useLayoutList = create<layoutListType>((set) => ({
     set(
       produce((state) => {
         state.data[i].count = e;
+        console.log("debug");
       })
     ),
   clean: () =>

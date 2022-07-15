@@ -1,5 +1,6 @@
 import { View, Text, Image, Navigator } from "@tarojs/components";
 import Taro, { setStorageSync, useReady } from "@tarojs/taro";
+import { useState } from "react";
 import "./index.scss";
 import icon1 from "../../asset/images/Vector.png";
 import icon2 from "../../asset/images/Vector2.png";
@@ -7,10 +8,12 @@ import icon3 from "../../asset/images/Vector3.png";
 import icon4 from "../../asset/images/Vector4.png";
 import icon5 from "../../asset/images/Vector5.png";
 import icon6 from "../../asset/images/Group.png";
+import api from "../../service/api";
 
 export default function Index() {
-  useReady(() => {
-    Taro.login({
+  const [announcement, setAnnouncement] = useState("暂无公告");
+  useReady(async () => {
+    await Taro.login({
       success: (res) => {
         Taro.request({
           method: "POST",
@@ -21,6 +24,16 @@ export default function Index() {
           success: (res1) => {
             console.log(res1);
             setStorageSync("token", res1.data.data.token);
+            api
+              .get("/user/broadcast")
+              .then((re: any) => {
+                console.log(11111);
+                console.log(re);
+                setAnnouncement(re.data.data.Content);
+              })
+              .catch((er: any) => {
+                console.log(er);
+              });
           },
           fail: (err) => console.log(err),
         });
@@ -33,9 +46,7 @@ export default function Index() {
         <View className="announcement-text">
           <Text>你好,欢迎使用学工仓储系统</Text>
           <View>
-            <Text>
-              我是公告我是公告我是公告我是公告我是公告我是公告我是公告我是公告我是公告我是公告
-            </Text>
+            <Text>{announcement}</Text>
           </View>
         </View>
       </View>

@@ -4,7 +4,6 @@ import Taro, { useReady } from "@tarojs/taro";
 import { useState } from "react";
 import Popup from "../../components/popup";
 import "./index.scss";
-import searchIcon from "../../asset/images/search.png";
 import usePopupDetail from "../../store/popup";
 import SelectThingList from "../../components/selectThingList";
 import FloatLayout from "../../components/floatLayout";
@@ -26,11 +25,17 @@ export default function Apply() {
   const thingList = useThingListStore((state) => state.data);
   const id = useThingListStore((state) => state.selectId);
   const setID = useThingListStore((state) => state.setSelectedId);
+  const setData = useThingListStore((state) => state.setData);
   const openLayout = (e) => {
     setLayoutShow(!layoutShow);
   };
+  const GetData = () => {
+    api.get("/user/goods").then((res) => {
+      setData(res.data.data);
+    });
+  };
   useReady(() => {
-    api.get("/user/broadcast");
+    GetData();
   });
   const onChange = (e) => {
     setText(e);
@@ -94,7 +99,6 @@ export default function Apply() {
           onActionClick={search}
         />
       </View>
-
       <View className="things">
         <SelectThingList />
       </View>
