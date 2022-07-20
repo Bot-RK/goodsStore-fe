@@ -1,11 +1,11 @@
-import { View, Text, Progress, Image, Button } from "@tarojs/components";
-import { AtInputNumber } from "taro-ui";
+import { View, Text, Progress, Button } from "@tarojs/components";
 import Taro from "@tarojs/taro";
 import "./second.scss";
-import searchIcon from "../../asset/images/search.png";
 import FloatLayout from "../../components/floatLayout";
 
 export default function Apply() {
+  // const empty=useApplyList((state)=>state.)
+
   function to() {
     Taro.navigateBack({
       delta: 2,

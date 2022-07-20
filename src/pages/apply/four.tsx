@@ -1,22 +1,91 @@
-import { View, Text, Input, Image, Button } from "@tarojs/components";
-import Taro from "@tarojs/taro";
+import { View, Text, Button } from "@tarojs/components";
+import Taro, { useReady } from "@tarojs/taro";
 import "./four.scss";
 import { formateTime } from "../../utils/getTime";
 import useApplyList from "../../store/applyList";
 import useJudge from "../../store/judgeIsMultiple";
 import useDepartmentList from "../../store/departmentList";
 import DetailList from "../../components/applyDetail";
+import useMultipleDepartmentType from "../../store/multipleDepartment";
+import api from "../../service/api";
 
 export default function Detail() {
   const person_name = useApplyList((state) => state.person_name);
   const isMultiple = useJudge((state) => state.isMultiple);
   const departmentList = useDepartmentList((state) => state.data);
   const deparmentID = useApplyList((state) => state.department_id);
+  const addData = useMultipleDepartmentType((state) => state.addData);
   const Index = departmentList.findIndex(({ ID }) => ID === deparmentID);
-  console.log(departmentList);
+  const multipleDepartment = useMultipleDepartmentType((state) => state.data);
+  const detail = useApplyList((state) => state.requests);
+  const applyList = useApplyList((state) => state);
   let longName = "";
   const departments = departmentList.filter((item) => item.count! > 0);
+  const test = [
+    {
+      person_name: "批量申请",
+      department_id: 1,
+      requests: [
+        {
+          good_id: 2,
+          amount: 10,
+        },
+        {
+          good_id: 3,
+          amount: 10,
+        },
+      ],
+    },
+    {
+      person_name: "批量申请",
+      department_id: 2,
+      requests: [
+        {
+          good_id: 2,
+          amount: 10,
+        },
+        {
+          good_id: 3,
+          amount: 10,
+        },
+      ],
+    },
+  ];
+  useReady(() => {
+    for (let i = 0; i < departments.length; i++) {
+      for (let j = 0; j < departments[i].count!; j++) {
+        addData(departments[i].ID, detail);
+      }
+      console.log(detail);
+    }
+  });
   function to() {
+    console.log(multipleDepartment);
+    api
+      .post("/user/records", test)
+      .then((res) => {
+        console.log("结果:" + res);
+        console.log("test");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    Taro.navigateTo({
+      url: "last",
+      success: (res) => {
+        Taro.showToast({
+          title: "成功",
+          icon: "success",
+          duration: 2000,
+        });
+      },
+    });
+  }
+  function to2() {
+    console.log("show:", applyList);
+    api.post("/user/record", applyList).then((res) => {
+      console.log(res);
+    });
     Taro.navigateTo({
       url: "last",
       success: (res) => {
@@ -61,7 +130,7 @@ export default function Detail() {
         <DetailList />
       </View>
       <View className="next">
-        <Button className="next-button" onClick={to}>
+        <Button className="next-button" onClick={isMultiple ? to : to2}>
           申领
         </Button>
       </View>

@@ -5,9 +5,7 @@ import deleteIcon from "../../asset/images/Vector13.png";
 export default function BackRecordsDetail(props: any) {
   const { Id } = props;
   const records = useAdminRecords((state) => state.data);
-  console.log(records + "id" + Id);
   const index = records.findIndex(({ id }) => id == Number(Id));
-  console.log("index" + index);
   return (
     <>
       <View className="thingList-text">

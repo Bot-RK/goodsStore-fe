@@ -1,12 +1,13 @@
-import { View, Text, Progress, Image, Input, Button } from "@tarojs/components";
-import Taro from "@tarojs/taro";
+import { View, Text, Button } from "@tarojs/components";
+import Taro, { useReady } from "@tarojs/taro";
 import { useState } from "react";
-import { AtSearchBar, AtCurtain, AtInputNumber } from "taro-ui";
+import { AtSearchBar } from "taro-ui";
 import ThingList from "../../components/thingList";
 import Popup from "../../components/popup";
 import "./index.scss";
 import usePopupDetail from "../../store/popup";
 import useThingListStore from "../../store/thingList";
+import api from "../../service/api";
 
 export default function Second() {
   const [text, setText] = useState("");
@@ -19,9 +20,15 @@ export default function Second() {
   const popupClose = usePopupDetail((state) => state.onclose);
   const id = useThingListStore((state) => state.selectId);
   const setID = useThingListStore((state) => state.setSelectedId);
+  const setData = useThingListStore((state) => state.setData);
   const onChange = (e) => {
     setText(e);
   };
+  useReady(() => {
+    api.get("/user/goods").then((res) => {
+      setData(res.data.data);
+    });
+  });
   const scan = (e) => {
     Taro.scanCode({
       success: (res) => {

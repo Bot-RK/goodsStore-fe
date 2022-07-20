@@ -4,7 +4,7 @@ import { produce } from "immer";
 interface applyListType {
   person_name: string;
   department_id: number;
-  data: Array<{
+  requests: Array<{
     good_id: number;
     amount: number;
   }>;
@@ -16,11 +16,11 @@ interface applyListType {
 const useApplyList = create<applyListType>((set) => ({
   person_name: "test",
   department_id: -1,
-  data: [],
+  requests: [],
   add: (id, Amount) =>
     set(
       produce((state) => {
-        state.data.push({
+        state.requests.push({
           good_id: id,
           amount: Amount,
         });

@@ -1,7 +1,7 @@
-import { View, Text, Input, Picker, Button } from "@tarojs/components";
+import { View, Text, Input, Button } from "@tarojs/components";
 import Taro from "@tarojs/taro";
 import { useState } from "react";
-import { AtImagePicker, AtInputNumber, AtList, AtListItem } from "taro-ui";
+import { AtImagePicker, AtInputNumber } from "taro-ui";
 import "./third.scss";
 import api from "../../service/api";
 
@@ -19,7 +19,7 @@ export default function Index() {
       .then((response) => {
         console.log(response.data.data);
         Taro.uploadFile({
-          url: "https://goods-storage-system.oss-cn-hangzhou.aliyun…3yTY&Signature=T0%2FsNW1kzU32wMiBJybR%2BiTU0tQ%3D",
+          url: "https://goods-storage-system.oss-cn-hangzhou.aliyun…na6e3yTY&Signature=X2QF8IuZtvO6uJEso8iWFV54ZNA%3D",
           filePath: file[0].url,
           name: response.data.data.key,
           success: (res) => {

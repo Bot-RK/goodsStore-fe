@@ -4,8 +4,6 @@ import useThingListStore from "../../store/thingList";
 
 export default function ThingList() {
   const thingList = useThingListStore((state) => state.data);
-  console.log(222);
-  console.log(thingList);
   const openPopupList = usePopupDetail((state) => state.onOpen);
   return (
     <>

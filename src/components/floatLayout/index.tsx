@@ -15,7 +15,6 @@ export default function FloatLayout() {
       onDelete(newIndex);
       setCount(newIndex, e);
     } else {
-      console.log("delete", layoutList);
       setCount(newIndex, e);
     }
   };

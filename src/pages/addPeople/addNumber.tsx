@@ -2,6 +2,8 @@ import { View, Text, Input, Picker, Button } from "@tarojs/components";
 import Taro from "@tarojs/taro";
 import { useState } from "react";
 import { AtList, AtListItem } from "taro-ui";
+import api from "../../service/api";
+
 import "./addNumber.scss";
 
 export default function AddNumber() {
@@ -11,20 +13,19 @@ export default function AddNumber() {
   const [number, setNumber] = useState("");
   const [is_admin, setIsAdmin] = useState(false);
   const onChangeAU = (e) => {
-    console.log(e);
+    console.log(e.detail.value);
     setAu(Authors[e.detail.value]);
-    setIsAdmin(e.detail.value == "成员" ? false : true);
+    setIsAdmin(e.detail.value == 0 ? false : true);
   };
   function final() {
-    Taro.navigateTo({
-      url: "index",
-      success: (res) => {
-        Taro.showToast({
-          title: "成功",
-          icon: "success",
-          duration: 2000,
-        });
-      },
+    console.log("admin:", is_admin);
+    api.put("/admin/user/add", {
+      phone: number,
+      username: name,
+      is_admin: is_admin,
+    });
+    Taro.navigateBack({
+      delta: 1,
     });
   }
   const onAddName = (e) => {

@@ -5,7 +5,6 @@ import icon6 from "../../asset/images/Vector11.png";
 
 export default function BackRecords() {
   const AdRecord = useAdminRecords((state) => state.data);
-  console.log(AdRecord);
   return (
     <>
       {AdRecord.map((item) => (

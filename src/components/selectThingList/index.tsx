@@ -1,4 +1,4 @@
-import { View, Image, Text, Icon } from "@tarojs/components";
+import { View, Image, Text } from "@tarojs/components";
 import { AtInputNumber } from "taro-ui";
 import useLayoutList from "../../store/layoutList";
 import useThingListStore from "../../store/thingList";
@@ -23,8 +23,6 @@ export default function SelectThingList() {
     remain_count,
     count_name
   ) => {
-    console.log("value:" + e);
-    console.log("index1:" + index1);
     onChange(index1, e);
     if (!layoutList.find(({ id }) => id === Id)) {
       onPush(Id, name, icon, remain_count, count_name);
@@ -33,7 +31,6 @@ export default function SelectThingList() {
       if (e === 0) {
         onDelete(index0);
       } else {
-        console.log("index0: " + index0);
         setCount(index0, e);
       }
     }

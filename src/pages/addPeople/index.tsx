@@ -1,16 +1,30 @@
-import { View, Text, Button, Picker } from "@tarojs/components";
-import Taro from "@tarojs/taro";
+import { View, Text, Button } from "@tarojs/components";
+import Taro, { useReady } from "@tarojs/taro";
 import { useState } from "react";
+import useAdminList from "../../store/adminList";
 import NumberList from "../../components/numberList";
 import "./index.scss";
+import api from "../../service/api";
+import List from "../../components/dpShow";
+import useDepartmentList from "../../store/departmentList";
 
 export default function Add() {
   const [selected, setSelected] = useState(true);
   const [text, setText] = useState("添加成员");
+  const setDpList = useDepartmentList((state) => state.setData);
+  const setData = useAdminList((state) => state.setData);
   function change() {
     setSelected(!selected);
     setText(!selected ? "添加成员" : "添加单位");
   }
+  useReady(() => {
+    api.get("/admin/users").then((res) => {
+      setData(res.data.data);
+    });
+    api.get("/user/departments").then((res1) => {
+      setDpList(res1.data.data);
+    });
+  });
   function click() {
     Taro.navigateTo({
       url: "addNumber",
@@ -80,15 +94,7 @@ export default function Add() {
         <View className="dp-title">
           <Text>单位</Text>
         </View>
-        <View className="dp-detail">
-          <Text>教育科</Text>
-        </View>
-        <View className="dp-detail">
-          <Text>教育科</Text>
-        </View>
-        <View className="dp-detail">
-          <Text>教育科</Text>
-        </View>
+        <List />
       </View>
     </View>
   );

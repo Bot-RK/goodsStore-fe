@@ -1,10 +1,22 @@
 import { View, Text, Image, Navigator } from "@tarojs/components";
+import { useState } from "react";
+import { useReady } from "@tarojs/taro";
+import api from "../../service/api";
 import Records from "../../components/records";
-import icon4 from "../../asset/images/Vector4.png";
-import icon6 from "../../asset/images/Vector6.png";
 import "./index.scss";
+import useRecordTypeStore from "../../store/records";
 
-export default function record() {
+export default function Record() {
+  const [page, setPage] = useState(1);
+  const setRecords = useRecordTypeStore((state) => state.setData);
+  useReady(() => {
+    api.get(`/user/records/${page}`).then((response) => {
+      console.log(response);
+      setPage(page + 1);
+      console.log(response);
+      setRecords(response.data.data);
+    });
+  });
   return (
     <View className="backGround-f">
       <View className="thingList-text">

@@ -27,9 +27,11 @@ export default {
       },
       success(res) {
         console.log("res=>", res);
+        console.log("details=>", option);
         if (res.statusCode === 200) {
           return res.data;
         } else {
+          console.log("details=>", option);
           Taro.showToast({
             title: "请求失败",
             icon: "none",
@@ -48,5 +50,9 @@ export default {
   post(url, data?: object) {
     let option = { url, data };
     return this.baseOptions(option, "POST");
+  },
+  put(url, data?: object) {
+    let option = { url, data };
+    return this.baseOptions(option, "PUT");
   },
 };

@@ -1,5 +1,5 @@
-import { View, Text, Progress, Input, Image, Button } from "@tarojs/components";
-import { AtFloatLayout, AtInputNumber, AtSearchBar } from "taro-ui";
+import { View, Text, Progress, Button } from "@tarojs/components";
+import { AtFloatLayout, AtSearchBar } from "taro-ui";
 import Taro, { useReady } from "@tarojs/taro";
 import { useState } from "react";
 import Popup from "../../components/popup";

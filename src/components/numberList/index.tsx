@@ -1,24 +1,41 @@
-import { View, Text, Picker } from "@tarojs/components";
-import { FC, useEffect } from "react";
+import { View, Text, Picker, Image } from "@tarojs/components";
 import { AtList, AtListItem } from "taro-ui";
 import useAdminList from "../../store/adminList";
+import deleteIcon from "../../asset/images/delete.png";
+import api from "../../service/api";
 
 export default function NumberList() {
   const Authoritys = useAdminList((state) => state.data);
   const onChange = useAdminList((state) => state.changeAu);
-  let a = [];
+  const setData = useAdminList((state) => state.setData);
   const authority = ["成员", "管理员"];
+  function deleteList(phone1) {
+    api
+      .put("/admin/user/delete", {
+        phone: phone1,
+      })
+      .then((res) => {
+        console.log("delete success: " + res);
+        api.get("/admin/users").then((res1) => {
+          setData(res1.data.data);
+        });
+      });
+  }
+
   return (
     <>
       {Authoritys.map((item, i) => (
         <View className="list-title" key={item.ID}>
-          <View>
-            <Text className="title-detail">{item.username}</Text>
+          <View className="list-delete" onClick={() => deleteList(item.phone)}>
+            <Image className="delete" src={deleteIcon}></Image>
           </View>
-          <View>
-            <Text className="title-detail">{item.phone}</Text>
+          <View className="list-detail1">
+            <Text>{item.username}</Text>
           </View>
-          <View>
+          <View className="list-detail2">
+            <Text>{item.phone}</Text>
+          </View>
+          <View className="list-detail3">
             <Picker
               className="selector"
               mode="selector"
@@ -28,7 +45,7 @@ export default function NumberList() {
               <AtList className="au-selector">
                 <AtListItem
                   className="au-selector-text"
-                  extraText={item.is_admin ? "成员" : "管理员"}
+                  extraText={item.is_admin ? "管理员" : "成员"}
                 />
               </AtList>
             </Picker>

@@ -1,19 +1,27 @@
 import { View, Text, Progress, Button } from "@tarojs/components";
 import { AtSearchBar } from "taro-ui";
-import Taro from "@tarojs/taro";
+import Taro, { useReady } from "@tarojs/taro";
 import { useState } from "react";
 import "./first.scss";
 import SelectThingList from "../../components/selectThingList";
 import useThingListStore from "../../store/thingList";
+import api from "../../service/api";
 
 export default function Apply() {
   const [text, setText] = useState("");
   const searchByName = useThingListStore((state) => state.searchByName);
   const thingList = useThingListStore((state) => state.data);
+  const setData = useThingListStore((state) => state.setData);
 
   const onChange = (e) => {
     setText(e);
   };
+  useReady(() => {
+    api.get("/user/goods").then((res) => {
+      setData(res.data.data);
+    });
+  });
+
   function to() {
     Taro.navigateTo({
       url: "second",

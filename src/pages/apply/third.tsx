@@ -1,10 +1,12 @@
 import { View, Text, Progress, Button, Input } from "@tarojs/components";
-import Taro from "@tarojs/taro";
+import Taro, { useReady } from "@tarojs/taro";
 import { useState } from "react";
 import { AtCheckbox, AtFloatLayout } from "taro-ui";
 import useJudge from "../../store/judgeIsMultiple";
 import useApplyList from "../../store/applyList";
 import "./third.scss";
+import useDepartmentList from "../../store/departmentList";
+import api from "../../service/api";
 
 export default function Third() {
   const [layoutShow, setLayoutShow] = useState(false);
@@ -15,34 +17,41 @@ export default function Third() {
   const applyList = useApplyList((state) => state);
   const setIsTrue = useJudge((state) => state.setIsTrue);
   const setIsFalse = useJudge((state) => state.setIsFlase);
-  const dp = [
-    {
-      ID: 1,
-      CreatedAt: "ss",
-      UpdatedAt: "ss",
-      DeletedAt: "aa",
-      name: "咳咳咳",
-    },
-    {
-      ID: 2,
-      CreatedAt: "ss",
-      UpdatedAt: "ss",
-      DeletedAt: "aa",
-      name: "咳咳咳1",
-    },
-    {
-      ID: 3,
-      CreatedAt: "ss",
-      UpdatedAt: "ss",
-      DeletedAt: "aa",
-      name: "咳咳咳2",
-    },
-  ];
-  const departments: any = dp.map(function (item) {
+  const setData = useDepartmentList((state) => state.setData);
+  const dpData = useDepartmentList((state) => state.data);
+  // const dp = [
+  //   {
+  //     ID: 1,
+  //     CreatedAt: "ss",
+  //     UpdatedAt: "ss",
+  //     DeletedAt: "aa",
+  //     name: "咳咳咳",
+  //   },
+  //   {
+  //     ID: 2,
+  //     CreatedAt: "ss",
+  //     UpdatedAt: "ss",
+  //     DeletedAt: "aa",
+  //     name: "咳咳咳1",
+  //   },
+  //   {
+  //     ID: 3,
+  //     CreatedAt: "ss",
+  //     UpdatedAt: "ss",
+  //     DeletedAt: "aa",
+  //     name: "咳咳咳2",
+  //   },
+  // ];
+  const departments: any = dpData.map(function (item) {
     let obj = {};
     obj["value"] = item.ID;
     obj["label"] = item.name;
     return obj;
+  });
+  useReady(() => {
+    api.get("/user/departments").then((res: any) => {
+      setData(res.data.data);
+    });
   });
   // const departments: any = [
   //   {
@@ -73,6 +82,7 @@ export default function Third() {
     if (e.length == 1) {
       setSingleDepartment(e[0]);
       console.log("list", applyList);
+      console.log("e" + e[0]);
     }
   };
   function to() {

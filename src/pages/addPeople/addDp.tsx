@@ -1,20 +1,21 @@
 import { View, Text, Input, Button } from "@tarojs/components";
 import Taro from "@tarojs/taro";
 import { useState } from "react";
+import api from "../../service/api";
 import "./addDp.scss";
 
 export default function AddDp() {
   const [dp, setDp] = useState("");
   function final() {
-    Taro.navigateTo({
-      url: "index",
-      success: (res) => {
-        Taro.showToast({
-          title: "成功",
-          icon: "success",
-          duration: 2000,
-        });
-      },
+    api
+      .put("/admin/department/add", {
+        name: dp,
+      })
+      .then((res) => {
+        console.log("dp add success:", res);
+      });
+    Taro.navigateBack({
+      delta: 1,
     });
   }
   const onAddDp = (e) => {

@@ -11,6 +11,7 @@ interface adminlist {
   }>;
   setLocalStorage: (state: any) => void;
   changeAu: any;
+  setData: (data: any) => void;
 }
 
 const useAdminList = create<adminlist>((set) => ({
@@ -18,7 +19,7 @@ const useAdminList = create<adminlist>((set) => ({
     {
       ID: 0,
       phone: "12312341234",
-      username: "666",
+      username: "6",
       is_admin: false,
     },
     {
@@ -50,6 +51,10 @@ const useAdminList = create<adminlist>((set) => ({
         }
       })
     ),
+  setData: (data1) =>
+    set(() => ({
+      data: data1,
+    })),
 }));
 // ({
 //     data:[

@@ -19,7 +19,7 @@ interface recordsType {
       measure_word: string;
     }>;
   }>;
-  setData: (data1: []) => void;
+  setData: (data1: any) => void;
 }
 
 const useRecordTypeStore = create<recordsType>((set) => ({

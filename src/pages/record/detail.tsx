@@ -1,4 +1,4 @@
-import { View, Text, Input, Image } from "@tarojs/components";
+import { View, Text } from "@tarojs/components";
 import { getCurrentInstance } from "@tarojs/taro";
 import RecordDetailList from "../../components/recordDetailList/recordDetailList";
 import RecordDetail from "../../components/recordDetail/recordDetail";

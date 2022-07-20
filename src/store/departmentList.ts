@@ -12,6 +12,7 @@ interface departmentListType {
   }>;
   addCount: () => void;
   setCount: (i: number, e: number) => void;
+  setData: (data1: any) => void;
 }
 
 const useDepartmentList = create<departmentListType>((set) => ({
@@ -47,6 +48,10 @@ const useDepartmentList = create<departmentListType>((set) => ({
       })
     );
   },
+  setData: (data1) =>
+    set(() => ({
+      data: data1,
+    })),
   setCount: (i, e) =>
     set(
       produce((state) => {

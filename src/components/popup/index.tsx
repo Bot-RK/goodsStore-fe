@@ -7,10 +7,9 @@ import {
   CommonEvent,
   CommonEventFunction,
 } from "@tarojs/components";
-import { useTabItemTap } from "@tarojs/taro";
-import { FC, memo } from "react";
+import { FC } from "react";
 import { AtCurtain, AtInputNumber } from "taro-ui";
-import { Barcode, QRCode } from "taro3-code";
+import { QRCode } from "taro3-code";
 import useThingListStore from "../../store/thingList";
 import white1 from "../../asset/images/纯白.png";
 import "./index.scss";

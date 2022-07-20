@@ -1,9 +1,8 @@
-import { View, Text, Progress, Input, Image, Button } from "@tarojs/components";
-import { AtInputNumber, AtSearchBar } from "taro-ui";
+import { View, Text, Button } from "@tarojs/components";
+import { AtSearchBar } from "taro-ui";
 import Taro from "@tarojs/taro";
 import { useState } from "react";
 import "./index.scss";
-import searchIcon from "../../asset/images/search.png";
 import ThingList from "../../components/thingList";
 import useThingListStore from "../../store/thingList";
 

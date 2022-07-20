@@ -3,7 +3,6 @@ import useAdminRecords from "../../store/adminRecords";
 
 export default function AdRecords() {
   const AdRecord = useAdminRecords((state) => state.data);
-  console.log(AdRecord);
   return (
     <>
       {AdRecord.map((item) => (

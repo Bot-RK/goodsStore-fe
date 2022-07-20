@@ -1,6 +1,5 @@
-import { View, Text, Progress, Image, Button } from "@tarojs/components";
+import { View, Text, Progress, Button } from "@tarojs/components";
 import Taro from "@tarojs/taro";
-import { AtInputNumber } from "taro-ui";
 import MultipleDetail from "../../components/multipleDetail";
 import "./multiple.scss";
 

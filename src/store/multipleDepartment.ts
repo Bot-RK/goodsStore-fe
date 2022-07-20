@@ -14,52 +14,7 @@ interface multipleDepartmentType {
 }
 
 const useMultipleDepartmentType = create<multipleDepartmentType>((set) => ({
-  data: [
-    {
-      person_name: "批量申请",
-      department_id: 1,
-      requests: [
-        {
-          good_id: 2,
-          amount: 10,
-        },
-        {
-          good_id: 3,
-          amount: 10,
-        },
-        {
-          good_id: 4,
-          amount: 10,
-        },
-        {
-          good_id: 13,
-          amount: 5,
-        },
-      ],
-    },
-    {
-      person_name: "批量申请",
-      department_id: 2,
-      requests: [
-        {
-          good_id: 2,
-          amount: 10,
-        },
-        {
-          good_id: 3,
-          amount: 10,
-        },
-        {
-          good_id: 4,
-          amount: 10,
-        },
-        {
-          good_id: 13,
-          amount: 5,
-        },
-      ],
-    },
-  ],
+  data: [],
   addData: (id, detail) =>
     set(
       produce((state) => {
