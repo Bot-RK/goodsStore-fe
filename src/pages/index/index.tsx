@@ -13,8 +13,9 @@ import api from "../../service/api";
 export default function Index() {
   const [announcement, setAnnouncement] = useState("暂无公告");
   useReady(async () => {
-    await Taro.login({
-      success: (res) => {
+    Taro.checkSession({
+      success: async () => {
+        console.log("登陆成功");
         Taro.request({
           method: "POST",
           url: "https://gss.ncuos.com/login",
@@ -36,6 +37,34 @@ export default function Index() {
               });
           },
           fail: (err) => console.log(err),
+        });
+      },
+      fail: async () => {
+        await Taro.login({
+          success: (res) => {
+            Taro.request({
+              method: "POST",
+              url: "https://gss.ncuos.com/login",
+              header: {
+                code: "1",
+              },
+              success: (res1) => {
+                console.log(res1);
+                setStorageSync("token", res1.data.data.token);
+                api
+                  .get("/user/broadcast")
+                  .then((re: any) => {
+                    console.log(11111);
+                    console.log(re);
+                    setAnnouncement(re.data.data.Content);
+                  })
+                  .catch((er: any) => {
+                    console.log(er);
+                  });
+              },
+              fail: (err) => console.log(err),
+            });
+          },
         });
       },
     });
