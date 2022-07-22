@@ -1,14 +1,20 @@
 import { View, Image, Text, Input } from "@tarojs/components";
+import useDepartmentList from "../../store/departmentList";
 import useAdminRecords from "../../store/adminRecords";
 
 export default function AdRecords() {
   const AdRecord = useAdminRecords((state) => state.data);
+  const department = useDepartmentList((state) => state.data);
   return (
     <>
       {AdRecord.map((item) => (
         <>
           <View className="list-item">
-            <Text>{`${item.department_id}:`}</Text>
+            <Text>{`${
+              department[
+                department.findIndex(({ ID }) => item.department_id == ID)
+              ].name
+            }:`}</Text>
           </View>
           {item.requests.map((list) => (
             <>

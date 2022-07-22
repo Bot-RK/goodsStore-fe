@@ -20,7 +20,7 @@ export default function Index() {
           method: "POST",
           url: "https://gss.ncuos.com/login",
           header: {
-            code: "1",
+            Authorization: "1",
           },
           success: (res1) => {
             console.log(res1);
@@ -40,6 +40,7 @@ export default function Index() {
         });
       },
       fail: async () => {
+        console.log("FAILED");
         await Taro.login({
           success: (res) => {
             Taro.request({

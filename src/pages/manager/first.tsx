@@ -1,11 +1,12 @@
 import { View, Text, Progress, Button } from "@tarojs/components";
 import { AtSearchBar } from "taro-ui";
-import Taro, { useReady } from "@tarojs/taro";
+import Taro, { usePullIntercept, useReady } from "@tarojs/taro";
 import { useState } from "react";
 import "./first.scss";
 import SelectThingList from "../../components/selectThingList";
 import useThingListStore from "../../store/thingList";
 import api from "../../service/api";
+import useUpdataGoodsStore from "../../store/updateGoods";
 
 export default function Apply() {
   const [text, setText] = useState("");

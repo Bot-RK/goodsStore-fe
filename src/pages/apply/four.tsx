@@ -62,7 +62,7 @@ export default function Detail() {
   function to() {
     console.log(multipleDepartment);
     api
-      .post("/user/records", test)
+      .post("/user/records", multipleDepartment)
       .then((res) => {
         console.log("结果:" + res);
         console.log("test");

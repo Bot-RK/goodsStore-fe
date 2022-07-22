@@ -2,11 +2,44 @@ import { View, Text, Progress, Button } from "@tarojs/components";
 import Taro from "@tarojs/taro";
 import "./second.scss";
 import FloatLayout from "../../components/floatLayout";
+import useLayoutList from "../../store/layoutList";
+import useUpdataGoodsStore from "../../store/updateGoods";
+import api from "../../service/api";
 
 export default function Apply() {
   // const empty=useApplyList((state)=>state.)
-
+  const data = useLayoutList((state) => state.data);
+  const needData = useUpdataGoodsStore((state) => state.data);
+  const pushData = useUpdataGoodsStore((state) => state.pushData);
+  const cleanData = useUpdataGoodsStore((state) => state.clean);
+  const cleanData1 = useLayoutList((state) => state.clean);
+  const test = useLayoutList((state) => state.onPush);
+  const data1: Array<any> = [];
   function to() {
+    for (let i = 0; i < data.length; i++) {
+      data1.push({
+        amount: data[i].count + data[i].remain_count,
+        name: data[i].name,
+        picture_url: data[i].icon,
+        measure_word: data[i].count_name,
+      });
+    }
+    console.log(data1);
+
+    data1.map((item) => {
+      api.put("/admin/good/update", item).then((res) => {
+        if (res.statusCode === 200) {
+          console.log("addRes:", res);
+          console.log(data1);
+          cleanData();
+          cleanData1();
+          console.log("add物品成功");
+        } else {
+          console.log(res);
+        }
+      });
+    });
+
     Taro.navigateBack({
       delta: 2,
       success: (res) => {

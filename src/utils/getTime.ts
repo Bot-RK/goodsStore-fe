@@ -25,4 +25,23 @@ const easyTime = () => {
   return year + "/" + month + "/" + day;
 };
 
-export { formateTime, easyTime };
+const getFromTime = (time) => {
+  let Timer = new Date();
+  let year = Timer.getFullYear();
+  let month = Timer.getMonth() + 1;
+  let day = Timer.getDate();
+  let checktime = (times) => {
+    if (times < 10) {
+      return Number("0" + times);
+    }
+    return times;
+  };
+  day = checktime(day);
+  let nowTime = "" + year + "-" + month + "-" + day;
+  let NowTime = Date.parse(nowTime);
+  const fromTime = Date.parse(time);
+  console.log(nowTime);
+  return (NowTime - fromTime) / 86400000 + 1 / 3;
+};
+
+export { formateTime, easyTime, getFromTime };

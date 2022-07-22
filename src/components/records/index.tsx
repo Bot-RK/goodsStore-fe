@@ -3,9 +3,11 @@ import useRecordTypeStore from "../../store/records";
 import icon4 from "../../asset/images/Vector4.png";
 import icon6 from "../../asset/images/Vector6.png";
 import { formateTime } from "../../utils/getTime";
+import useDepartmentList from "../../store/departmentList";
 
 const Records = () => {
   const recordsData = useRecordTypeStore((state) => state.data);
+  const department = useDepartmentList((state) => state.data);
   const time = formateTime();
   return (
     <>
@@ -22,7 +24,11 @@ const Records = () => {
               <Text className="little-font">
                 {`剩余${item.total_amount}件物资`}
               </Text>
-              <Text className="department-name">{item.department_id}</Text>
+              <Text className="department-name">{`${
+                department[
+                  department.findIndex(({ ID }) => item.department_id == ID)
+                ].name
+              }`}</Text>
             </View>
             <Image className="arrow" src={icon4}></Image>
           </View>

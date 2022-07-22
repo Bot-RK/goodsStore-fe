@@ -7,13 +7,17 @@ import {
   Navigator,
   Picker,
 } from "@tarojs/components";
+import { useReady } from "@tarojs/taro";
 import { useState } from "react";
 import { AtCheckbox, AtFloatLayout, AtList, AtListItem } from "taro-ui";
 import "./index.scss";
-
+import { getFromTime } from "../../utils/getTime";
 import icon5 from "../../asset/images/Vector12.png";
 import AdRecords from "../../components/adminRecords";
 import BackRecords from "../../components/backRecords";
+import api from "../../service/api";
+import useDepartmentList from "../../store/departmentList";
+import useAdminRecords from "../../store/adminRecords";
 
 export default function Index() {
   const [layoutShow, setLayoutShow] = useState(false);
@@ -21,33 +25,64 @@ export default function Index() {
   const [startDate, setStartDate] = useState("2022-07-02");
   const [endDate, setEndDate] = useState("2022-07-12");
   const [selectList, setSelectList] = useState([]);
+  const setDpData = useDepartmentList((state) => state.setData);
+  const DpList = useDepartmentList((state) => state.data);
+  const setRecordsList = useAdminRecords((state) => state.setData);
   // const [dp, setDp] = useState("");
+
+  useReady(() => {
+    api.get("/user/departments").then((res) => {
+      setDpData(res.data.data);
+    });
+  });
   const openLayout = (e) => {
     setLayoutShow(!layoutShow);
     console.log(layoutShow);
   };
   const select = (e) => {
     setSelectList(e);
+    console.log(e);
   };
   const closeLayout = (e) => {
     setLayoutShow(!layoutShow);
     console.log(layoutShow);
+    let time1 = getFromTime(startDate);
+    let time2 = getFromTime(endDate);
+    let data: Array<any> = [];
+    for (let i = 0; i < selectList.length; i++) {
+      data.push({
+        from: time1,
+        to: time2,
+        last_id: -1,
+        department_id: selectList[i],
+      });
+    }
+    api.post("/admin/records", data).then((res) => {
+      setRecordsList(res.data.data);
+    });
   };
   // const department: string[] = ["A", "B", "C", "d"];
-  const departments: any = [
-    {
-      value: "学工处",
-      label: "学工处",
-    },
-    {
-      value: "保卫处",
-      label: "保卫处",
-    },
-    {
-      value: "后勤处",
-      label: "后勤处",
-    },
-  ];
+  let departments: Array<any> = [];
+  for (let i = 0; i < DpList.length; i++) {
+    departments.push({
+      value: DpList[i].ID,
+      label: DpList[i].name,
+    });
+  }
+  // const departments: any = [
+  //   {
+  //     value: "学工处",
+  //     label: "学工处",
+  //   },
+  //   {
+  //     value: "保卫处",
+  //     label: "保卫处",
+  //   },
+  //   {
+  //     value: "后勤处",
+  //     label: "后勤处",
+  //   },
+  // ];
   function change() {
     setSelected(!selected);
   }
@@ -58,6 +93,7 @@ export default function Index() {
 
   const onStartTimeChange = (e) => {
     setStartDate(e.detail.value);
+    console.log("ttttttt", getFromTime(startDate));
   };
   const onEndTimeChange = (e) => {
     setEndDate(e.detail.value);
@@ -88,8 +124,8 @@ export default function Index() {
             <Picker
               mode="date"
               onChange={onStartTimeChange}
-              value="2022-07-02"
-              start="2022-07-02"
+              value={startDate}
+              end="2023-12-31"
             >
               <AtList>
                 <AtListItem title={startDate} />
@@ -103,7 +139,7 @@ export default function Index() {
             <Picker
               mode="date"
               onChange={onEndTimeChange}
-              value="2022-07-12"
+              value={endDate}
               end="2023-12-31"
             >
               <AtList>

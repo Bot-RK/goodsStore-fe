@@ -1,11 +1,13 @@
 import { View, Text, Image, Input } from "@tarojs/components";
 import useAdminRecords from "../../store/adminRecords";
 import deleteIcon from "../../asset/images/Vector13.png";
+import useDepartmentList from "../../store/departmentList";
 
 export default function BackRecordsDetail(props: any) {
   const { Id } = props;
   const records = useAdminRecords((state) => state.data);
   const index = records.findIndex(({ id }) => id == Number(Id));
+  const department = useDepartmentList((state) => state.data);
   return (
     <>
       <View className="thingList-text">
@@ -32,7 +34,14 @@ export default function BackRecordsDetail(props: any) {
       <View className="record-detail">
         <Text className="record-title">申领单位:</Text>
         <Text className="record-message">
-          &nbsp;&nbsp;{records[index].department_id}
+          &nbsp;&nbsp;
+          {`${
+            department[
+              department.findIndex(
+                ({ ID }) => records[index].department_id == ID
+              )
+            ].name
+          }`}
         </Text>
       </View>
       <View>

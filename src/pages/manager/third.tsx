@@ -4,6 +4,7 @@ import { useState } from "react";
 import { AtImagePicker, AtInputNumber } from "taro-ui";
 import "./third.scss";
 import api from "../../service/api";
+import { tobeBase64 } from "../../utils/imageUpload";
 
 export default function Index() {
   const [count, setCount] = useState(0);
@@ -12,49 +13,73 @@ export default function Index() {
   const [measure_word, setMeasure_word] = useState("");
   const [picture_url, setPicture_url] = useState("");
   const [suffix, setSuffix] = useState("");
-
   async function final() {
+    // api
+    //   .get(`/admin/picture/${suffix}`)
+    //   .then((response) => {
+    //     console.log(response.data.data);
+    //     Taro.uploadFile({
+    //       url: response.data.data.get_url,
+    //       filePath: file[0].url,
+    //       name: response.data.data.key,
+    //       success: (res) => {
+    //         console.log(res);
+    //       },
+    //       fail: (res1) => {
+    //         console.log(res1);
+    //       },
+    //     });
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //     console.log(error.message);
+    //     console.log(11113333);
+    //   });
+
     api
-      .get(`/admin/picture/${suffix}`)
-      .then((response) => {
-        console.log(response.data.data);
-        Taro.uploadFile({
-          url: "https://goods-storage-system.oss-cn-hangzhou.aliyun…na6e3yTY&Signature=X2QF8IuZtvO6uJEso8iWFV54ZNA%3D",
-          filePath: file[0].url,
-          name: response.data.data.key,
-          success: (res) => {
-            console.log(res);
-          },
-          fail: (res1) => {
-            console.log(res1);
+      .put("/admin/good/add", {
+        amount: count,
+        name: name,
+        picture_url: picture_url,
+        measure_word: measure_word,
+      })
+      .then((res) => {
+        console.log(res);
+        Taro.navigateBack({
+          delta: 1,
+          success: (res1) => {
+            Taro.showToast({
+              title: "成功",
+              icon: "success",
+              duration: 2000,
+            });
           },
         });
       })
-      .catch((error) => {
-        console.log(error);
-        console.log(error.message);
-        console.log(11113333);
+      .catch((err) => {
+        console.log(err);
       });
-
-    Taro.navigateBack({
-      delta: 1,
-      success: (res) => {
-        Taro.showToast({
-          title: "成功",
-          icon: "success",
-          duration: 2000,
-        });
-      },
-    });
   }
 
-  const onChange = (files) => {
-    console.log(file);
-    console.log(files);
+  const onChange = async (files: any) => {
     setFile(files);
-    console.log(file);
-    console.log(files[0].url);
     setSuffix(files[0].url.substring(files[0].url.length - 3));
+    const fs = Taro.getFileSystemManager();
+    fs.readFile({
+      filePath: files[0].url,
+      encoding: "base64",
+      success: (res) => {
+        console.log("1333", res.data);
+        api
+          .post("/admin/picture", {
+            picture: res.data,
+          })
+          .then((res1) => {
+            console.log(res1);
+            setPicture_url(res1.data.data);
+          });
+      },
+    });
   };
   const SetName = (e) => {
     setName(e.detail.value);
