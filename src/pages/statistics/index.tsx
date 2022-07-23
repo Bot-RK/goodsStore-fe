@@ -7,7 +7,7 @@ import {
   Navigator,
   Picker,
 } from "@tarojs/components";
-import { useReady } from "@tarojs/taro";
+import Taro, { getStorageSync, useReady } from "@tarojs/taro";
 import { useState } from "react";
 import { AtCheckbox, AtFloatLayout, AtList, AtListItem } from "taro-ui";
 import "./index.scss";
@@ -28,6 +28,7 @@ export default function Index() {
   const setDpData = useDepartmentList((state) => state.setData);
   const DpList = useDepartmentList((state) => state.data);
   const setRecordsList = useAdminRecords((state) => state.setData);
+  const token = getStorageSync("token");
   // const [dp, setDp] = useState("");
 
   useReady(() => {
@@ -57,9 +58,23 @@ export default function Index() {
         department_id: selectList[i],
       });
     }
-    api.post("/admin/records", data).then((res) => {
-      setRecordsList(res.data.data);
+    Taro.request({
+      url: "https://gss.ncuos.com/admin/records",
+      method: "POST",
+      header: {
+        "content-type": "application/x-www-form-urlencoded;charset=utf-8",
+        Authorization: token,
+      },
+      data: JSON.stringify(data),
+      success: (res) => {
+        console.log("成功啦", res);
+        setRecordsList(res.data.data);
+        console.log(JSON.stringify(data));
+      },
     });
+    // api.post("/admin/records", data).then((res) => {
+    //   setRecordsList(res.data.data);
+    // });
   };
   // const department: string[] = ["A", "B", "C", "d"];
   let departments: Array<any> = [];

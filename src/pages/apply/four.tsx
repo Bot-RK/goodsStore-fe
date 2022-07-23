@@ -1,5 +1,5 @@
 import { View, Text, Button } from "@tarojs/components";
-import Taro, { useReady } from "@tarojs/taro";
+import Taro, { getStorageSync, useReady } from "@tarojs/taro";
 import "./four.scss";
 import { formateTime } from "../../utils/getTime";
 import useApplyList from "../../store/applyList";
@@ -21,6 +21,7 @@ export default function Detail() {
   const applyList = useApplyList((state) => state);
   let longName = "";
   const departments = departmentList.filter((item) => item.count! > 0);
+  const token = getStorageSync("token");
   const test = [
     {
       person_name: "批量申请",
@@ -61,25 +62,37 @@ export default function Detail() {
   });
   function to() {
     console.log(multipleDepartment);
-    api
-      .post("/user/records", multipleDepartment)
-      .then((res) => {
-        console.log("结果:" + res);
-        console.log("test");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    Taro.navigateTo({
-      url: "last",
+    Taro.request({
+      url: "https://gss.ncuos.com/user/records",
+      method: "POST",
+      header: {
+        "content-type": "application/x-www-form-urlencoded;charset=utf-8",
+        Authorization: token,
+      },
+      data: JSON.stringify(multipleDepartment),
       success: (res) => {
-        Taro.showToast({
-          title: "成功",
-          icon: "success",
-          duration: 2000,
+        console.log("成功啦", res);
+        Taro.navigateTo({
+          url: "last",
+          success: (res1) => {
+            Taro.showToast({
+              title: "成功",
+              icon: "success",
+              duration: 2000,
+            });
+          },
         });
       },
     });
+    // api
+    //   .post("/user/records", multipleDepartment)
+    //   .then((res) => {
+    //     console.log("结果:" + res);
+    //     console.log("test");
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   }
   function to2() {
     console.log("show:", applyList);

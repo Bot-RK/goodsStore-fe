@@ -1,5 +1,5 @@
 import { View, Text, Button } from "@tarojs/components";
-import Taro from "@tarojs/taro";
+import Taro, { getStorageSync } from "@tarojs/taro";
 import { useState } from "react";
 import { AtInputNumber, AtTextarea } from "taro-ui";
 import api from "../../service/api";
@@ -9,6 +9,7 @@ import "./index.scss";
 export default function () {
   const [text, setText] = useState("");
   const [warning_value, setWarning_value] = useState(0);
+  const token = getStorageSync("token");
   const onChange = (e) => {
     setText(e);
   };
@@ -25,6 +26,10 @@ export default function () {
         console.log("公告更新", res);
         Taro.request({
           method: "POST",
+          header: {
+            "content-type": "application/json",
+            Authorization: token,
+          },
           url: `https://gss.ncuos.com/admin/value?value=${warning_value}`,
           success: (res2) => {
             console.log("预警值更新", res2);
