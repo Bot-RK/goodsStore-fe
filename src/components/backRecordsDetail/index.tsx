@@ -8,11 +8,16 @@ export default function BackRecordsDetail(props: any) {
   const records = useAdminRecords((state) => state.data);
   const index = records.findIndex(({ id }) => id == Number(Id));
   const department = useDepartmentList((state) => state.data);
+
+  // const delete=()=>{
+
+  // }
+
   return (
     <>
       <View className="thingList-text">
         <Text className="thingList-font">
-          {records[index].created_at}的申领
+          {records[index].created_at.substring(0, 9)}的申领
         </Text>
       </View>
       <View className="delete">
@@ -22,7 +27,7 @@ export default function BackRecordsDetail(props: any) {
       <View className="record-detail">
         <Text className="record-title">申领时间:</Text>
         <Text className="record-message">
-          &nbsp;&nbsp;{records[index].created_at}
+          &nbsp;&nbsp;{records[index].created_at.substring(0, 9)}
         </Text>
       </View>
       <View className="record-detail">

@@ -16,29 +16,39 @@ export default function Index() {
   const [suffix, setSuffix] = useState("");
   const token = getStorageSync("token");
   async function final() {
-    api
-      .put("/admin/good/add", {
-        amount: count,
-        name: name,
-        picture_url: picture_url,
-        measure_word: measure_word,
-      })
-      .then((res) => {
-        console.log(res);
-        Taro.navigateBack({
-          delta: 1,
-          success: (res1) => {
-            Taro.showToast({
-              title: "成功",
-              icon: "success",
-              duration: 2000,
-            });
-          },
+    Taro.navigateTo({
+      url: "QRcode",
+      success: (res) => {
+        Taro.showToast({
+          title: "成功",
+          icon: "success",
+          duration: 2000,
         });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      },
+    });
+    // api
+    //   .put("/admin/good/add", {
+    //     amount: count,
+    //     name: name,
+    //     picture_url: picture_url,
+    //     measure_word: measure_word,
+    //   })
+    //   .then((res) => {
+    //     console.log(res);
+    //     Taro.navigateBack({
+    //       delta: 1,
+    //       success: (res1) => {
+    //         Taro.showToast({
+    //           title: "成功",
+    //           icon: "success",
+    //           duration: 2000,
+    //         });
+    //       },
+    //     });
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   }
 
   const onChange = async (files: any) => {
@@ -56,7 +66,7 @@ export default function Index() {
           response.data.data.signed_url.length
         );
         console.log(path);
-        console.log(files[0].url);
+        console.log("url", files[0].url);
         console.log(response.data.data);
         let Expires = getParams(response.data.data.signed_url, "Expires");
         let OSSAccessKeyId = getParams(

@@ -13,6 +13,7 @@ interface departmentListType {
   addCount: () => void;
   setCount: (i: number, e: number) => void;
   setData: (data1: any) => void;
+  setList: (id: number) => void;
 }
 
 const useDepartmentList = create<departmentListType>((set) => ({
@@ -43,7 +44,7 @@ const useDepartmentList = create<departmentListType>((set) => ({
     set(
       produce((state) => {
         state.data.forEach((item) => {
-          item["count"] = 1;
+          item["count"] = 0;
         });
       })
     );
@@ -58,6 +59,17 @@ const useDepartmentList = create<departmentListType>((set) => ({
         state.data[i].count = e;
       })
     ),
+  setList: (id) => {
+    set(
+      produce((state) => {
+        state.data.forEach((item) => {
+          if (item.ID === id) {
+            item["count"] = 1;
+          }
+        });
+      })
+    );
+  },
 }));
 
 export default useDepartmentList;

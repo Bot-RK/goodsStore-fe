@@ -21,6 +21,7 @@ export default function Detail() {
   const applyList = useApplyList((state) => state);
   let longName = "";
   const departments = departmentList.filter((item) => item.count! > 0);
+  const clean = useMultipleDepartmentType((state) => state.clean);
   const token = getStorageSync("token");
   const test = [
     {
@@ -61,17 +62,18 @@ export default function Detail() {
     }
   });
   function to() {
-    console.log(multipleDepartment);
+    console.log(JSON.stringify(multipleDepartment));
     Taro.request({
       url: "https://gss.ncuos.com/user/records",
       method: "POST",
       header: {
-        "content-type": "application/x-www-form-urlencoded;charset=utf-8",
+        "content-type": "application/json;charset=utf-8",
         Authorization: token,
       },
       data: JSON.stringify(multipleDepartment),
       success: (res) => {
         console.log("成功啦", res);
+        clean();
         Taro.navigateTo({
           url: "last",
           success: (res1) => {
@@ -112,7 +114,9 @@ export default function Detail() {
   }
   let time = formateTime();
   departments.forEach((item) => {
-    longName += item.name + "(" + item.count + ")" + " ";
+    if (item.count! > 0) {
+      longName += item.name + "(" + item.count + ")" + " ";
+    }
   });
 
   return (

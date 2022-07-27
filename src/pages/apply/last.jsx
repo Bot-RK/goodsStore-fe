@@ -3,10 +3,13 @@ import Taro from "@tarojs/taro";
 import useJudge from "../../store/judgeIsMultiple";
 import final from '../../asset/images/final.png'
 import './last.scss'
+import useLayoutList from "../../store/layoutList";
 
 export default function Last(){
+  const clean=useLayoutList((state)=>state.clean)
   const isJudeg=useJudge((state)=>state.isMultiple)
     function to(){
+      clean()
       if(!isJudeg){
         Taro.navigateBack({
           delta:4

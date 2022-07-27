@@ -1,7 +1,7 @@
 import { produce } from "immer";
 import create from "zustand";
 
-interface multipleDepartmentType {
+interface selectedDpListType {
   data: Array<{
     person_name: string;
     department_id: number;
@@ -10,12 +10,15 @@ interface multipleDepartmentType {
       amount: number;
     }>;
   }>;
+  setData: (data1: any) => void;
   addData: (id: any, detail: any) => void;
-  clean: () => void;
 }
-
-const useMultipleDepartmentType = create<multipleDepartmentType>((set) => ({
+const useSelectedDpList = create<selectedDpListType>((set) => ({
   data: [],
+  setData: (data1) =>
+    set(() => ({
+      data: data1,
+    })),
   addData: (id, detail) =>
     set(
       produce((state) => {
@@ -26,10 +29,5 @@ const useMultipleDepartmentType = create<multipleDepartmentType>((set) => ({
         });
       })
     ),
-  clean: () =>
-    set(() => ({
-      data: [],
-    })),
 }));
-
-export default useMultipleDepartmentType;
+export default useSelectedDpList;

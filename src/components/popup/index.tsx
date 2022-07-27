@@ -11,11 +11,12 @@ import { FC } from "react";
 import { AtCurtain, AtInputNumber } from "taro-ui";
 import { QRCode } from "taro3-code";
 import useThingListStore from "../../store/thingList";
-import white1 from "../../asset/images/纯白.png";
+import white1 from "../../asset/images/white.png";
 import "./index.scss";
 
 type popupProps = {
   isOpen: boolean;
+  "";
   isShowQRcode: boolean;
   thingId: number;
   icon?: string;

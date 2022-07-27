@@ -31,7 +31,7 @@ export default defineAppConfig({
     },
     {
       root: "pages/manager",
-      pages: ["index", "first", "second", "third"],
+      pages: ["index", "first", "second", "third", "QRcode"],
     },
   ],
 });

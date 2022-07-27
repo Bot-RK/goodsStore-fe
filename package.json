@@ -50,6 +50,7 @@
     "react-native": "^0.67.3",
     "taro-ui": "3.0.0-alpha.9",
     "taro3-code": "^2.2.0",
+    "weapp-qrcode-canvas-2d": "^1.1.2",
     "zustand": "^4.0.0-rc.1"
   },
   "devDependencies": {

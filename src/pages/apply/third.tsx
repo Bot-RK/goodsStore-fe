@@ -7,6 +7,7 @@ import useApplyList from "../../store/applyList";
 import "./third.scss";
 import useDepartmentList from "../../store/departmentList";
 import api from "../../service/api";
+import useSelectedId from "../../store/selected";
 
 export default function Third() {
   const [layoutShow, setLayoutShow] = useState(false);
@@ -19,6 +20,7 @@ export default function Third() {
   const setIsFalse = useJudge((state) => state.setIsFlase);
   const setData = useDepartmentList((state) => state.setData);
   const dpData = useDepartmentList((state) => state.data);
+  const setShowData = useSelectedId((state) => state.setData);
   // const dp = [
   //   {
   //     ID: 1,
@@ -79,6 +81,7 @@ export default function Third() {
   };
   const select = (e) => {
     setSelected(e);
+    setShowData(e);
     if (e.length == 1) {
       setSingleDepartment(e[0]);
       console.log("list", applyList);
