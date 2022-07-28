@@ -23,7 +23,7 @@ export default function QRcode() {
           canvas: canvas,
           canvasId: "myQrcode",
           width: 200,
-          padding: 30,
+          padding: 90,
           background: "#ffffff",
           paddingColor: "#ffffff",
           foreground: "#000000",
@@ -31,15 +31,15 @@ export default function QRcode() {
         });
         ctx.fillStyle = "#000000";
         ctx.font = "48px  serif";
-        ctx.fillText("名称 :剪刀", 220, 590);
+        ctx.fillText("物品:剪刀", canvas.width / 3, canvas.height - 30);
 
         Taro.canvasToTempFilePath({
           canvasId: "myQrcode",
           canvas: canvas,
           x: 0,
           y: 0,
-          width: 260,
-          height: 260,
+          width: canvas.width,
+          height: canvas.height,
           destWidth: 260,
           destHeight: 260,
           success(res1) {
@@ -58,7 +58,8 @@ export default function QRcode() {
       });
   });
   return (
-    <View className="backGround-b">
+    <View>
+      <View>1111111111111111</View>
       <Canvas
         type="2d"
         id="myQrcode"

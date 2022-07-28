@@ -1,7 +1,7 @@
 import { View, Image, Text, Navigator } from "@tarojs/components";
 import useRecordTypeStore from "../../store/records";
-import icon4 from "../../asset/images/Vector4.png";
-import icon6 from "../../asset/images/Vector6.png";
+import icon4 from "../../asset/images/Vector4.js";
+import icon6 from "../../asset/images/Vector6.js";
 import { formateTime } from "../../utils/getTime";
 import useDepartmentList from "../../store/departmentList";
 

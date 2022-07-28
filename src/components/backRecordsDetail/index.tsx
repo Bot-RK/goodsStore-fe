@@ -1,6 +1,6 @@
 import { View, Text, Image, Input } from "@tarojs/components";
 import useAdminRecords from "../../store/adminRecords";
-import deleteIcon from "../../asset/images/Vector13.png";
+import deleteIcon from "../../asset/images/Vector13.js";
 import useDepartmentList from "../../store/departmentList";
 
 export default function BackRecordsDetail(props: any) {

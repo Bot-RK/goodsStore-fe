@@ -1,7 +1,7 @@
 import { View, Text, Picker, Image } from "@tarojs/components";
 import { AtList, AtListItem } from "taro-ui";
 import useAdminList from "../../store/adminList";
-import deleteIcon from "../../asset/images/delete.png";
+import deleteIcon from "../../asset/images/delete.js";
 import api from "../../service/api";
 
 export default function NumberList() {

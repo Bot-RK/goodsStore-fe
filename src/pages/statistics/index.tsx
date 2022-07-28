@@ -12,7 +12,7 @@ import { useState } from "react";
 import { AtCheckbox, AtFloatLayout, AtList, AtListItem } from "taro-ui";
 import "./index.scss";
 import { getFromTime } from "../../utils/getTime";
-import icon5 from "../../asset/images/Vector12.png";
+import icon5 from "../../asset/images/Vector12.js";
 import AdRecords from "../../components/adminRecords";
 import BackRecords from "../../components/backRecords";
 import api from "../../service/api";

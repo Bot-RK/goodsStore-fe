@@ -1,7 +1,7 @@
 import { View, Text, Image, Navigator } from "@tarojs/components";
 import useAdminRecords from "../../store/adminRecords";
-import icon4 from "../../asset/images/Vector4.png";
-import icon6 from "../../asset/images/Vector11.png";
+import icon4 from "../../asset/images/Vector4.js";
+import icon6 from "../../asset/images/Vector11.js";
 import useDepartmentList from "../../store/departmentList";
 
 export default function BackRecords() {

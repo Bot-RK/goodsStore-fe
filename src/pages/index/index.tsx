@@ -2,12 +2,12 @@ import { View, Text, Image, Navigator } from "@tarojs/components";
 import Taro, { setStorageSync, useReady } from "@tarojs/taro";
 import { useState } from "react";
 import "./index.scss";
-import icon1 from "../../asset/images/Vector.png";
-import icon2 from "../../asset/images/Vector2.png";
-import icon3 from "../../asset/images/Vector3.png";
-import icon4 from "../../asset/images/Vector4.png";
-import icon5 from "../../asset/images/Vector5.png";
-import icon6 from "../../asset/images/Group.png";
+import icon1 from "../../asset/images/Vector.js";
+import icon2 from "../../asset/images/Vector2.js";
+import icon3 from "../../asset/images/Vector3.js";
+import icon4 from "../../asset/images/Vector4.js";
+import icon5 from "../../asset/images/Vector5.js";
+import icon6 from "../../asset/images/Group.js";
 import api from "../../service/api";
 
 export default function Index() {

@@ -1,13 +1,13 @@
 import { View, Text, Image, Navigator } from "@tarojs/components";
 import { useReady } from "@tarojs/taro";
 import "./index.scss";
-import icon1 from "../../asset/images/Vector7.png";
-import icon2 from "../../asset/images/Vector8.png";
-import icon3 from "../../asset/images/Vector9.png";
-import icon4 from "../../asset/images/Vector4.png";
-import icon5 from "../../asset/images/Vector10.png";
-import icon6 from "../../asset/images/backStage1.png";
-import icon7 from "../../asset/images/Group.png";
+import icon1 from "../../asset/images/Vector7.js";
+import icon2 from "../../asset/images/Vector8.js";
+import icon3 from "../../asset/images/Vector9.js";
+import icon4 from "../../asset/images/Vector4.js";
+import icon5 from "../../asset/images/Vector10.js";
+import icon6 from "../../asset/images/backStage1.js";
+import icon7 from "../../asset/images/Group.js";
 import useLayoutList from "../../store/layoutList";
 
 export default function Index() {

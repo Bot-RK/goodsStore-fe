@@ -1,7 +1,7 @@
 import { View, Text, Image } from "@tarojs/components";
 import api from "../../service/api";
 import useDepartmentList from "../../store/departmentList";
-import deleteIcon from "../../asset/images/delete.png";
+import deleteIcon from "../../asset/images/delete.js";
 
 export default function List() {
   const dpList = useDepartmentList((state) => state.data);

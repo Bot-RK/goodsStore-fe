@@ -1,7 +1,7 @@
 import { Image, View,Button } from "@tarojs/components";
 import Taro from "@tarojs/taro";
 import useJudge from "../../store/judgeIsMultiple";
-import final from '../../asset/images/final.png'
+import final from '../../asset/images/final.js'
 import './last.scss'
 import useLayoutList from "../../store/layoutList";
 
