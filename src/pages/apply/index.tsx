@@ -32,6 +32,7 @@ export default function Apply() {
   const GetData = () => {
     api.get("/user/goods").then((res) => {
       setData(res.data.data);
+      console.log("11:", res.data.data);
     });
   };
   useReady(() => {

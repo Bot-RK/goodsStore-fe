@@ -7,12 +7,15 @@ import {
   CommonEvent,
   CommonEventFunction,
 } from "@tarojs/components";
-import { FC } from "react";
+import Taro from "@tarojs/taro";
+import { FC, useState } from "react";
 import { AtCurtain, AtInputNumber } from "taro-ui";
 import { QRCode } from "taro3-code";
 import useThingListStore from "../../store/thingList";
 import white1 from "../../asset/images/white.js";
 import "./index.scss";
+import useLayoutList from "../../store/layoutList";
+import usePopupDetail from "../../store/popup";
 
 type popupProps = {
   isOpen: boolean;
@@ -34,10 +37,30 @@ const Popup: FC<popupProps> = ({
   isShowCounter,
   needCount,
   onclose,
-  getCount,
 }) => {
   const thingList = useThingListStore((state) => state.data);
   const index = thingList.findIndex(({ ID }) => ID === thingId);
+  const onPush = useLayoutList((state) => state.onPush);
+  const [value, setValue] = useState(1);
+  const layoutList = useLayoutList((state) => state.data);
+  const onClose = usePopupDetail((state) => state.onclose);
+  const onChange = useThingListStore((state) => state.onChange);
+  const onchangeValue = (e) => {
+    setValue(Number(e));
+    onChange(index, e);
+  };
+
+  const onClick1 = (Id, name, icon, remain_count, count_name) => {
+    if (!layoutList.find(({ id }) => id === Id)) {
+      onPush(Id, name, icon, remain_count, count_name, value);
+    } else {
+      Taro.showToast({
+        title: "物品已添加",
+        icon: "error",
+      });
+    }
+    onClose();
+  };
 
   return (
     <>
@@ -79,16 +102,27 @@ const Popup: FC<popupProps> = ({
               <Text className="counter-name-new">需要</Text>
               <AtInputNumber
                 className="counter-counter-new"
-                min={0}
-                max={10}
+                min={1}
+                max={10000}
                 step={1}
-                value={needCount!}
+                value={value}
                 width={120}
-                onChange={getCount!}
+                onChange={onchangeValue}
                 type="number"
               />
             </View>
-            <View className={isShowCounter ? "next-1" : "unnext"}>
+            <View
+              className={isShowCounter ? "next-1" : "unnext"}
+              onClick={() => {
+                onClick1(
+                  thingId,
+                  thingList[index].name,
+                  thingList[index].picture_url,
+                  thingList[index].amount,
+                  thingList[index].measure_word
+                );
+              }}
+            >
               <Button className="next-button-1">加入申领清单</Button>
             </View>
           </View>

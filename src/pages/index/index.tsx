@@ -16,6 +16,33 @@ export default function Index() {
     Taro.checkSession({
       success: async () => {
         console.log("登陆成功");
+        // await Taro.login({
+        //   success: (res) => {
+        //     console.log(res.code);
+        //     Taro.request({
+        //       method: "POST",
+        //       url: "https://gss.ncuos.com/login",
+        //       header: {
+        //         Authorization: res.code,
+        //       },
+        //       success: (res1) => {
+        //         console.log(res1);
+        //         setStorageSync("token", res1.data.data.token);
+        //         api
+        //           .get("/user/broadcast")
+        //           .then((re: any) => {
+        //             console.log(11111);
+        //             console.log(re);
+        //             setAnnouncement(re.data.data.Content);
+        //           })
+        //           .catch((er: any) => {
+        //             console.log(er);
+        //           });
+        //       },
+        //       fail: (err) => console.log(err),
+        //     });
+        //   },
+        // });
         Taro.request({
           method: "POST",
           url: "https://gss.ncuos.com/login",
@@ -47,7 +74,7 @@ export default function Index() {
               method: "POST",
               url: "https://gss.ncuos.com/login",
               header: {
-                code: "1",
+                Authorization: "1",
               },
               success: (res1) => {
                 console.log(res1);

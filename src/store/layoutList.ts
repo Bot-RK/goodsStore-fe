@@ -16,7 +16,8 @@ interface layoutListType {
     name: any,
     icon: any,
     remain1_count: any,
-    count: any
+    count: any,
+    needCount?: any
   ) => void;
   setCount: (i: number, e: number) => void;
   onDelete: (index: number) => void;
@@ -30,7 +31,7 @@ const useLayoutList = create<layoutListType>((set) => ({
         state.data[i].count = e;
       })
     ),
-  onPush: (id1, name1, icon1, remain1_count1, count_name1) =>
+  onPush: (id1, name1, icon1, remain1_count1, count_name1, needCount = 0) =>
     set(
       produce((state) => {
         state.data.push({
@@ -38,7 +39,7 @@ const useLayoutList = create<layoutListType>((set) => ({
           name: name1,
           icon: icon1,
           remain_count: remain1_count1,
-          count: 1,
+          count: needCount ? needCount : 1,
           count_name: count_name1,
         });
       })
