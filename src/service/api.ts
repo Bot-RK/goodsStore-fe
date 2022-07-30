@@ -55,4 +55,8 @@ export default {
     let option = { url, data };
     return this.baseOptions(option, "PUT");
   },
+  delete(url, data?: object) {
+    let option = { url, data };
+    return this.baseOptions(option, "DELETE");
+  },
 };

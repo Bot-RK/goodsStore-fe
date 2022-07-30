@@ -5,16 +5,23 @@ import { useState } from "react";
 import "./index.scss";
 import ThingList from "../../components/thingList";
 import useThingListStore from "../../store/thingList";
+import api from "../../service/api";
 
 export default function Apply() {
   const searchByName = useThingListStore((state) => state.searchByName);
   const [text, setText] = useState("");
   const thingList = useThingListStore((state) => state.data);
+  const setData = useThingListStore((state) => state.setData);
 
   const onChange = (e) => {
     setText(e);
   };
 
+  Taro.useReady(() => {
+    api.get("/user/goods").then((res) => {
+      setData(res.data.data);
+    });
+  });
   function to() {
     Taro.navigateTo({
       url: "first",
@@ -55,9 +62,9 @@ export default function Apply() {
       <View className="progress">
         <Text className="progress-text">物资管理</Text>
       </View>
-      <View>
+      {/* <View>
         <Button className="button-scan" onClick={scan}></Button>
-      </View>
+      </View> */}
       <View className="manager-button">
         <Button className="button-one" onClick={to}>
           补充物品
