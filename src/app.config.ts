@@ -11,6 +11,8 @@ export default defineAppConfig({
     navigationBarBackgroundColor: "#fff",
     navigationBarTitleText: "WeChat",
     navigationBarTextStyle: "black",
+    enablePullDownRefresh: true,
+    onReachBottomDistance: 50,
   },
   subpackages: [
     {
