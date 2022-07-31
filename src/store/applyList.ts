@@ -11,6 +11,7 @@ interface applyListType {
   add: (id: number, Amount: number) => void;
   setPerson_name: (name: string) => void;
   setDepartment_id: (id: number) => void;
+  clean: () => void;
 }
 
 const useApplyList = create<applyListType>((set) => ({
@@ -29,6 +30,10 @@ const useApplyList = create<applyListType>((set) => ({
   setDepartment_id: (id) =>
     set((state) => ({
       department_id: id,
+    })),
+  clean: () =>
+    set((state) => ({
+      requests: [],
     })),
   setPerson_name: (name) =>
     set((state) => ({

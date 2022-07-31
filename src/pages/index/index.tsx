@@ -9,72 +9,24 @@ import icon4 from "../../asset/images/Vector4.js";
 import icon5 from "../../asset/images/Vector5.js";
 import icon6 from "../../asset/images/Group.js";
 import api from "../../service/api";
+import useDepartmentList from "../../store/departmentList";
 
 export default function Index() {
   const [announcement, setAnnouncement] = useState("暂无公告");
+  const setDp = useDepartmentList((state) => state.setData);
+
   useReady(async () => {
     Taro.checkSession({
       success: async () => {
         console.log("登陆成功");
-        // await Taro.login({
-        //   success: (res) => {
-        //     console.log(res.code);
-        //     Taro.request({
-        //       method: "POST",
-        //       url: "https://gss.ncuos.com/login",
-        //       header: {
-        //         Authorization: res.code,
-        //       },
-        //       success: (res1) => {
-        //         console.log(res1);
-        //         setStorageSync("token", res1.data.data.token);
-        //         api
-        //           .get("/user/broadcast")
-        //           .then((re: any) => {
-        //             console.log(11111);
-        //             console.log(re);
-        //             setAnnouncement(re.data.data.Content);
-        //           })
-        //           .catch((er: any) => {
-        //             console.log(er);
-        //           });
-        //       },
-        //       fail: (err) => console.log(err),
-        //     });
-        //   },
-        // });
-        Taro.request({
-          method: "POST",
-          url: "https://gss.ncuos.com/login",
-          header: {
-            Authorization: "1",
-          },
-          success: (res1) => {
-            console.log(res1);
-            setStorageSync("token", res1.data.data.token);
-            api
-              .get("/user/broadcast")
-              .then((re: any) => {
-                console.log(11111);
-                console.log(re);
-                setAnnouncement(re.data.data.Content);
-              })
-              .catch((er: any) => {
-                console.log(er);
-              });
-          },
-          fail: (err) => console.log(err),
-        });
-      },
-      fail: async () => {
-        console.log("FAILED");
         await Taro.login({
           success: (res) => {
+            console.log(res.code);
             Taro.request({
-              method: "POST",
+              method: "GET",
               url: "https://gss.ncuos.com/login",
               header: {
-                Authorization: "1",
+                Authorization: 15270952061,
               },
               success: (res1) => {
                 console.log(res1);
@@ -89,6 +41,63 @@ export default function Index() {
                   .catch((er: any) => {
                     console.log(er);
                   });
+                api.get("/user/departments").then((resData) => {
+                  setDp(resData.data.data);
+                });
+              },
+              fail: (err) => console.log(err),
+            });
+          },
+        });
+        // Taro.request({
+        //   method: "GET",
+        //   url: "https://gss.ncuos.com/login",
+        //   header: {
+        //     Authorization: "15270952061",
+        //   },
+        //   success: (res1) => {
+        //     console.log(res1);
+        //     setStorageSync("token", res1.data.data.token);
+        //     api
+        //       .get("/user/broadcast")
+        //       .then((re: any) => {
+        //         console.log(11111);
+        //         console.log(re);
+        //         setAnnouncement(re.data.data.Content);
+        //       })
+        //       .catch((er: any) => {
+        //         console.log(er);
+        //       });
+        //   },
+        //   fail: (err) => console.log(err),
+        // });
+      },
+      fail: async () => {
+        console.log("FAILED");
+        await Taro.login({
+          success: (res) => {
+            Taro.request({
+              method: "GET",
+              url: "https://gss.ncuos.com/login",
+              header: {
+                Authorization: "15270952061",
+              },
+              success: (res1) => {
+                console.log(res1);
+                setStorageSync("token", res1.data.data.token);
+                api
+                  .get("/user/broadcast")
+                  .then((re: any) => {
+                    console.log(11111);
+                    console.log(re);
+                    setAnnouncement(re.data.data.Content);
+                  })
+                  .catch((er: any) => {
+                    console.log(er);
+                  });
+                api.get("/user/departments").then((resData) => {
+                  setDp(resData.data.data);
+                });
               },
               fail: (err) => console.log(err),
             });

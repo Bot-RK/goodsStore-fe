@@ -12,10 +12,7 @@ const RecordDetailList = (props: any) => {
       {recordsList[index].requests.map((item) => (
         <>
           <View className="things-item">
-            <Image
-              src="https://joeschmoe.io/api/v1/random"
-              className="things-icon"
-            ></Image>
+            <Image src={`${item.picture_url}`} className="things-icon"></Image>
             <View className="things-texts">
               <Text className="things-title">{item.name}</Text>
             </View>

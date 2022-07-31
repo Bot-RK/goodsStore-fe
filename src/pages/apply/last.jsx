@@ -4,12 +4,15 @@ import useJudge from "../../store/judgeIsMultiple";
 import final from '../../asset/images/final.js'
 import './last.scss'
 import useLayoutList from "../../store/layoutList";
+import useApplyList from "../../store/applyList";
 
 export default function Last(){
   const clean=useLayoutList((state)=>state.clean)
+  const cleanAp=useApplyList((state)=>state.clean)
   const isJudeg=useJudge((state)=>state.isMultiple)
     function to(){
       clean()
+      cleanAp()
       if(!isJudeg){
         Taro.navigateBack({
           delta:4

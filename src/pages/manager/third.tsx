@@ -74,8 +74,23 @@ export default function Index() {
           "OSSAccessKeyId"
         );
         let Signature = getParams(response.data.data.signed_url, "Signature");
+        console.log("key:", response.data.data.key);
         console.log("签名", Signature);
         console.log("Expires", Expires);
+        let date = new Date();
+        // 设置policy过期时间。
+        date.setHours(date.getHours() + 1);
+        console.log("date", date);
+        let srcT = date.toISOString();
+        console.log("srcT", srcT);
+        const policyText = {
+          expiration: Expires,
+        };
+        const buffer = Buffer.from(JSON.stringify(policyText));
+        console.log("base64", buffer.toString("base64"));
+        const base64 = buffer.toString("base64");
+        // const policyText = { expiration: Expires.toISOString() };
+        // const buffer = Buffer.from(policyText);
         Taro.uploadFile({
           url: "https://goods-storage-system.oss-cn-hangzhou.aliyuncs.com",
           filePath: files[0].url,
@@ -87,9 +102,7 @@ export default function Index() {
             key: response.data.data.key,
             OSSAccessKeyId: OSSAccessKeyId,
             signature: Signature,
-            policy: {
-              expiration: Expires,
-            },
+            policy: base64,
             success_action_status: "200",
           },
           success: (res) => {

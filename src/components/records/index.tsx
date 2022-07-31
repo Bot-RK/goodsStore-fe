@@ -2,13 +2,11 @@ import { View, Image, Text, Navigator } from "@tarojs/components";
 import useRecordTypeStore from "../../store/records";
 import icon4 from "../../asset/images/Vector4.js";
 import icon6 from "../../asset/images/Vector6.js";
-import { formateTime } from "../../utils/getTime";
 import useDepartmentList from "../../store/departmentList";
 
 const Records = () => {
   const recordsData = useRecordTypeStore((state) => state.data);
   const department = useDepartmentList((state) => state.data);
-  const time = formateTime();
   return (
     <>
       {recordsData.map((item) => (
@@ -19,10 +17,12 @@ const Records = () => {
               url={`/pages/record/detail?id=${item.id}`}
             ></Navigator>
             <Image className="icon" src={icon6}></Image>
-            <Text className="icon-font">{time}</Text>
+            <Text className="icon-font">
+              {item.created_at.substring(0, 10)}
+            </Text>
             <View className="little-box">
               <Text className="little-font">
-                {`剩余${item.total_amount}件物资`}
+                {`申领${item.total_amount}件物资`}
               </Text>
               <Text className="department-name">{`${
                 department[
