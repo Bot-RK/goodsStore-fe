@@ -1,4 +1,4 @@
-import { View, Text, Image, Navigator } from "@tarojs/components";
+import { View, Text } from "@tarojs/components";
 import { useState } from "react";
 import Taro, { useReachBottom, useReady } from "@tarojs/taro";
 import api from "../../service/api";
@@ -27,7 +27,7 @@ export default function Record() {
         console.log(response);
         setRecords([...data, ...response.data.data]);
       })
-      .catch((error) => {
+      .catch(() => {
         Taro.showModal({
           title: "提示",
           content: "数据到底啦",

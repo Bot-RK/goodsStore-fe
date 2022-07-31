@@ -1,12 +1,4 @@
-import {
-  View,
-  Text,
-  Button,
-  Image,
-  Input,
-  Navigator,
-  Picker,
-} from "@tarojs/components";
+import { View, Text, Button, Image, Picker } from "@tarojs/components";
 import Taro, { getStorageSync, useReady } from "@tarojs/taro";
 import { useState } from "react";
 import { AtCheckbox, AtFloatLayout, AtList, AtListItem } from "taro-ui";
@@ -36,10 +28,10 @@ export default function Index() {
     api.get("/user/departments").then((res) => {
       setDpData(res.data.data);
     });
-    api.get("/user/records/1").then((res) => {
-      setAdRecord(res.data.data);
-      console.log("这是数据", res.data.data);
-    });
+    // api.get("/user/records/1").then((res) => {
+    //   setAdRecord(res.data.data);
+    //   console.log("这是数据", res.data.data);
+    // });
   });
   const openLayout = (e) => {
     setLayoutShow(!layoutShow);
@@ -72,9 +64,16 @@ export default function Index() {
       },
       data: JSON.stringify(data),
       success: (res) => {
-        console.log("成功啦", res);
-        setRecordsList(res.data.data);
-        console.log(JSON.stringify(data));
+        if (res.data.data) {
+          console.log("成功啦", res);
+          setRecordsList(res.data.data);
+          console.log(JSON.stringify(data));
+        } else {
+          Taro.showToast({
+            title: "失败,无数据",
+            icon: "error",
+          });
+        }
       },
     });
     // api.post("/admin/records", data).then((res) => {
