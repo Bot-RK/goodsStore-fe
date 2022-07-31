@@ -19,12 +19,27 @@ export default function Record() {
     });
   });
   useReachBottom(() => {
-    api.get(`/user/records/${page}`).then((response) => {
-      console.log(response);
-      setPage(page + 1);
-      console.log(response);
-      setRecords([...data, ...response.data.data]);
-    });
+    api
+      .get(`/user/records/${page}`)
+      .then((response) => {
+        console.log(response);
+        setPage(page + 1);
+        console.log(response);
+        setRecords([...data, ...response.data.data]);
+      })
+      .catch((error) => {
+        Taro.showModal({
+          title: "提示",
+          content: "数据到底啦",
+          success: function (res) {
+            if (res.confirm) {
+              console.log("用户点击确定");
+            } else if (res.cancel) {
+              console.log("用户点击取消");
+            }
+          },
+        });
+      });
   });
   return (
     <View className="backGround-f">

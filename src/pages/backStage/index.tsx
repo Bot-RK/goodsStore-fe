@@ -1,5 +1,5 @@
 import { View, Text, Image, Navigator } from "@tarojs/components";
-import { useReady } from "@tarojs/taro";
+import { getStorageSync, useReady } from "@tarojs/taro";
 import "./index.scss";
 import icon1 from "../../asset/images/Vector7.js";
 import icon2 from "../../asset/images/Vector8.js";
@@ -15,11 +15,13 @@ export default function Index() {
   useReady(() => {
     clean();
   });
+  const name = getStorageSync("name");
+
   return (
     <View className='"backGround-b"'>
       <View className="title">
         <Text className="title-name">管理后台</Text>
-        <Text className="title-who">你好,xxx</Text>
+        <Text className="title-who">你好,{name}</Text>
       </View>
       <View className="backStage-image">
         <Image className="backStage-image1" src={icon6}></Image>

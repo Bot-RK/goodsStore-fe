@@ -1,5 +1,5 @@
 import { View, Text, Image, Navigator } from "@tarojs/components";
-import Taro, { setStorageSync, useReady } from "@tarojs/taro";
+import Taro, { getStorageSync, setStorageSync, useReady } from "@tarojs/taro";
 import { useState } from "react";
 import "./index.scss";
 import icon1 from "../../asset/images/Vector.js";
@@ -31,6 +31,8 @@ export default function Index() {
               success: (res1) => {
                 console.log(res1);
                 setStorageSync("token", res1.data.data.token);
+                setStorageSync("name", res1.data.data.user.username);
+                setStorageSync("is_admin", res1.data.data.user.is_admin);
                 api
                   .get("/user/broadcast")
                   .then((re: any) => {
@@ -106,6 +108,26 @@ export default function Index() {
       },
     });
   });
+  const enterBack = () => {
+    console.log(getStorageSync("is_admin"));
+    if (getStorageSync("is_admin")) {
+      Taro.navigateTo({
+        url: "/pages/backStage/index",
+        success: () => {
+          Taro.showToast({
+            title: "欢迎",
+            icon: "success",
+          });
+        },
+      });
+    } else {
+      Taro.showModal({
+        title: "错误",
+        content: "用户权限不足",
+      });
+    }
+  };
+
   return (
     <View className='"backGround-f"'>
       <View className="announcement">
@@ -134,8 +156,8 @@ export default function Index() {
         <Text className="icon-font">申领记录</Text>
         <Image className="arrow" src={icon4}></Image>
       </View>
-      <View className="operation">
-        <Navigator className="pathTo" url="/pages/backStage/index"></Navigator>
+      <View className="operation" onClick={enterBack}>
+        <View className="pathTo"></View>
         <Image className="icon" src={icon5}></Image>
         <Text className="icon-font">管理后台</Text>
         <Image className="arrow" src={icon4}></Image>
