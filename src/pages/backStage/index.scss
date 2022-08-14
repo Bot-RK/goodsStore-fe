@@ -7,6 +7,7 @@ $background-color:#FAFDF8;
     background-color: $background-color;
     font-family: 'PingFang SC';
     font-style: normal;
+    font-size: 32px;
 }
 .announcement{
     height: 30%;
@@ -24,7 +25,7 @@ $background-color:#FAFDF8;
     margin-bottom: 15%;
 }
 .icon{
-    margin-top: 49px;
+    margin-top: 8%;
     margin-left: 36px;
     width: 45px;
     height: 45px;
@@ -32,20 +33,31 @@ $background-color:#FAFDF8;
 .icon-font{
     position: absolute;
     margin-left: 20px;
-    margin-top: 52px;
+    margin-top: 8%;
     color: #333333;
+    font-size: 32px;
 }
 .arrow{
     position: absolute;
     width: 20px;
     height: 32px;
     margin-left: 75%;
-    margin-top: 56px;
+    margin-top: 8%;
+    padding-top: 10px;
 }
 .pathTo{
     position: absolute;
     width: 100%;
     min-height: 100%;
+}
+.icon-family{
+    position: fixed;
+    top: 95%;
+    left: 35.5%;
+}
+.family-image{
+   width: 220px;
+   height: 38.5px
 }
 .backStage-image{
     position: absolute;
@@ -64,13 +76,4 @@ $background-color:#FAFDF8;
     margin-left: 60px;
     font-size: 42px;
     margin-top: 65px;
-}
-.icon-family{
-    position: fixed;
-    top: 95%;
-    left: 35.5%;
-}
-.family-image{
-   width: 220px;
-   height: 38.5px;
 }

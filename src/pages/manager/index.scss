@@ -38,7 +38,7 @@ $background-color:#FAFDF8;
     border-radius: 16px;
 }
 .things{
-    margin-top: 10px;
+    margin-top: 0px;
     margin-left: 48px;
     width: 88%;
 }
@@ -46,18 +46,19 @@ $background-color:#FAFDF8;
     position: relative;
     margin-top: 35px;
     background-color: #ffffff;
-    height: 130px;
+    height: 145px;
 }
 .things-icon{
     position: absolute;
-    width: 115px;
-    height: 115px;
+    width: 130px;
+    height: 130px;
     margin-left: 15px;
+    border-radius: 9px;
 }
 .things-texts{
     display: flex;
     flex-direction: column;
-    margin-left: 143px;
+    margin-left: 158px;
 }
 .things-title{
     margin-top: 15px;
@@ -65,18 +66,18 @@ $background-color:#FAFDF8;
     font-size: 30px;
 }
 .things-count{
-    margin-top:15px;
+    margin-top:20px;
     margin-left: 60%;
     display: flex;
     flex-direction: row;
     color:  #BED3BE;
     text-align: center;
-    font-size: 30px;
+    font-size: 32px;
 }
 .counts{
     width: 80px !important;
     background-color: #F0F5F0;
-    border-radius: 5px;
+    border-radius: 7px;
     color: black;
     font-size: 40px;
 }
@@ -89,14 +90,4 @@ $background-color:#FAFDF8;
     width: 88%;
     margin-left: 48px;
     background-color:$background-color ;
-}
-.button-scan{
-    position: absolute;
-    margin-left: 88%;
-    margin-top: -45px;
-    padding-left: 5px;
-    width: 50px;
-    height: 50px;
-    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAAAXNSR0IArs4c6QAAAgZJREFUSEvdVjFoVEEQnfnFgYVoklIQU6RMYZNYmt5GRFErA9pY3J8FuSs9yxO8m1/YnIK/ExRMp6UpxVKtNSRNmkiE4/A+xz2Z4++xfv6PmFxSZIr/d2d239vZ2Z0dpkCazea5LMsuAljw6tFotNvv97fSNP0djrW2c+7MeDxeYuZ5b2PmvVqttt1ut39Ndb4hIo+JqFUEyvsPVPVl0Vav129HUfS6Yk5LVZ+Yje0Tx/FNZn5TMdjUpSQicp+IXlTNA3ArSZK37JybB7AXDNwiojTo/ySir6q6WQQTkatEtExE0+0iontEdCnYvgWO43iVmT8FAIuqakSHEhExgh9+MoArnK/mY67cVNW1Q6EHk0TE8MxLk7VTRGL+iAhy11RV3Qy2q2uwhqOqPDnCjUbjbJZl11S16sz/N6+I3CGiD6q6PyE5brHAH3TTZ8HfMhIfj1kAlmKcjCfHtvwAeBJ4OwnMPAfg/VFSise11ALgRhRF37vd7oZtV5hrUlVdP6p3IvIqT5QGtXiK0sqJZGHn3DKALz4OlmtmEJPw7l1mKx6Gw+F+AXj6CjLzN2Z+2ul0dorkzrkLAOpEtBLY/DviVXP+CB+YWgA8SpLkWQnJQwDPqzyfvvF+wD+KibtlGdo5dx3AuwqSv6uV4BKdz4sA+09kMBh87vV6g6rVWu0FYNXby+quP+SF9aB0qOeoAAAAAElFTkSuQmCC");
-    border: #F8F9FD;
 }
