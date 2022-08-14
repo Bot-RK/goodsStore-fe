@@ -8,7 +8,7 @@ import { tobeBase64 } from "../../utils/imageUpload";
 import getParams from "../../utils/getParams";
 
 export default function Index() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
   const [file, setFile] = useState<any>([]);
   const [name, setName] = useState("");
   const [measure_word, setMeasure_word] = useState("");
@@ -16,39 +16,39 @@ export default function Index() {
   const [suffix, setSuffix] = useState("");
   const token = getStorageSync("token");
   async function final() {
-    Taro.navigateTo({
-      url: "QRcode",
-      success: (res) => {
-        Taro.showToast({
-          title: "成功",
-          icon: "success",
-          duration: 2000,
+    api
+      .put("/admin/good/add", {
+        amount: count,
+        name: name,
+        picture_url: picture_url,
+        measure_word: measure_word,
+      })
+      .then((res) => {
+        console.log(res);
+        Taro.navigateBack({
+          delta: 1,
+          success: (res1) => {
+            Taro.showToast({
+              title: "成功",
+              icon: "success",
+              duration: 2000,
+            });
+            Taro.navigateTo({
+              url: "QRcode",
+              success: (res2) => {
+                Taro.showToast({
+                  title: "成功",
+                  icon: "success",
+                  duration: 2000,
+                });
+              },
+            });
+          },
         });
-      },
-    });
-    // api
-    //   .put("/admin/good/add", {
-    //     amount: count,
-    //     name: name,
-    //     picture_url: picture_url,
-    //     measure_word: measure_word,
-    //   })
-    //   .then((res) => {
-    //     console.log(res);
-    //     Taro.navigateBack({
-    //       delta: 1,
-    //       success: (res1) => {
-    //         Taro.showToast({
-    //           title: "成功",
-    //           icon: "success",
-    //           duration: 2000,
-    //         });
-    //       },
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   const onChange = async (files: any) => {
@@ -60,37 +60,26 @@ export default function Index() {
       .get(`/admin/picture/${files[0].url.substring(files[0].url.length - 3)}`)
       .then((response) => {
         console.log(response.data.data);
-        setPicture_url(response.data.data.get_url);
-        const path = response.data.data.signed_url.substring(
-          58,
-          response.data.data.signed_url.length
-        );
-        console.log(path);
-        console.log("url", files[0].url);
-        console.log(response.data.data);
-        let Expires = getParams(response.data.data.signed_url, "Expires");
-        let OSSAccessKeyId = getParams(
-          response.data.data.signed_url,
-          "OSSAccessKeyId"
-        );
-        let Signature = getParams(response.data.data.signed_url, "Signature");
-        console.log("key:", response.data.data.key);
-        console.log("签名", Signature);
-        console.log("Expires", Expires);
-        let date = new Date();
-        // 设置policy过期时间。
-        date.setHours(date.getHours() + 1);
-        console.log("date", date);
-        let srcT = date.toISOString();
-        console.log("srcT", srcT);
-        const policyText = {
-          expiration: Expires,
-        };
-        const buffer = Buffer.from(JSON.stringify(policyText));
-        console.log("base64", buffer.toString("base64"));
-        const base64 = buffer.toString("base64");
-        // const policyText = { expiration: Expires.toISOString() };
-        // const buffer = Buffer.from(policyText);
+        setPicture_url(response.data.data.key);
+        console.log("id", response.data.data.access_id);
+        console.log("base64", response.data.data.policy);
+        // const path = response.data.data.signed_url.substring(
+        //   58,
+        //   response.data.data.signed_url.length
+        // );
+        // console.log(path);
+        // console.log("url", files[0].url);
+        // console.log(response.data.data);
+        // let Expires = getParams(response.data.data.signed_url, "Expires");
+        // let OSSAccessKeyId = getParams(
+        //   response.data.data.signed_url,
+        //   "OSSAccessKeyId"
+        // );
+        // let Signature = getParams(response.data.data.signed_url, "Signature");
+        // console.log("key:", response.data.data.key);
+        // console.log("签名", Signature);
+        // console.log("Expires", Expires);
+
         Taro.uploadFile({
           url: "https://goods-storage-system.oss-cn-hangzhou.aliyuncs.com",
           filePath: files[0].url,
@@ -99,10 +88,10 @@ export default function Index() {
             "content-type": "multipart/form-data",
           },
           formData: {
-            key: response.data.data.key,
-            OSSAccessKeyId: OSSAccessKeyId,
-            signature: Signature,
-            policy: base64,
+            key: response.data.data.filename,
+            OSSAccessKeyId: response.data.data.access_id,
+            signature: response.data.data.signature,
+            policy: response.data.data.policy,
             success_action_status: "200",
           },
           success: (res) => {
@@ -113,6 +102,7 @@ export default function Index() {
           },
         });
       });
+
     // const fs = Taro.getFileSystemManager();
     // fs.readFile({
     //   filePath: files[0].url,
@@ -193,8 +183,8 @@ export default function Index() {
         <View>
           <AtInputNumber
             className="counter"
-            min={0}
-            max={10}
+            min={1}
+            max={10000}
             step={1}
             value={count}
             width={100}

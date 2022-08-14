@@ -9,10 +9,7 @@ export default function ThingList() {
     <>
       {thingList.map((item) => (
         <View className="things-item" key={item.ID} onClick={openPopupList}>
-          <Image
-            src="https://joeschmoe.io/api/v1/random"
-            className="things-icon"
-          ></Image>
+          <Image src={`${item.picture_url}`} className="things-icon"></Image>
           <View className="things-texts">
             <Text className="things-title">{item.name}</Text>
           </View>

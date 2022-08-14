@@ -47,7 +47,12 @@ export default function QRcode() {
             Taro.saveImageToPhotosAlbum({
               filePath: res1.tempFilePath,
               success: (res2) => {
-                Taro.showToast({ title: "成功", icon: "none" });
+                Taro.navigateBack({
+                  delta: 3,
+                  success: () => {
+                    Taro.showToast({ title: "成功保存图片", icon: "none" });
+                  },
+                });
               },
             });
           },
@@ -59,7 +64,6 @@ export default function QRcode() {
   });
   return (
     <View>
-      <View>1111111111111111</View>
       <Canvas
         type="2d"
         id="myQrcode"

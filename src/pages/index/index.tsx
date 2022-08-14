@@ -109,23 +109,23 @@ export default function Index() {
     });
   });
   const enterBack = () => {
-    console.log(getStorageSync("is_admin"));
-    if (getStorageSync("is_admin")) {
-      Taro.navigateTo({
-        url: "/pages/backStage/index",
-        success: () => {
-          Taro.showToast({
-            title: "欢迎",
-            icon: "success",
-          });
-        },
-      });
-    } else {
-      Taro.showModal({
-        title: "错误",
-        content: "用户权限不足",
-      });
-    }
+    // console.log(getStorageSync("is_admin"));
+    // if (getStorageSync("is_admin")) {
+    Taro.navigateTo({
+      url: "/pages/backStage/index",
+      success: () => {
+        Taro.showToast({
+          title: "欢迎",
+          icon: "success",
+        });
+      },
+    });
+    // } else {
+    //   Taro.showModal({
+    //     title: "错误",
+    //     content: "用户权限不足",
+    //   });
+    // }
   };
 
   return (

@@ -52,13 +52,7 @@ export default function Apply() {
     });
     Taro.navigateTo({
       url: "third",
-      success: (res) => {
-        Taro.showToast({
-          title: "成功",
-          icon: "success",
-          duration: 2000,
-        });
-      },
+      success: (res) => {},
     });
   }
   const closeLayout = (e) => {

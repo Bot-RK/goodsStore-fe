@@ -13,6 +13,7 @@ export default function Third() {
   const [layoutShow, setLayoutShow] = useState(false);
   const [selectList, setSelected] = useState([]);
   const [isMultiple, setIsMultiple] = useState(false);
+  const [text, setText] = useState<boolean>(false);
   const setSingleDepartment = useApplyList((state) => state.setDepartment_id);
   const setName = useApplyList((state) => state.setPerson_name);
   const applyList = useApplyList((state) => state);
@@ -76,7 +77,10 @@ export default function Third() {
     setLayoutShow(!layoutShow);
 
     if (selectList.length > 1) {
-      setIsMultiple(!isMultiple);
+      setIsMultiple(true);
+    }
+    if (selectList.length > 0) {
+      setText(true);
     }
   };
   const select = (e) => {
@@ -143,7 +147,7 @@ export default function Third() {
         <Text>申领部门:</Text>
         <View className="department-box">
           <Button className="department-button" onClick={openLayout}>
-            点击选择
+            {text ? "我的部门" : "点击选择"}
           </Button>
         </View>
       </View>
