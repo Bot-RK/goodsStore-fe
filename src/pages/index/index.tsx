@@ -1,5 +1,5 @@
 import { View, Text, Image, Navigator } from "@tarojs/components";
-import Taro, { getStorageSync, setStorageSync, useReady } from "@tarojs/taro";
+import Taro, { setStorageSync, useReady } from "@tarojs/taro";
 import { useState } from "react";
 import "./index.scss";
 import icon1 from "../../asset/images/Vector.js";
@@ -77,7 +77,7 @@ export default function Index() {
       fail: async () => {
         console.log("FAILED");
         await Taro.login({
-          success: (res) => {
+          success: () => {
             Taro.request({
               method: "GET",
               url: "https://gss.ncuos.com/login",

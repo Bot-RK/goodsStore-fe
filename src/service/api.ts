@@ -25,7 +25,7 @@ export default {
         "content-type": contentType,
         Authorization: token,
       },
-      success(res) {
+      success(res: any) {
         console.log("res=>", res);
         console.log("details=>", option);
         if (res.statusCode === 200) {
@@ -42,20 +42,20 @@ export default {
     };
     return Taro.request(option);
   },
-  get(url, data?: object) {
+  get(url: string, data?: object) {
     let option = { url, data };
     console.log("token=>", getStorageSync("token"));
     return this.baseOptions(option);
   },
-  post(url, data?: object) {
+  post(url: string, data?: object) {
     let option = { url, data };
     return this.baseOptions(option, "POST");
   },
-  put(url, data?: object) {
+  put(url: string, data?: object) {
     let option = { url, data };
     return this.baseOptions(option, "PUT");
   },
-  delete(url, data?: object) {
+  delete(url: string, data?: object) {
     let option = { url, data };
     return this.baseOptions(option, "DELETE");
   },

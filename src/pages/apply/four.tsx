@@ -23,36 +23,7 @@ export default function Detail() {
   const departments = departmentList.filter((item) => item.count! > 0);
   const clean = useMultipleDepartmentType((state) => state.clean);
   const token = getStorageSync("token");
-  const test = [
-    {
-      person_name: "批量申请",
-      department_id: 1,
-      requests: [
-        {
-          good_id: 2,
-          amount: 10,
-        },
-        {
-          good_id: 3,
-          amount: 10,
-        },
-      ],
-    },
-    {
-      person_name: "批量申请",
-      department_id: 2,
-      requests: [
-        {
-          good_id: 2,
-          amount: 10,
-        },
-        {
-          good_id: 3,
-          amount: 10,
-        },
-      ],
-    },
-  ];
+
   useReady(() => {
     for (let i = 0; i < departments.length; i++) {
       for (let j = 0; j < departments[i].count!; j++) {
@@ -76,7 +47,7 @@ export default function Detail() {
         clean();
         Taro.navigateTo({
           url: "last",
-          success: (res1) => {
+          success: () => {
             Taro.showToast({
               title: "成功",
               icon: "success",
@@ -86,24 +57,15 @@ export default function Detail() {
         });
       },
     });
-    // api
-    //   .post("/user/records", multipleDepartment)
-    //   .then((res) => {
-    //     console.log("结果:" + res);
-    //     console.log("test");
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
   }
   function to2() {
     console.log("show:", applyList);
-    api.post("/user/record", applyList).then((res) => {
+    api.post("/user/record", applyList).then((res: any) => {
       console.log(res);
     });
     Taro.navigateTo({
       url: "last",
-      success: (res) => {
+      success: () => {
         Taro.showToast({
           title: "成功",
           icon: "success",

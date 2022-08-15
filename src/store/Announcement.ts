@@ -1,4 +1,3 @@
-import Taro from "@tarojs/taro";
 import create from "zustand";
 
 interface announcementType {

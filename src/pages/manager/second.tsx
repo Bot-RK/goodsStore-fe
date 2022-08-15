@@ -9,11 +9,8 @@ import api from "../../service/api";
 export default function Apply() {
   // const empty=useApplyList((state)=>state.)
   const data = useLayoutList((state) => state.data);
-  const needData = useUpdataGoodsStore((state) => state.data);
-  const pushData = useUpdataGoodsStore((state) => state.pushData);
   const cleanData = useUpdataGoodsStore((state) => state.clean);
   const cleanData1 = useLayoutList((state) => state.clean);
-  const test = useLayoutList((state) => state.onPush);
   const data1: Array<any> = [];
   function to() {
     for (let i = 0; i < data.length; i++) {
@@ -42,7 +39,7 @@ export default function Apply() {
 
     Taro.navigateBack({
       delta: 2,
-      success: (res) => {
+      success: () => {
         Taro.showToast({
           title: "成功",
           icon: "success",

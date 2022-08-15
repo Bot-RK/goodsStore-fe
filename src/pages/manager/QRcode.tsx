@@ -1,10 +1,13 @@
-import { Canvas, Icon, View } from "@tarojs/components";
+import { Canvas, View } from "@tarojs/components";
 import Taro from "@tarojs/taro";
-import { QRCode } from "taro3-code";
 import drawQrcode from "weapp-qrcode-canvas-2d";
 import "./QRcode.scss";
+import useQrcodeDetail from "../../store/Qrcode";
 
 export default function QRcode() {
+  const ID = useQrcodeDetail((state) => state.id);
+  const name = useQrcodeDetail((state) => state.name);
+
   Taro.useReady(() => {
     const query = Taro.createSelectorQuery();
     query
@@ -27,11 +30,11 @@ export default function QRcode() {
           background: "#ffffff",
           paddingColor: "#ffffff",
           foreground: "#000000",
-          text: "55",
+          text: `${ID}`,
         });
         ctx.fillStyle = "#000000";
         ctx.font = "48px  serif";
-        ctx.fillText("物品:剪刀", canvas.width / 3, canvas.height - 30);
+        ctx.fillText(`${name}`, canvas.width / 2 - 15, canvas.height - 30);
 
         Taro.canvasToTempFilePath({
           canvasId: "myQrcode",
@@ -46,11 +49,15 @@ export default function QRcode() {
             console.log("二维码临时路径：", res1.tempFilePath);
             Taro.saveImageToPhotosAlbum({
               filePath: res1.tempFilePath,
-              success: (res2) => {
+              success: () => {
                 Taro.navigateBack({
                   delta: 3,
                   success: () => {
-                    Taro.showToast({ title: "成功保存图片", icon: "none" });
+                    Taro.showToast({
+                      title: "成功保存图片",
+                      icon: "none",
+                      duration: 3000,
+                    });
                   },
                 });
               },

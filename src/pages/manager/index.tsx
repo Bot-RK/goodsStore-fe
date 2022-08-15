@@ -18,14 +18,14 @@ export default function Apply() {
   };
 
   Taro.useReady(() => {
-    api.get("/user/goods").then((res) => {
+    api.get("/user/goods").then((res: any) => {
       setData(res.data.data);
     });
   });
   function to() {
     Taro.navigateTo({
       url: "first",
-      success: (res) => {
+      success: () => {
         Taro.showToast({
           title: "成功",
           icon: "success",
@@ -41,7 +41,7 @@ export default function Apply() {
   function to2() {
     Taro.navigateTo({
       url: "third",
-      success: (res) => {
+      success: () => {
         Taro.showToast({
           title: "成功",
           icon: "success",
@@ -50,13 +50,7 @@ export default function Apply() {
       },
     });
   }
-  const scan = (e) => {
-    Taro.scanCode({
-      success: (res) => {
-        console.log(res);
-      },
-    });
-  };
+
   return (
     <View className="backGround-b">
       <View className="progress">

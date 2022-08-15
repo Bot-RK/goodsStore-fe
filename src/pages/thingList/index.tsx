@@ -11,8 +11,6 @@ import api from "../../service/api";
 
 export default function Second() {
   const [text, setText] = useState("");
-  // const [open, setOpen] = useState(false);
-  const [count, setCount] = useState(0);
   const searchByName = useThingListStore((state) => state.searchByName);
   const thingList = useThingListStore((state) => state.data);
   const open = usePopupDetail((state) => state.isOpen);
@@ -29,7 +27,7 @@ export default function Second() {
       setData(res.data.data);
     });
   });
-  const scan = (e) => {
+  const scan = () => {
     Taro.scanCode({
       success: (res) => {
         setID(Number(res.result));
@@ -43,9 +41,6 @@ export default function Second() {
     searchByName(index);
   };
 
-  const getCount = (e) => {
-    setCount(e);
-  };
   return (
     <View className="backGround-f">
       <View className="thingList-text">

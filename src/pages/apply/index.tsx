@@ -52,25 +52,19 @@ export default function Apply() {
     });
     Taro.navigateTo({
       url: "third",
-      success: (res) => {},
+      success: () => {},
     });
   }
-  const closeLayout = (e) => {
+  const closeLayout = () => {
     setLayoutShow(!layoutShow);
   };
-  const scan = (e) => {
+  const scan = () => {
     Taro.scanCode({
       success: (res) => {
         setID(Number(res.result));
         popupOpen();
       },
     });
-  };
-
-  const getPhoneNumber = (e) => {
-    console.log(e.detail.errMsg);
-    console.log(e.detail.iv);
-    console.log(e.detail.encryptedData);
   };
 
   return (

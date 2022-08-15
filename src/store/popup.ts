@@ -1,4 +1,3 @@
-import { CommonEvent, CommonEventFunction } from "@tarojs/components";
 import create from "zustand";
 
 interface popUpDetail {

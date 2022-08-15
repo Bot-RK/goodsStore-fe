@@ -21,17 +21,11 @@ export default function Index() {
   const DpList = useDepartmentList((state) => state.data);
   const setRecordsList = useAdminRecords((state) => state.setData);
   const token = getStorageSync("token");
-  const setAdRecord = useAdminRecords((state) => state.setData);
-  // const [dp, setDp] = useState("");
 
   useReady(() => {
     api.get("/user/departments").then((res) => {
       setDpData(res.data.data);
     });
-    // api.get("/user/records/1").then((res) => {
-    //   setAdRecord(res.data.data);
-    //   console.log("这是数据", res.data.data);
-    // });
   });
   const openLayout = (e) => {
     setLayoutShow(!layoutShow);

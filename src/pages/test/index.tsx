@@ -1,5 +1,4 @@
-import { View, Text, Button } from "@tarojs/components";
-import create from "zustand";
+import { View, Button } from "@tarojs/components";
 import useStore from "./counter";
 
 export default function Index() {

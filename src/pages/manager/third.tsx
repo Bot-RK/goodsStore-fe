@@ -4,8 +4,7 @@ import { useState } from "react";
 import { AtImagePicker, AtInputNumber } from "taro-ui";
 import "./third.scss";
 import api from "../../service/api";
-import { tobeBase64 } from "../../utils/imageUpload";
-import getParams from "../../utils/getParams";
+import useQrcodeDetail from "../../store/Qrcode";
 
 export default function Index() {
   const [count, setCount] = useState(1);
@@ -13,7 +12,10 @@ export default function Index() {
   const [name, setName] = useState("");
   const [measure_word, setMeasure_word] = useState("");
   const [picture_url, setPicture_url] = useState("");
-  const [suffix, setSuffix] = useState("");
+  const setQrName = useQrcodeDetail((state) => state.setName);
+  const setQrId = useQrcodeDetail((state) => state.setId);
+  const size = 1024 * 1024 * 10;
+
   const token = getStorageSync("token");
   async function final() {
     api
@@ -25,9 +27,11 @@ export default function Index() {
       })
       .then((res) => {
         console.log(res);
+        setQrId(res.data.data.ID);
+        setQrName(res.data.data.name);
         Taro.navigateBack({
           delta: 1,
-          success: (res1) => {
+          success: () => {
             Taro.showToast({
               title: "成功",
               icon: "success",
@@ -35,13 +39,7 @@ export default function Index() {
             });
             Taro.navigateTo({
               url: "QRcode",
-              success: (res2) => {
-                Taro.showToast({
-                  title: "成功",
-                  icon: "success",
-                  duration: 2000,
-                });
-              },
+              success: () => {},
             });
           },
         });
@@ -52,56 +50,48 @@ export default function Index() {
   }
 
   const onChange = async (files: any) => {
-    setFile(files);
-    console.log("files", files);
-    setSuffix(files[0].url.substring(files[0].url.length - 3));
-    console.log("token", token);
-    api
-      .get(`/admin/picture/${files[0].url.substring(files[0].url.length - 3)}`)
-      .then((response) => {
-        console.log(response.data.data);
-        setPicture_url(response.data.data.key);
-        console.log("id", response.data.data.access_id);
-        console.log("base64", response.data.data.policy);
-        // const path = response.data.data.signed_url.substring(
-        //   58,
-        //   response.data.data.signed_url.length
-        // );
-        // console.log(path);
-        // console.log("url", files[0].url);
-        // console.log(response.data.data);
-        // let Expires = getParams(response.data.data.signed_url, "Expires");
-        // let OSSAccessKeyId = getParams(
-        //   response.data.data.signed_url,
-        //   "OSSAccessKeyId"
-        // );
-        // let Signature = getParams(response.data.data.signed_url, "Signature");
-        // console.log("key:", response.data.data.key);
-        // console.log("签名", Signature);
-        // console.log("Expires", Expires);
-
-        Taro.uploadFile({
-          url: "https://goods-storage-system.oss-cn-hangzhou.aliyuncs.com",
-          filePath: files[0].url,
-          name: "file",
-          header: {
-            "content-type": "multipart/form-data",
-          },
-          formData: {
-            key: response.data.data.filename,
-            OSSAccessKeyId: response.data.data.access_id,
-            signature: response.data.data.signature,
-            policy: response.data.data.policy,
-            success_action_status: "200",
-          },
-          success: (res) => {
-            console.log("success", res);
-          },
-          fail: (res1) => {
-            console.log("fail", res1);
-          },
+    if (files[0].file.size <= size) {
+      setFile(files);
+      console.log("files", files);
+      console.log("token", token);
+      api
+        .get(
+          `/admin/picture/${files[0].url.substring(files[0].url.length - 3)}`
+        )
+        .then((response) => {
+          console.log(response.data.data);
+          setPicture_url(response.data.data.key);
+          console.log("id", response.data.data.access_id);
+          console.log("base64", response.data.data.policy);
+          Taro.uploadFile({
+            url: "https://goods-storage-system.oss-cn-hangzhou.aliyuncs.com",
+            filePath: files[0].url,
+            name: "file",
+            header: {
+              "content-type": "multipart/form-data",
+            },
+            formData: {
+              key: response.data.data.filename,
+              OSSAccessKeyId: response.data.data.access_id,
+              signature: response.data.data.signature,
+              policy: response.data.data.policy,
+              success_action_status: "200",
+            },
+            success: (res) => {
+              console.log("success", res);
+            },
+            fail: (res1) => {
+              console.log("fail", res1);
+            },
+          });
         });
+    } else {
+      Taro.showToast({
+        title: "错误,图片过大",
+        icon: "error",
+        duration: 2000,
       });
+    }
 
     // const fs = Taro.getFileSystemManager();
     // fs.readFile({
