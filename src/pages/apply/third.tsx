@@ -22,29 +22,6 @@ export default function Third() {
   const setData = useDepartmentList((state) => state.setData);
   const dpData = useDepartmentList((state) => state.data);
   const setShowData = useSelectedId((state) => state.setData);
-  // const dp = [
-  //   {
-  //     ID: 1,
-  //     CreatedAt: "ss",
-  //     UpdatedAt: "ss",
-  //     DeletedAt: "aa",
-  //     name: "咳咳咳",
-  //   },
-  //   {
-  //     ID: 2,
-  //     CreatedAt: "ss",
-  //     UpdatedAt: "ss",
-  //     DeletedAt: "aa",
-  //     name: "咳咳咳1",
-  //   },
-  //   {
-  //     ID: 3,
-  //     CreatedAt: "ss",
-  //     UpdatedAt: "ss",
-  //     DeletedAt: "aa",
-  //     name: "咳咳咳2",
-  //   },
-  // ];
   const departments: any = dpData.map(function (item) {
     let obj = {};
     obj["value"] = item.ID;
@@ -56,24 +33,10 @@ export default function Third() {
       setData(res.data.data);
     });
   });
-  // const departments: any = [
-  //   {
-  //     value: "学工处",
-  //     label: "学工处",
-  //   },
-  //   {
-  //     value: "保卫处",
-  //     label: "保卫处",
-  //   },
-  //   {
-  //     value: "后勤处",
-  //     label: "后勤处",
-  //   },
-  // ];
-  const openLayout = (e) => {
+  const openLayout = () => {
     setLayoutShow(!layoutShow);
   };
-  const closeLayout = (e) => {
+  const closeLayout = () => {
     setLayoutShow(!layoutShow);
 
     if (selectList.length > 1) {
@@ -83,7 +46,7 @@ export default function Third() {
       setText(true);
     }
   };
-  const select = (e) => {
+  const select = (e: any) => {
     setSelected(e);
     setShowData(e);
     if (e.length == 1) {
@@ -96,26 +59,12 @@ export default function Third() {
     setIsFalse();
     Taro.navigateTo({
       url: "four",
-      success: (res) => {
-        Taro.showToast({
-          title: "成功",
-          icon: "success",
-          duration: 2000,
-        });
-      },
     });
   }
-  const to2 = (e) => {
+  const to2 = () => {
     setIsTrue();
     Taro.navigateTo({
       url: "multiple",
-      success: (res) => {
-        Taro.showToast({
-          title: "成功",
-          icon: "success",
-          duration: 2000,
-        });
-      },
     });
   };
   const onBlur = (name) => {

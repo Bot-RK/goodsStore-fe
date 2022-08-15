@@ -7,13 +7,6 @@ export default function Apply() {
   function to() {
     Taro.navigateTo({
       url: "four",
-      success: (res) => {
-        Taro.showToast({
-          title: "成功",
-          icon: "success",
-          duration: 2000,
-        });
-      },
     });
   }
   return (

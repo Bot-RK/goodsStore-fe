@@ -25,13 +25,6 @@ export default function Apply() {
   function to() {
     Taro.navigateTo({
       url: "first",
-      success: () => {
-        Taro.showToast({
-          title: "成功",
-          icon: "success",
-          duration: 2000,
-        });
-      },
     });
   }
   const search = () => {
@@ -41,13 +34,6 @@ export default function Apply() {
   function to2() {
     Taro.navigateTo({
       url: "third",
-      success: () => {
-        Taro.showToast({
-          title: "成功",
-          icon: "success",
-          duration: 2000,
-        });
-      },
     });
   }
 

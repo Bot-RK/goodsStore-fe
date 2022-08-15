@@ -22,16 +22,6 @@ export default function Last(){
           delta:5
         })
       }
-        // Taro.navigateTo({
-        //   url :'/pages/index/index',
-        //   success:(res)=>{
-        //     Taro.showToast({
-        //       title: '成功',
-        //       icon: 'success',
-        //       duration: 2000
-        //     })
-        //   }
-        // })
       }
     return(
         <View className="backGround-f">

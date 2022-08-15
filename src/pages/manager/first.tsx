@@ -13,11 +13,11 @@ export default function Apply() {
   const thingList = useThingListStore((state) => state.data);
   const setData = useThingListStore((state) => state.setData);
 
-  const onChange = (e) => {
+  const onChange = (e: string) => {
     setText(e);
   };
   useReady(() => {
-    api.get("/user/goods").then((res) => {
+    api.get("/user/goods").then((res: any) => {
       setData(res.data.data);
     });
   });
@@ -25,18 +25,6 @@ export default function Apply() {
   function to() {
     Taro.navigateTo({
       url: "second",
-      success: (res) => {
-        Taro.showToast({
-          title: "成功",
-          icon: "success",
-          duration: 2000,
-        });
-      },
-    });
-    Taro.login({
-      success: (res) => {
-        console.log(res.code);
-      },
     });
   }
   const search = () => {

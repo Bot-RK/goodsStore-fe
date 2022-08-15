@@ -28,25 +28,11 @@ export default function Add() {
   function click() {
     Taro.navigateTo({
       url: "addNumber",
-      success: (res) => {
-        Taro.showToast({
-          title: "成功",
-          icon: "success",
-          duration: 2000,
-        });
-      },
     });
   }
   function click2() {
     Taro.navigateTo({
       url: "addDp",
-      success: (res) => {
-        Taro.showToast({
-          title: "成功",
-          icon: "success",
-          duration: 2000,
-        });
-      },
     });
   }
 

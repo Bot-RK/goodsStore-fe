@@ -39,18 +39,6 @@ export default function Apply() {
 
     Taro.navigateBack({
       delta: 2,
-      success: () => {
-        Taro.showToast({
-          title: "成功",
-          icon: "success",
-          duration: 2000,
-        });
-      },
-    });
-    Taro.login({
-      success: (res) => {
-        console.log(res.code);
-      },
     });
   }
   return (

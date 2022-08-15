@@ -1,5 +1,5 @@
 import { View, Text, Image, Navigator } from "@tarojs/components";
-import Taro, { setStorageSync, useReady } from "@tarojs/taro";
+import Taro, { getStorageSync, setStorageSync, useReady } from "@tarojs/taro";
 import { useState } from "react";
 import "./index.scss";
 import icon1 from "../../asset/images/Vector.js";
@@ -109,23 +109,23 @@ export default function Index() {
     });
   });
   const enterBack = () => {
-    // console.log(getStorageSync("is_admin"));
-    // if (getStorageSync("is_admin")) {
-    Taro.navigateTo({
-      url: "/pages/backStage/index",
-      success: () => {
-        Taro.showToast({
-          title: "欢迎",
-          icon: "success",
-        });
-      },
-    });
-    // } else {
-    //   Taro.showModal({
-    //     title: "错误",
-    //     content: "用户权限不足",
-    //   });
-    // }
+    console.log(getStorageSync("is_admin"));
+    if (getStorageSync("is_admin")) {
+      Taro.navigateTo({
+        url: "/pages/backStage/index",
+        success: () => {
+          Taro.showToast({
+            title: "欢迎",
+            icon: "success",
+          });
+        },
+      });
+    } else {
+      Taro.showModal({
+        title: "错误",
+        content: "用户权限不足",
+      });
+    }
   };
 
   return (

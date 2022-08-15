@@ -19,11 +19,11 @@ export default function Second() {
   const id = useThingListStore((state) => state.selectId);
   const setID = useThingListStore((state) => state.setSelectedId);
   const setData = useThingListStore((state) => state.setData);
-  const onChange = (e) => {
+  const onChange = (e: string) => {
     setText(e);
   };
   useReady(() => {
-    api.get("/user/goods").then((res) => {
+    api.get("/user/goods").then((res: any) => {
       setData(res.data.data);
     });
   });
@@ -45,17 +45,6 @@ export default function Second() {
     <View className="backGround-f">
       <View className="thingList-text">
         <Text className="thingList-font">物资清单</Text>
-        {/* <View className="search">
-        <Image className="search-icon" src={searchIcon}></Image>
-        <Input
-          className="search-input"
-          type="text"
-          placeholder="搜索物品"
-          confirmType="search"
-          placeholderClass="search-input-placeholder"
-          focus
-        ></Input>
-      </View> */}
         <View>
           <Button className="button-scan" onClick={scan}></Button>
         </View>
@@ -77,7 +66,6 @@ export default function Second() {
         thingId={id}
         remainCount={20}
       ></Popup>
-      {/* <Popup isOpen={open} isShowQRcode isShowCounter={false} onclose={close}></Popup> */}
     </View>
   );
 }
