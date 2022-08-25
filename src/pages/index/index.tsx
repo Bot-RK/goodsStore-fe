@@ -26,7 +26,7 @@ export default function Index() {
               method: "GET",
               url: "https://gss.ncuos.com/login",
               header: {
-                Authorization: 15270952061,
+                Authorization: Number(getStorageSync("phone")),
               },
               success: (res1) => {
                 console.log(res1);
@@ -36,8 +36,6 @@ export default function Index() {
                 api
                   .get("/user/broadcast")
                   .then((re: any) => {
-                    console.log(11111);
-                    console.log(re);
                     setAnnouncement(re.data.data.Content);
                   })
                   .catch((er: any) => {
