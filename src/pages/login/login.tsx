@@ -1,16 +1,22 @@
 import { Button, View, Text } from "@tarojs/components";
-import Taro, { setStorageSync } from "@tarojs/taro";
-import { useState } from "react";
+import Taro, { getStorageSync, setStorageSync } from "@tarojs/taro";
+import { useEffect, useState } from "react";
 import { AtInput } from "taro-ui";
 
 import "./login.scss";
 
 const Login = () => {
   const [phone, setPhone] = useState("");
-
   const handlePhoneChange = (e) => {
     setPhone(e);
   };
+  useEffect(() => {
+    if (getStorageSync("phone")) {
+      Taro.navigateTo({
+        url: "/pages/index/index",
+      });
+    }
+  }, []);
 
   const getPhone = (e) => {
     let match = /^1[3-9]\d{9}$/g;
