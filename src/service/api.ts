@@ -26,12 +26,9 @@ export default {
         Authorization: token,
       },
       success(res: any) {
-        console.log("res=>", res);
-        console.log("details=>", option);
         if (res.statusCode === 200) {
           return res.data;
         } else {
-          console.log("details=>", option);
           Taro.showToast({
             title: "请求失败",
             icon: "none",
