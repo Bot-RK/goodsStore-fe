@@ -46,7 +46,6 @@ export default function QRcode() {
           destWidth: 260,
           destHeight: 260,
           success(res1) {
-            console.log("二维码临时路径：", res1.tempFilePath);
             Taro.saveImageToPhotosAlbum({
               filePath: res1.tempFilePath,
               success: () => {
@@ -62,9 +61,6 @@ export default function QRcode() {
                 });
               },
             });
-          },
-          fail(res1) {
-            console.error(res1);
           },
         });
       });

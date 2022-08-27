@@ -2,13 +2,14 @@ import { View, Text, Input, Picker, Button } from "@tarojs/components";
 import Taro from "@tarojs/taro";
 import { useState } from "react";
 import { AtList, AtListItem } from "taro-ui";
+import useAdminList from "../../store/adminList";
 import api from "../../service/api";
-
 import "./addNumber.scss";
 
 export default function AddNumber() {
   const [au, setAu] = useState("");
   const Authors: string[] = ["成员", "管理员"];
+  const setData = useAdminList((state) => state.setData);
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
   const [is_admin, setIsAdmin] = useState(false);
@@ -19,11 +20,30 @@ export default function AddNumber() {
   };
   function final() {
     console.log("admin:", is_admin);
-    api.put("/admin/user/add", {
-      phone: number,
-      username: name,
-      is_admin: is_admin,
-    });
+    api
+      .put("/admin/user/add", {
+        phone: number,
+        username: name,
+        is_admin: is_admin,
+      })
+      .then((response) => {
+        if (response.statusCode == 200) {
+          api.get("/admin/users").then((res) => {
+            setData(res.data.data);
+          });
+          Taro.showToast({
+            title: "add success",
+            icon: "none",
+            duration: 2000,
+          });
+        } else {
+          Taro.showToast({
+            title: `${response.data.message}`,
+            icon: "none",
+            duration: 2000,
+          });
+        }
+      });
     Taro.navigateBack({
       delta: 1,
     });

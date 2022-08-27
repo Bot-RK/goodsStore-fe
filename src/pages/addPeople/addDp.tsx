@@ -1,18 +1,35 @@
 import { View, Text, Input, Button } from "@tarojs/components";
 import Taro from "@tarojs/taro";
 import { useState } from "react";
+import useDepartmentList from "../../store/departmentList";
 import api from "../../service/api";
 import "./addDp.scss";
 
 export default function AddDp() {
   const [dp, setDp] = useState("");
+  const setDpList = useDepartmentList((state) => state.setData);
   function final() {
     api
       .put("/admin/department/add", {
         name: dp,
       })
-      .then((res) => {
-        console.log("dp add success:", res);
+      .then((response) => {
+        if (response.statusCode == 200) {
+          api.get("/user/departments").then((res) => {
+            setDpList(res.data.data);
+          });
+          Taro.showToast({
+            title: "add success",
+            icon: "none",
+            duration: 2000,
+          });
+        } else {
+          Taro.showToast({
+            title: `${response.data.message}`,
+            icon: "none",
+            duration: 2000,
+          });
+        }
       });
     Taro.navigateBack({
       delta: 1,
