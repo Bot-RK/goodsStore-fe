@@ -29,75 +29,80 @@ export default function Index() {
                 Authorization: Number(getStorageSync("phone")),
               },
               success: (res1) => {
-                console.log(res1);
-                setStorageSync("token", res1.data.data.token);
-                setStorageSync("name", res1.data.data.user.username);
-                setStorageSync("is_admin", res1.data.data.user.is_admin);
-                api
-                  .get("/user/broadcast")
-                  .then((re: any) => {
-                    setAnnouncement(re.data.data.Content);
-                  })
-                  .catch((er: any) => {
-                    console.log(er);
+                if (res1.statusCode === 200) {
+                  console.log(res1);
+                  setStorageSync("token", res1.data.data.token);
+                  setStorageSync("name", res1.data.data.user.username);
+                  setStorageSync("is_admin", res1.data.data.user.is_admin);
+                  api
+                    .get("/user/broadcast")
+                    .then((re: any) => {
+                      setAnnouncement(re.data.data.Content);
+                    })
+                    .catch((er: any) => {
+                      console.log(er);
+                    });
+                  api.get("/user/departments").then((resData) => {
+                    setDp(resData.data.data);
                   });
-                api.get("/user/departments").then((resData) => {
-                  setDp(resData.data.data);
-                });
+                } else {
+                  Taro.navigateBack({
+                    delta: 1,
+                    success: () => {
+                      Taro.showToast({
+                        title: `${res1.data.message}`,
+                        icon: "none",
+                        duration: 2000,
+                      });
+                    },
+                  });
+                }
               },
               fail: (err) => console.log(err),
             });
           },
         });
-        // Taro.request({
-        //   method: "GET",
-        //   url: "https://gss.ncuos.com/login",
-        //   header: {
-        //     Authorization: "15270952061",
-        //   },
-        //   success: (res1) => {
-        //     console.log(res1);
-        //     setStorageSync("token", res1.data.data.token);
-        //     api
-        //       .get("/user/broadcast")
-        //       .then((re: any) => {
-        //         console.log(11111);
-        //         console.log(re);
-        //         setAnnouncement(re.data.data.Content);
-        //       })
-        //       .catch((er: any) => {
-        //         console.log(er);
-        //       });
-        //   },
-        //   fail: (err) => console.log(err),
-        // });
       },
       fail: async () => {
         console.log("FAILED");
         await Taro.login({
-          success: () => {
+          success: (res) => {
+            console.log(res.code);
             Taro.request({
               method: "GET",
               url: "https://gss.ncuos.com/login",
               header: {
-                Authorization: "15270952061",
+                Authorization: Number(getStorageSync("phone")),
               },
               success: (res1) => {
-                console.log(res1);
-                setStorageSync("token", res1.data.data.token);
-                api
-                  .get("/user/broadcast")
-                  .then((re: any) => {
-                    console.log(11111);
-                    console.log(re);
-                    setAnnouncement(re.data.data.Content);
-                  })
-                  .catch((er: any) => {
-                    console.log(er);
+                if (res1.statusCode === 200) {
+                  console.log(res1);
+                  setStorageSync("token", res1.data.data.token);
+                  setStorageSync("name", res1.data.data.user.username);
+                  setStorageSync("is_admin", res1.data.data.user.is_admin);
+                  api
+                    .get("/user/broadcast")
+                    .then((re: any) => {
+                      setAnnouncement(re.data.data.Content);
+                    })
+                    .catch((er: any) => {
+                      console.log(er);
+                    });
+                  api.get("/user/departments").then((resData) => {
+                    setDp(resData.data.data);
                   });
-                api.get("/user/departments").then((resData) => {
-                  setDp(resData.data.data);
-                });
+                } else {
+                  Taro.navigateBack({
+                    delta: 1,
+                    success: () => {
+                      Taro.showToast({
+                        title: `${res1.data.message}`,
+                        icon: "none",
+                        duration: 2000,
+                      });
+                    },
+                  });
+                }
               },
               fail: (err) => console.log(err),
             });
