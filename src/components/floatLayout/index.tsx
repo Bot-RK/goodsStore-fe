@@ -23,10 +23,7 @@ export default function FloatLayout() {
       {layoutList.map((item, index) => (
         <>
           <View className="things-item">
-            <Image
-              src="https://joeschmoe.io/api/v1/random"
-              className="things-icon"
-            ></Image>
+            <Image src={item.icon} className="things-icon"></Image>
             <View className="things-texts">
               <Text className="things-title">{item.name}</Text>
               <Text className="things-count">{`剩余${item.remain_count}`}</Text>

@@ -7,7 +7,7 @@ const formateTime = () => {
   let minute = time.getMinutes();
   let checktime = (times) => {
     if (times < 10) {
-      return Number("0" + times);
+      return "0" + times;
     }
     return times;
   };
@@ -32,7 +32,7 @@ const getFromTime = (time) => {
   let day = Timer.getDate();
   let checktime = (times) => {
     if (times < 10) {
-      return Number("0" + times);
+      return "0" + times;
     }
     return times;
   };
