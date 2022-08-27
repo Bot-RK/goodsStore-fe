@@ -34,7 +34,7 @@ export default function QRcode() {
         });
         ctx.fillStyle = "#000000";
         ctx.font = "48px  serif";
-        ctx.fillText(`${name}`, canvas.width / 2 - 15, canvas.height - 30);
+        ctx.fillText(`${name}`, canvas.width / 3 + 50, canvas.height - 30);
 
         Taro.canvasToTempFilePath({
           canvasId: "myQrcode",
