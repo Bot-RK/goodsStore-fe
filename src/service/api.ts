@@ -41,7 +41,6 @@ export default {
   },
   get(url: string, data?: object) {
     let option = { url, data };
-    console.log("token=>", getStorageSync("token"));
     return this.baseOptions(option);
   },
   post(url: string, data?: object) {

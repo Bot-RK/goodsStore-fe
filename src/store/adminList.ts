@@ -15,26 +15,7 @@ interface adminlist {
 }
 
 const useAdminList = create<adminlist>((set) => ({
-  data: [
-    {
-      ID: 0,
-      phone: "12312341234",
-      username: "6",
-      is_admin: false,
-    },
-    {
-      ID: 1,
-      phone: "12312341234",
-      username: "777",
-      is_admin: false,
-    },
-    {
-      ID: 2,
-      phone: "12312341234",
-      username: "888",
-      is_admin: true,
-    },
-  ],
+  data: [],
   setLocalStorage: (state) => {
     Taro.setStorage({
       key: "adminList",
@@ -44,10 +25,10 @@ const useAdminList = create<adminlist>((set) => ({
   changeAu: (i, e) =>
     set(
       produce((state) => {
-        if (e.detail.value == 0 && !state.data[i].is_admin) {
-          state.data[i].is_admin = !state.data[i].is_admin;
-        } else if (e.detail.value == 1 && state.data[i].is_admin) {
-          state.data[i].is_admin = !state.data[i].is_admin;
+        if (e.detail.value == "0" && state.data[i].is_admin) {
+          state.data[i].is_admin = false;
+        } else if (e.detail.value == "1" && !state.data[i].is_admin) {
+          state.data[i].is_admin = true;
         }
       })
     ),

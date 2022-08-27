@@ -50,7 +50,7 @@ export default function SelectThingList() {
             <AtInputNumber
               type="number"
               min={0}
-              max={100}
+              max={item.amount}
               step={1}
               value={`${item.count}`}
               onChange={(e) =>

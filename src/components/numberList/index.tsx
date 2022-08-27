@@ -1,5 +1,6 @@
 import { View, Text, Picker, Image } from "@tarojs/components";
 import { AtList, AtListItem } from "taro-ui";
+import Taro from "@tarojs/taro";
 import useAdminList from "../../store/adminList";
 import deleteIcon from "../../asset/images/delete.js";
 import api from "../../service/api";
@@ -14,13 +15,38 @@ export default function NumberList() {
       .put("/admin/user/delete", {
         phone: phone1,
       })
-      .then((res) => {
-        console.log("delete success: " + res);
-        api.get("/admin/users").then((res1) => {
-          setData(res1.data.data);
+      .then(() => {
+        api.get("/admin/users").then((res) => {
+          setData(res.data.data);
         });
       });
   }
+
+  const chageAu = async (index, value) => {
+    await onChange(index, value);
+    api
+      .put("/admin/user/update", {
+        phone: Authoritys[index].phone,
+        username: Authoritys[index].username,
+        is_admin: value.detail.value == "1" ? true : false,
+      })
+      .then(() => {
+        console.log(value.detail.value);
+        console.log(value.detail.value == "1" ? true : false);
+        Taro.showToast({
+          title: " update success",
+          icon: "none",
+          duration: 2000,
+        });
+      })
+      .catch((err) => {
+        Taro.showToast({
+          title: `${err.message}`,
+          icon: "none",
+          duration: 2000,
+        });
+      });
+  };
 
   return (
     <>
@@ -40,7 +66,8 @@ export default function NumberList() {
               className="selector"
               mode="selector"
               range={authority}
-              onChange={(e) => onChange(i, e)}
+              value={item.is_admin ? 1 : 0}
+              onChange={(e) => chageAu(i, e)}
             >
               <AtList className="au-selector">
                 <AtListItem

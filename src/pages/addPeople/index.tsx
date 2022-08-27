@@ -20,6 +20,7 @@ export default function Add() {
   useReady(() => {
     api.get("/admin/users").then((res) => {
       setData(res.data.data);
+      console.log(res.data.data);
     });
     api.get("/user/departments").then((res1) => {
       setDpList(res1.data.data);

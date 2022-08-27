@@ -16,7 +16,6 @@ export default function Index() {
   const setQrId = useQrcodeDetail((state) => state.setId);
   const size = 1024 * 1024 * 10;
 
-  const token = getStorageSync("token");
   async function final() {
     api
       .put("/admin/good/add", {
@@ -26,43 +25,49 @@ export default function Index() {
         measure_word: measure_word,
       })
       .then((res) => {
-        console.log(res);
-        setQrId(res.data.data.ID);
-        setQrName(res.data.data.name);
-        Taro.navigateBack({
-          delta: 1,
-          success: () => {
-            Taro.showToast({
-              title: "成功",
-              icon: "success",
-              duration: 2000,
-            });
-            Taro.navigateTo({
-              url: "QRcode",
-              success: () => {},
-            });
-          },
-        });
+        if (res.statusCode == 200) {
+          setQrId(res.data.data.ID);
+          setQrName(res.data.data.name);
+          Taro.navigateBack({
+            delta: 1,
+            success: () => {
+              Taro.showToast({
+                title: "add success",
+                icon: "success",
+                duration: 2000,
+              });
+              Taro.navigateTo({
+                url: "QRcode",
+                success: () => {},
+              });
+            },
+          });
+        } else {
+          Taro.showToast({
+            title: `${res.data.message}`,
+            icon: "none",
+            duration: 2000,
+          });
+        }
       })
       .catch((err) => {
-        console.log(err);
+        Taro.showToast({
+          title: `${err}`,
+          icon: "none",
+          duration: 2000,
+        });
       });
   }
 
   const onChange = async (files: any) => {
     if (files[0].file.size <= size) {
       setFile(files);
-      console.log("files", files);
-      console.log("token", token);
       api
         .get(
           `/admin/picture/${files[0].url.substring(files[0].url.length - 3)}`
         )
         .then((response) => {
-          console.log(response.data.data);
           setPicture_url(response.data.data.key);
-          console.log("id", response.data.data.access_id);
-          console.log("base64", response.data.data.policy);
           Taro.uploadFile({
             url: "https://goods-storage-system.oss-cn-hangzhou.aliyuncs.com",
             filePath: files[0].url,
@@ -77,11 +82,13 @@ export default function Index() {
               policy: response.data.data.policy,
               success_action_status: "200",
             },
-            success: (res) => {
-              console.log("success", res);
-            },
-            fail: (res1) => {
-              console.log("fail", res1);
+            success: () => {},
+            fail: (err) => {
+              Taro.showToast({
+                title: `${err}`,
+                icon: "none",
+                duration: 2000,
+              });
             },
           });
         });
@@ -92,48 +99,6 @@ export default function Index() {
         duration: 2000,
       });
     }
-
-    // const fs = Taro.getFileSystemManager();
-    // fs.readFile({
-    //   filePath: files[0].url,
-    //   encoding: "binary",
-    //   success: (res) => {
-    //     console.log("1333", res.data);
-    //     let options: any = {
-    //       method: "POST",
-    //       url: "https://gss.ncuos.com/admin/picture",
-    //       header: {
-    //         "content-type": "application/json",
-    //         Authorization: token,
-    //       },
-    //       responseType: "arraybuffer",
-    //       formData: {
-    //         picture: {
-    //           value: res.data,
-    //           options: {
-    //             filename: "filename",
-    //             contentType: null,
-    //           },
-    //         },
-    //       },
-    //     };
-    //     Taro.request(options)
-    //       .then((ress) => {
-    //         console.log(ress);
-    //       })
-    //       .catch((err) => {
-    //         console.log("err", err);
-    //       });
-    // api
-    //   .post("/admin/picture", {
-    //     picture: res.data,
-    //   })
-    //   .then((res1) => {
-    //     console.log(res1);
-    //     setPicture_url(res1.data.data);
-    //   });
-    //   },
-    // });
   };
   const SetName = (e) => {
     setName(e.detail.value);
