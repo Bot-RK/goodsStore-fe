@@ -68,7 +68,7 @@ export default function Apply() {
   };
 
   return (
-    <View className="backGround-f">
+    <View catchMove={layoutShow} className="backGround-f">
       <View className="progress">
         <Text className="progress-font">步骤1/2</Text>
         <Progress
@@ -99,13 +99,15 @@ export default function Apply() {
           下一步
         </Button>
       </View>
-      <AtFloatLayout
-        isOpened={layoutShow}
-        title="已选清单"
-        onClose={closeLayout}
-      >
-        <FloatLayout />
-      </AtFloatLayout>
+      <View>
+        <AtFloatLayout
+          isOpened={layoutShow}
+          title="已选清单"
+          onClose={closeLayout}
+        >
+          <FloatLayout />
+        </AtFloatLayout>
+      </View>
       <Popup
         isOpen={open}
         isShowQRcode={false}

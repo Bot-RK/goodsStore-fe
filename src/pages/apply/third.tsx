@@ -41,6 +41,8 @@ export default function Third() {
 
     if (selectList.length > 1) {
       setIsMultiple(true);
+    } else {
+      setIsMultiple(false);
     }
     if (selectList.length > 0) {
       setText(true);
