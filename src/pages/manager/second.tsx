@@ -5,12 +5,13 @@ import FloatLayout from "../../components/floatLayout";
 import useLayoutList from "../../store/layoutList";
 import useUpdataGoodsStore from "../../store/updateGoods";
 import api from "../../service/api";
+import useThingListStore from "../../store/thingList";
 
 export default function Apply() {
-  // const empty=useApplyList((state)=>state.)
   const data = useLayoutList((state) => state.data);
   const cleanData = useUpdataGoodsStore((state) => state.clean);
   const cleanData1 = useLayoutList((state) => state.clean);
+  const setData = useThingListStore((state) => state.setData);
   const data1: Array<any> = [];
   function to() {
     let isSuccess;
@@ -39,7 +40,6 @@ export default function Apply() {
         }
       });
     });
-    console.log("isSuccess:", isSuccess);
     setTimeout(() => {
       if (isSuccess) {
         Taro.showToast({
@@ -47,19 +47,14 @@ export default function Apply() {
           icon: "none",
           duration: 2000,
         });
-      } else {
-        Taro.showToast({
-          title: "add error",
-          icon: "none",
-          duration: 2000,
-        });
       }
-    }, 100);
-    setTimeout(() => {
-      Taro.navigateBack({
-        delta: 2,
-      });
-    }, 2000);
+    }, 200);
+    api.get("/user/goods").then((res: any) => {
+      setData(res.data.data);
+    });
+    Taro.navigateBack({
+      delta: 2,
+    });
   }
   return (
     <View className="backGround-b">
