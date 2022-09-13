@@ -10,6 +10,7 @@ import BackRecords from "../../components/backRecords";
 import api from "../../service/api";
 import useDepartmentList from "../../store/departmentList";
 import useAdminRecords from "../../store/adminRecords";
+import useRecordParamsStore from "../../store/adminRecordParams";
 
 export default function Index() {
   const [layoutShow, setLayoutShow] = useState(false);
@@ -21,6 +22,7 @@ export default function Index() {
   const DpList = useDepartmentList((state) => state.data);
   const setRecordsList = useAdminRecords((state) => state.setData);
   const token = getStorageSync("token");
+  const setParamsdata = useRecordParamsStore((state) => state.setData);
 
   useReady(() => {
     api.get("/user/departments").then((res) => {
@@ -49,6 +51,7 @@ export default function Index() {
         department_id: selectList[i],
       });
     }
+    setParamsdata(data);
     Taro.request({
       url: "https://gss.ncuos.com/admin/records",
       method: "POST",
