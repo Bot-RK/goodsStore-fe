@@ -13,6 +13,7 @@ export default function Apply() {
   const cleanData1 = useLayoutList((state) => state.clean);
   const data1: Array<any> = [];
   function to() {
+    let isSuccess;
     for (let i = 0; i < data.length; i++) {
       data1.push({
         amount: data[i].count + data[i].remain_count,
@@ -22,24 +23,43 @@ export default function Apply() {
       });
     }
     console.log(data1);
-
-    data1.map((item) => {
-      api.put("/admin/good/update", item).then((res) => {
+    data1.map(async (item) => {
+      await api.put("/admin/good/update", item).then((res) => {
         if (res.statusCode === 200) {
           console.log("addRes:", res);
           console.log(data1);
           cleanData();
           cleanData1();
           console.log("add物品成功");
+          isSuccess = true;
+          console.log("isSuccess:", isSuccess);
         } else {
           console.log(res);
+          isSuccess = false;
         }
       });
     });
-
-    Taro.navigateBack({
-      delta: 2,
-    });
+    console.log("isSuccess:", isSuccess);
+    setTimeout(() => {
+      if (isSuccess) {
+        Taro.showToast({
+          title: "add success",
+          icon: "none",
+          duration: 2000,
+        });
+      } else {
+        Taro.showToast({
+          title: "add error",
+          icon: "none",
+          duration: 2000,
+        });
+      }
+    }, 100);
+    setTimeout(() => {
+      Taro.navigateBack({
+        delta: 2,
+      });
+    }, 2000);
   }
   return (
     <View className="backGround-b">

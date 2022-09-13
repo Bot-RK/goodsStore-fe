@@ -9,11 +9,11 @@ interface judgeType {
 const useJudge = create<judgeType>((set) => ({
   isMultiple: false,
   setIsTrue: () =>
-    set((state) => ({
+    set(() => ({
       isMultiple: true,
     })),
   setIsFlase: () =>
-    set((state) => ({
+    set(() => ({
       isMultiple: false,
     })),
 }));

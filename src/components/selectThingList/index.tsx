@@ -3,7 +3,7 @@ import { AtInputNumber } from "taro-ui";
 import useLayoutList from "../../store/layoutList";
 import useThingListStore from "../../store/thingList";
 
-export default function SelectThingList() {
+export default function SelectThingList({ isAdd = false } = {}) {
   const thingList = useThingListStore((state) => state.data);
   const addCount = useThingListStore((state) => state.addCount);
   const onChange = useThingListStore((state) => state.onChange);
@@ -50,7 +50,7 @@ export default function SelectThingList() {
             <AtInputNumber
               type="number"
               min={0}
-              max={item.amount}
+              max={isAdd ? 99999 : item.amount}
               step={1}
               value={`${item.count}`}
               onChange={(e) =>

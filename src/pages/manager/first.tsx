@@ -52,7 +52,7 @@ export default function Apply() {
       />
 
       <View className="things">
-        <SelectThingList />
+        <SelectThingList isAdd />
       </View>
       <View className="next">
         <Button className="next-button" onClick={to}>
